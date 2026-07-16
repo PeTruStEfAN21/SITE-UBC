@@ -1,0 +1,18 @@
+// ══════════════════════════════════════
+//  scss/_base.scss
+//  Reset global, body, tipografie
+// ══════════════════════════════════════
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: var(--bg-primar);
+    color: var(--text-alb);
+    line-height: 1.6;
+    overflow-x: hidden;
+}

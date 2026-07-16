@@ -1,0 +1,84 @@
+// ══════════════════════════════════════
+//  scss/_responsive.scss
+//  Media queries pentru toate breakpoint-urile
+// ══════════════════════════════════════
+
+// === RESPONSIVE ===
+
+@media (max-width: 900px) {
+    .despre-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-container {
+        flex-direction: column;
+    }
+
+    .contact-map {
+        min-height: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 12px 15px;
+    }
+
+    .logo-ubc {
+        font-size: 24px;
+    }
+
+    nav ul {
+        gap: 5px;
+    }
+
+    .btn-menu {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .btn-suna {
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+
+    .hero {
+        padding: 80px 15px 40px 15px;
+    }
+
+    .hero-box {
+        padding: 30px 20px;
+        border-left-width: 4px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .despre-hero {
+        padding: 30px 20px;
+        margin: 20px 15px;
+    }
+
+    .despre-text h2 {
+        font-size: 2rem;
+    }
+
+    .calc-box,
+    .placeholder-box {
+        padding: 30px 20px;
+    }
+
+    .calc-inputs-wrapper {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    #rezultat-volum {
+        font-size: 2.8rem;
+    }
+
+    .card {
+        width: 100%;
+    }
+}

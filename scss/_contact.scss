@@ -1,0 +1,82 @@
+// ══════════════════════════════════════
+//  scss/_contact.scss
+//  Secțiunea Contact, hartă și footer
+// ══════════════════════════════════════
+
+// === CONTACT & FOOTER ===
+
+.contact-section {
+    padding: 90px 40px;
+    background-color: var(--bg-primar);
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 50px;
+    align-items: stretch;
+}
+
+.contact-info {
+    flex: 1;
+    background-color: var(--bg-secundar);
+    padding: 45px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: left;
+
+    h2 {
+        font-size: 2.4rem;
+        margin-bottom: 10px;
+        font-weight: 900;
+    }
+}
+
+.info-block {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+    h4 {
+        color: var(--verde-ubc);
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+    }
+
+    p,
+    a {
+        color: var(--text-alb);
+        font-size: 1.1rem;
+        text-decoration: none;
+        font-weight: 700;
+    }
+}
+
+.contact-map {
+    flex: 1.2;
+    position: relative;
+    min-height: 450px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+        border: none;
+    }
+}
+
+footer {
+    background-color: #0c0d0e;
+    padding: 40px;
+    text-align: center;
+    color: var(--text-gri);
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}

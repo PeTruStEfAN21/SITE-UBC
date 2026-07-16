@@ -1,0 +1,20 @@
+{
+  "name": "ubc-site",
+  "version": "1.0.0",
+  "description": "Site UBC — Stație de Betoane Călărași",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "sass": "^1.77.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "author": "UBC",
+  "license": "ISC"
+}

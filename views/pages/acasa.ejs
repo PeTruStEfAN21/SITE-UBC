@@ -1,0 +1,109 @@
+<%# views/pages/acasa.ejs — Pagina 1: Acasă (Hero, Trust Bar, Calculator, Produse Beton) %>
+
+<!-- ==========================================
+     PAGINA 1: ACASĂ (HERO, TRUST, CALC, PRODUSE)
+     ========================================== -->
+<main id="page-acasa" class="page-view active">
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-box">
+            <h1>Beton de înaltă precizie.<br>Livrare rapidă.</h1>
+            <p>Stație ecologică automatizată. Capacitate de producție industrială, calitate controlată prin laborator propriu și flotă modernă de cife și pompe pentru șantierul tău.</p>
+
+            <div class="hero-buttons">
+                <a href="tel:0724349503" class="btn-suna" style="padding: 14px 30px; font-size: 16px;">📞 Sună la Dispecerat</a>
+                <a href="#calculator" class="btn-menu" style="padding: 14px 28px; font-size: 15px;">🧮 Calculează Necesarul</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Bar -->
+    <section class="trust-bar">
+        <div class="trust-item"><h3>ISO 9001</h3><p>Calitate Certificată</p></div>
+        <div class="trust-item"><h3>ISC</h3><p>Laborator Autorizat</p></div>
+        <div class="trust-item"><h3>24/7</h3><p>Dispecerat &amp; Livrare</p></div>
+    </section>
+
+    <!-- Calculator Dinamic -->
+    <section id="calculator" class="calc-section">
+        <h2 style="font-size: 2.4rem; margin-bottom: 10px; font-weight: 900;">Calculează Volumul Exact</h2>
+        <p style="color: var(--text-gri); margin-bottom: 40px;">Introdu dimensiunile elementului de turnat pentru a afla necesarul de beton.</p>
+
+        <div class="calc-box">
+            <div class="calc-inputs-wrapper">
+                <div class="calc-group">
+                    <label>Lungime (metri)</label>
+                    <input type="number" id="lungime" placeholder="ex: 12" class="calc-input" step="0.1">
+                </div>
+                <div class="calc-group">
+                    <label>Lățime (metri)</label>
+                    <input type="number" id="latime" placeholder="ex: 6" class="calc-input" step="0.1">
+                </div>
+                <div class="calc-group">
+                    <label>Grosime (metri)</label>
+                    <input type="number" id="grosime" placeholder="ex: 0.15" class="calc-input" step="0.01">
+                </div>
+            </div>
+
+            <div class="calc-result-box">
+                <span style="color: var(--text-gri); font-size: 0.85rem; text-transform: uppercase; font-weight: 700; letter-spacing: 1px;">Volum Total Necesar:</span>
+                <h3 id="rezultat-volum">0.00 <span style="font-size: 1.8rem; font-weight: 700;">m³</span></h3>
+            </div>
+
+            <a href="tel:0724349503" id="btn-comanda-calc" class="btn-suna" style="width: 100%; justify-content: center; padding: 16px; opacity: 0.5; pointer-events: none;">Introdu dimensiunile pentru comandă</a>
+            <p style="font-size: 0.8rem; color: var(--text-gri); margin-top: 15px;">* Un operator va prelua instant valoarea calculată pentru alocarea cifelor.</p>
+        </div>
+    </section>
+
+    <!-- Clase și Specificații Beton -->
+    <section id="produse" class="produse">
+        <h2 style="font-size: 2.6rem; margin-bottom: 15px; font-weight: 900;">Clase și Specificații Beton</h2>
+        <p style="color: var(--text-gri); font-size: 1.1rem; max-width: 650px; margin: 0 auto 40px auto;">Selectează categoria de turnare pentru a vizualiza rețetele noastre omologate conform standardelor europene.</p>
+
+        <div class="tabs-container">
+            <button class="tab-btn active" data-tab="usoare">🧱 Betoane Ușoare &amp; Uzuale (B150 - B350)</button>
+            <button class="tab-btn" data-tab="grele">🏗️ Betoane Grele &amp; Structurale (B400 - B450)</button>
+        </div>
+
+        <!-- Grid Betoane Ușoare -->
+        <div id="grid-usoare" class="grid-produse">
+            <div class="card">
+                <div><h3>B150</h3><span class="standard">C12/15</span><p>Ideal pentru egalizări de fundație, umpluturi, blocuri simple de betonare și trotuare pietonale fără solicitări masive.</p></div>
+                <div class="card-footer-info">💡 Agregat optimizat • Turnare facilă</div>
+            </div>
+            <div class="card">
+                <div><h3>B200</h3><span class="standard">C16/20 (Nestructural)</span><p>Recomandat pentru fundații de corpuri ușoare, stâlpișori de delimitare, ziduri de sprijin mici și platforme auto pietonale.</p></div>
+                <div class="card-footer-info">💡 Rezistență moderată • Uz general</div>
+            </div>
+            <div class="card">
+                <span class="card-badge">🔥 Cel mai vândut</span>
+                <div><h3>B250</h3><span class="standard">C18/22.5 (sau C16/20 Struct.)</span><p>Standardul de aur pentru rezidențial: fundații armate de case, pardoseli, stâlpi principali, centuri și grinzi standard.</p></div>
+                <div class="card-footer-info">💡 Elasticitate &amp; Durabilitate sporită</div>
+            </div>
+            <div class="card">
+                <div><h3>B300</h3><span class="standard">C20/25</span><p>Dedicat elementelor structurale solicitate: planșee armate peste etaj, stâlpi de rezistență, grinzi portante și diafragme.</p></div>
+                <div class="card-footer-info">💡 Conținut ridicat de ciment pur</div>
+            </div>
+            <div class="card">
+                <div><h3>B350</h3><span class="standard">C25/30</span><p>Beton structural de înaltă performanță pentru radiere generale, planșee cu deschideri mari și infrastructuri comerciale grele.</p></div>
+                <div class="card-footer-info">💡 Protecție anti-fisurare maximă</div>
+            </div>
+        </div>
+
+        <!-- Grid Betoane Grele -->
+        <div id="grid-grele" class="grid-produse hidden">
+            <div class="card">
+                <span class="card-badge heavy">🏗️ Industrial Greu</span>
+                <div><h3>B400</h3><span class="standard">C30/37</span><p>Conceput pentru infrastructură critică, hale industriale portante, fundații pentru utilaje de tonaj greu, piloni și poduri.</p></div>
+                <div class="card-footer-info" style="color: #FF4C4C;">⚡ Rezistență mecanică superioară</div>
+            </div>
+            <div class="card">
+                <span class="card-badge heavy">🛡️ Structuri Speciale</span>
+                <div><h3>B450</h3><span class="standard">C35/45</span><p>Formula supremă pentru medii chimic agresive, piloni forați de mare adâncime, lucrări hidrotehnice și solicitări seismice extreme.</p></div>
+                <div class="card-footer-info" style="color: #FF4C4C;">⚡ Impermeabilitate &amp; Densitate maximă</div>
+            </div>
+        </div>
+    </section>
+
+</main>

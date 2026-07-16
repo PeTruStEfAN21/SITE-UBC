@@ -1,0 +1,81 @@
+// ══════════════════════════════════════
+//  scss/_despre.scss
+//  Pagina Despre Noi: layout, text, piloni
+// ══════════════════════════════════════
+
+// === PAGINA DESPRE NOI (DESIGN WOW) ===
+
+.despre-hero {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 50px;
+    background: var(--bg-secundar);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    text-align: left;
+}
+
+.despre-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.despre-text {
+    h2 {
+        font-size: 2.8rem;
+        font-weight: 900;
+        line-height: 1.2;
+        margin-bottom: 25px;
+
+        span {
+            color: var(--verde-ubc);
+        }
+    }
+
+    p {
+        color: var(--text-gri);
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 20px;
+    }
+}
+
+.despre-piloni {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto 60px auto;
+}
+
+.pilon-box {
+    background: rgba(20, 22, 24, 0.7);
+    padding: 35px;
+    border-radius: 16px;
+    border: 1px solid rgba(46, 204, 113, 0.2);
+    text-align: left;
+    transition: transform 0.3s;
+
+    &:hover {
+        transform: translateY(-5px);
+        border-color: var(--verde-ubc);
+    }
+
+    h3 {
+        color: var(--verde-ubc);
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    p {
+        color: var(--text-gri);
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+}

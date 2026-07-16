@@ -1,0 +1,30 @@
+// ══════════════════════════════════════
+//  scss/_router.scss
+//  Sistemul de pagini SPA (page-view)
+// ══════════════════════════════════════
+
+// === SISTEMUL DE PAGINI (ROUTER SPA) ===
+.page-view {
+    display: none; // Ascundem toate paginile implicit
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    padding-top: 80px; // Spațiu sub header-ul fix
+    min-height: calc(100vh - 100px);
+
+    &.active {
+        display: block; // Afișăm doar pagina activă
+        opacity: 1;
+        animation: fadeInPage 0.4s ease-out;
+    }
+}
+
+@keyframes fadeInPage {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

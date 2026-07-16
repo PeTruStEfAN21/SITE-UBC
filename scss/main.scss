@@ -1,0 +1,32 @@
+// ══════════════════════════════════════
+//  scss/main.scss
+//  Punctul de intrare SCSS — importă toate
+//  fișierele parțiale în ordinea corectă
+// ══════════════════════════════════════
+
+// 1. Variabile & Custom Properties (primul, folosit de toți)
+@use 'variables';
+
+// 2. Reset & stiluri de bază
+@use 'base';
+
+// 3. Header, navigație, butoane globale
+@use 'header';
+
+// 4. Sistemul de pagini SPA
+@use 'router';
+
+// 5. Pagina Acasă (Hero, Trust Bar, Calculator, Produse)
+@use 'home';
+
+// 6. Pagina Despre Noi
+@use 'despre';
+
+// 7. Pagini Placeholder (Utilaje, Portofoliu)
+@use 'placeholder';
+
+// 8. Secțiunea Contact & Footer
+@use 'contact';
+
+// 9. Media Queries Responsive (ultimul, pentru a suprascrie corect)
+@use 'responsive';

@@ -1,0 +1,24 @@
+// ══════════════════════════════════════
+//  scss/_variables.scss
+//  Variabile SCSS + CSS Custom Properties
+// ══════════════════════════════════════
+
+// --- Variabile SCSS (pentru calcule interne SCSS) ---
+$verde-ubc:   #2ECC71;
+$verde-glow:  #3FEF8B;
+$bg-primar:   #141618;
+$bg-secundar: #202428;
+$bg-card:     #282D32;
+$text-alb:    #FFFFFF;
+$text-gri:    #A0A6AC;
+
+// --- CSS Custom Properties (disponibile global în browser) ---
+:root {
+    --verde-ubc:   #{$verde-ubc};
+    --verde-glow:  #{$verde-glow};
+    --bg-primar:   #{$bg-primar};
+    --bg-secundar: #{$bg-secundar};
+    --bg-card:     #{$bg-card};
+    --text-alb:    #{$text-alb};
+    --text-gri:    #{$text-gri};
+}

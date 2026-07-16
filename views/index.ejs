@@ -1,0 +1,23 @@
+<%# views/index.ejs — Layout principal: asamblează toate partials-urile și paginile %>
+<!DOCTYPE html>
+<html lang="ro">
+
+    <%- include('partials/head') %>
+
+<body>
+
+    <%- include('partials/header') %>
+
+    <%- include('pages/acasa') %>
+    <%- include('pages/despre') %>
+    <%- include('pages/utilaje') %>
+    <%- include('pages/portofoliu') %>
+
+    <%- include('partials/contact') %>
+    <%- include('partials/footer') %>
+
+    <!-- Script front-end: Router SPA + Calculator + Tab-uri Betoane -->
+    <script src="/js/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+// ══════════════════════════════════════
+//  scss/_placeholder.scss
+//  Pagini placeholder (Utilaje & Portofoliu)
+// ══════════════════════════════════════
+
+// === PAGINI PLACEHOLDER (UTILAJE & PORTOFOLIU) ===
+
+.placeholder-box {
+    max-width: 800px;
+    margin: 80px auto;
+    padding: 60px 40px;
+    background: var(--bg-secundar);
+    border-radius: 20px;
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    text-align: center;
+
+    h2 {
+        font-size: 2.2rem;
+        margin-bottom: 15px;
+        color: var(--text-alb);
+    }
+
+    p {
+        color: var(--text-gri);
+        font-size: 1.1rem;
+        max-width: 500px;
+        margin: 0 auto 30px auto;
+    }
+}
