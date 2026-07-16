@@ -3,7 +3,15 @@
 <!-- HEADER & NAVIGATION -->
 <header>
     <a class="logo-ubc" data-target="acasa"><span>U</span>BC</a>
-    <nav>
+
+    <!-- Buton hamburger — vizibil doar pe mobile (CSS îl ascunde pe desktop) -->
+    <button class="hamburger-btn" id="hamburger-btn" aria-label="Deschide meniul" aria-expanded="false" aria-controls="main-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav id="main-nav">
         <ul>
             <li><a class="btn-menu active" data-target="acasa">Acasă</a></li>
             <li><a class="btn-menu" data-target="despre">Despre Noi</a></li>

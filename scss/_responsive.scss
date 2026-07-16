@@ -1,10 +1,11 @@
 // ══════════════════════════════════════
 //  scss/_responsive.scss
-//  Media queries pentru toate breakpoint-urile
+//  Media queries — Tablet & Mobile
 // ══════════════════════════════════════
 
-// === RESPONSIVE ===
-
+// ════════════════════════
+//  TABLET (≤ 900px)
+// ════════════════════════
 @media (max-width: 900px) {
     .despre-grid {
         grid-template-columns: 1fr;
@@ -17,68 +18,214 @@
     .contact-map {
         min-height: 350px;
     }
+
+    .grid-produse {
+        gap: 18px;
+    }
+
+    .card {
+        width: calc(50% - 10px);
+        min-width: 260px;
+    }
 }
 
+// ════════════════════════
+//  MOBILE (≤ 768px)
+// ════════════════════════
 @media (max-width: 768px) {
+
+    // ── Header: ascunde nav, afișează hamburger ──
     header {
-        padding: 12px 15px;
+        padding: 12px 18px;
+        position: fixed;
+        flex-wrap: nowrap;
     }
 
     .logo-ubc {
-        font-size: 24px;
+        font-size: 22px;
+        z-index: 1001;
+        position: relative;
     }
 
-    nav ul {
+    // Buton hamburger ☰ — vizibil doar pe mobile
+    .hamburger-btn {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         gap: 5px;
+        width: 42px;
+        height: 42px;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 10px;
+        cursor: pointer;
+        z-index: 1001;
+        position: relative;
+        transition: background 0.2s;
+        flex-shrink: 0;
+
+        span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: #fff;
+            border-radius: 2px;
+            transition: transform 0.3s ease, opacity 0.2s;
+        }
+
+        &.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        &.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        &.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
     }
 
-    .btn-menu {
-        padding: 8px 12px;
-        font-size: 12px;
+    // Nav mobile — slide-down overlay
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(20, 22, 24, 0.97);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(46, 204, 113, 0.2);
+        padding: 80px 20px 24px 20px;
+        transform: translateY(-110%);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+
+        &.nav-open {
+            transform: translateY(0);
+        }
+
+        ul {
+            flex-direction: column;
+            gap: 8px;
+            align-items: stretch;
+        }
+
+        li {
+            width: 100%;
+        }
+
+        a.btn-menu,
+        a.btn-suna {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            padding: 14px 20px;
+            font-size: 14px;
+            border-radius: 12px;
+        }
     }
 
-    .btn-suna {
-        padding: 8px 14px;
-        font-size: 12px;
-    }
-
+    // ── Hero: fix background-attachment pe mobile (bug iOS) ──
     .hero {
-        padding: 80px 15px 40px 15px;
+        padding: 90px 15px 50px;
+        // background-attachment: fixed e broken pe iOS Safari
+        // → îl înlocuim cu scroll normal pe mobile
+        background-attachment: scroll;
+        min-height: 100svh; // svh = safe viewport height (fără bara browser)
     }
 
     .hero-box {
-        padding: 30px 20px;
+        padding: 28px 20px;
         border-left-width: 4px;
+        max-width: 100%;
     }
 
     .hero h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        letter-spacing: 0;
     }
 
-    .despre-hero {
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+
+        a {
+            text-align: center;
+            justify-content: center;
+        }
+    }
+
+    // ── Trust Bar ──
+    .trust-bar {
+        flex-direction: column;
+        gap: 20px;
         padding: 30px 20px;
-        margin: 20px 15px;
     }
 
-    .despre-text h2 {
-        font-size: 2rem;
+    // ── Secțiuni generale ──
+    .calc-section,
+    .produse,
+    .section-generica {
+        padding: 60px 15px;
     }
 
+    // ── Calculator ──
     .calc-box,
     .placeholder-box {
-        padding: 30px 20px;
+        padding: 24px 16px;
+        margin: 0 5px;
     }
 
     .calc-inputs-wrapper {
         flex-direction: column;
-        gap: 15px;
+        gap: 14px;
     }
 
     #rezultat-volum {
-        font-size: 2.8rem;
+        font-size: 2.4rem;
     }
 
+    // ── Carduri betoane: 1 coloană pe mobile ──
     .card {
         width: 100%;
+        min-width: unset;
+        padding: 28px 20px;
+    }
+
+    // ── Tab-uri betoane ──
+    .tab-btn {
+        padding: 11px 16px;
+        font-size: 0.85rem;
+    }
+
+    // ── Despre ──
+    .despre-hero {
+        padding: 24px 16px;
+        margin: 16px 10px;
+    }
+
+    .despre-text h2 {
+        font-size: 1.6rem;
+    }
+
+    .despre-piloni {
+        grid-template-columns: 1fr !important;
+        gap: 14px;
     }
 }
+
+// ════════════════════════
+//  SMALL MOBILE (≤ 400px)
+// ════════════════════════
+@media (max-width: 400px) {
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .logo-ubc {
+        font-size: 19px;
+    }
+
+    .tab-btn {
+        font-size: 0.78rem;
+        padding: 10px 12px;
+    }
+}
+

@@ -91,3 +91,9 @@ nav ul {
         transform: translateY(-2px) scale(1.02);
     }
 }
+
+// Butonul hamburger este ascuns pe desktop
+// (responsive.scss îl activează pe mobile)
+.hamburger-btn {
+    display: none;
+}
