@@ -472,8 +472,106 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
+
+
     // ═══════════════════════════════════════════════════════
-    //  7. INIT — Mesaj de confirmare în consolă
+    //  7. COUNTER ANIMAT — Cifre Impact (30+, 2003, 60m³)
+    // ═══════════════════════════════════════════════════════
+
+    /**
+     * Animează un număr de la 0 la target cu easing ease-out.
+     * @param {HTMLElement} el     - Elementul span cu textul contorului
+     * @param {number}      target - Valoarea finală
+     * @param {number}      ms     - Durata animației în ms
+     */
+    function animateCounter(el, target, ms = 1800) {
+        const start     = performance.now();
+        const startVal  = 0;
+
+        // Easing ease-out cubic
+        const easeOut = t => 1 - Math.pow(1 - t, 3);
+
+        function step(now) {
+            const elapsed  = now - start;
+            const progress = Math.min(elapsed / ms, 1);
+            const current  = Math.round(easeOut(progress) * (target - startVal) + startVal);
+            el.textContent = current.toLocaleString('ro-RO');
+
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            } else {
+                el.textContent = target.toLocaleString('ro-RO');
+            }
+        }
+
+        requestAnimationFrame(step);
+    }
+
+    // Pornește counterele când secțiunea intră în viewport
+    const counters = document.querySelectorAll('.impact-counter');
+
+    if (counters.length && 'IntersectionObserver' in window) {
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+
+                const el     = entry.target;
+                const target = parseInt(el.dataset.target, 10);
+
+                // Durata mai scurtă pentru numere mari (2003 → 1200ms)
+                const duration = target > 1000 ? 1200 : 1800;
+
+                animateCounter(el, target, duration);
+                counterObserver.unobserve(el); // animă o singură dată
+            });
+        }, { threshold: 0.3 });
+
+        counters.forEach(el => counterObserver.observe(el));
+    } else {
+        // Fallback fără IntersectionObserver — afișează direct valoarea
+        counters.forEach(el => {
+            el.textContent = parseInt(el.dataset.target, 10).toLocaleString('ro-RO');
+        });
+    }
+
+    // Ascunde iframe-ul gol și arată placeholder-ul
+    const videoIframe = document.getElementById('ubc-video');
+    const videoPlaceholder = document.getElementById('video-placeholder');
+    if (videoIframe && videoPlaceholder) {
+        if (!videoIframe.getAttribute('src') || videoIframe.getAttribute('src') === '') {
+            videoIframe.style.display = 'none';
+            videoPlaceholder.style.display = 'flex';
+        } else {
+            videoPlaceholder.style.display = 'none';
+        }
+    }
+
+
+    // ═══════════════════════════════════════════════════════
+    //  8. PERFORMANCE MONITORING (client-side)
+    // ═══════════════════════════════════════════════════════
+
+    window.addEventListener('load', () => {
+        try {
+            const nav = performance.getEntriesByType('navigation')[0];
+            if (nav) {
+                const loadTime = Math.round(nav.loadEventEnd - nav.startTime);
+                // Avertizăm (doar în consolă) dacă pagina e lentă
+                if (loadTime > 4000) {
+                    console.warn(`[UBC Perf] ⚠️ Pagina s-a încărcat în ${loadTime}ms — analizează resursele!`);
+                    if (window.UBC_Errors) {
+                        window.UBC_Errors.log(`Timp de încărcare mare: ${loadTime}ms`, 'performance');
+                    }
+                } else {
+                    console.log(`%c[UBC Perf] ✅ Pagina încărcată în ${loadTime}ms`, 'color:#2ECC71;');
+                }
+            }
+        } catch (_) {}
+    });
+
+
+    // ═══════════════════════════════════════════════════════
+    //  9. INIT — Mesaj de confirmare în consolă
     // ═══════════════════════════════════════════════════════
 
     console.log('%c[UBC App] ✅ Toate modulele front-end active!', 'color:#2ECC71; font-weight:bold; font-size:12px;');
