@@ -98,10 +98,11 @@ app.post('/api/admin/login', (req, res) => {
 //  Rute
 // ─────────────────────────────────────────────
 app.get('/', (req, res) => {
-    const utilaje  = readJson('data/utilaje.json',    'utilaje');
-    const proiecte = readJson('data/portofoliu.json', 'proiecte');
+    const utilaje   = readJson('data/utilaje.json',    'utilaje');
+    const proiecte  = readJson('data/portofoliu.json', 'proiecte');
+    const parteneri = readJson('data/parteneri.json',  'parteneri');
 
-    res.render('index', { utilaje, proiecte });
+    res.render('index', { utilaje, proiecte, parteneri });
 });
 
 // ─────────────────────────────────────────────

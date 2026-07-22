@@ -1,0 +1,29 @@
+{
+  "parteneri": [
+    {
+      "id": "holcim",
+      "sigla": "/photos/parteneri/HOLCIM.png",
+      "nume": "HOLCIM"
+    },
+    {
+      "id": "mc-bauchemie",
+      "sigla": "/photos/parteneri/MC.png",
+      "nume": "MC Bauchemie"
+    },
+    {
+      "id": "urgent-beton",
+      "sigla": "/photos/parteneri/URGENT_BETON.png",
+      "nume": "URGENT BETON"
+    },
+    {
+      "id": "oscar",
+      "sigla": "/photos/parteneri/OSCAR.png",
+      "nume": "OSCAR Downstream"
+    },
+    {
+      "id": "green-mix-vicecom",
+      "sigla": "/photos/parteneri/GREEN_MIX_VICECOM.png",
+      "nume": "GREEN MIX VICECOM"
+    }
+  ]
+}

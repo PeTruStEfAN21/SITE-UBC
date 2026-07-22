@@ -1,0 +1,171 @@
+<%# views/pages/galerie.ejs — Pagina Galerie Foto și Meniu Derulant Parteneri %>
+
+<main id="page-galerie" class="page-view">
+
+    <%# ── HEADER PAGINĂ ── %>
+    <div class="gl-header">
+        <div class="gl-header__inner">
+            <span class="gl-eyebrow">Imagini &amp; Colaborări</span>
+            <h1>Galerie &amp; <span>Parteneri</span></h1>
+            <p>Descoperă stația de betoane UBC în imagini și rețeaua noastră de parteneri de încredere din industrie.</p>
+        </div>
+    </div>
+
+    <%# ── GALERIE FOTO COMPLETĂ ── %>
+    <section class="gl-gallery-section">
+        <div class="gl-section-title">
+            <h2>Galerie <span>Foto Stație</span></h2>
+            <p>Click pe orice imagine pentru vizualizare ecran complet</p>
+        </div>
+
+        <div class="gl-grid">
+            <div class="gl-item" data-lightbox-src="/photos/Statie3.jpg">
+                <img src="/photos/Statie3.jpg" alt="Ansamblu Stație Betoane UBC" class="gl-item__img" loading="lazy">
+                <div class="gl-item__overlay">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="gl-item" data-lightbox-src="/photos/Statie.jpg">
+                <img src="/photos/Statie.jpg" alt="Stație Betoane UBC Oltenița" class="gl-item__img" loading="lazy">
+                <div class="gl-item__overlay">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="gl-item" data-lightbox-src="/photos/Statie2.jpg">
+                <img src="/photos/Statie2.jpg" alt="Silozuri și Malaxor UBC" class="gl-item__img" loading="lazy">
+                <div class="gl-item__overlay">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="gl-item" data-lightbox-src="/photos/Statie4.jpg">
+                <img src="/photos/Statie4.jpg" alt="Operațiuni Pompare Beton UBC" class="gl-item__img" loading="lazy">
+                <div class="gl-item__overlay">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="gl-item" data-lightbox-src="/photos/Statie5.jpg">
+                <img src="/photos/Statie5.jpg" alt="Flotă Cife &amp; Autopompe UBC" class="gl-item__img" loading="lazy">
+                <div class="gl-item__overlay">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%# ── MENIU DERULANT PARTENERI (SIGLE PARTENERI) ── %>
+    <section class="gl-parteneri-section">
+        <div class="gl-section-title">
+            <h2>Partenerii <span>Noștri</span></h2>
+            <p>Companii și parteneri strategici cu care colaborăm</p>
+        </div>
+
+        <%
+            const _defaultParteneri = [
+                { id: "holcim",            sigla: "/photos/parteneri/HOLCIM.png",            nume: "HOLCIM" },
+                { id: "mc-bauchemie",      sigla: "/photos/parteneri/MC.png",                nume: "MC Bauchemie" },
+                { id: "urgent-beton",      sigla: "/photos/parteneri/URGENT_BETON.png",      nume: "URGENT BETON" },
+                { id: "oscar",             sigla: "/photos/parteneri/OSCAR.png",             nume: "OSCAR Downstream" },
+                { id: "green-mix-vicecom", sigla: "/photos/parteneri/GREEN_MIX_VICECOM.png", nume: "GREEN MIX VICECOM" }
+            ];
+            const _pList = (typeof parteneri !== 'undefined' && parteneri.length > 0)
+                ? parteneri
+                : ((locals.parteneri && locals.parteneri.length > 0) ? locals.parteneri : _defaultParteneri);
+        %>
+
+        <div class="gl-partners-container">
+            <button class="gl-partners-arrow gl-partners-arrow--prev" id="gl-parteneri-prev" aria-label="Anterior">‹</button>
+
+            <div class="gl-partners-track" id="gl-parteneri-track">
+                <% _pList.forEach(function(p) { %>
+                    <div class="gl-partner-card" data-id="<%= p.id %>">
+                        <img
+                            src="<%= p.sigla %>"
+                            alt="<%= p.nume || 'Partener UBC' %>"
+                            class="gl-partner-logo"
+                            loading="lazy"
+                        >
+                    </div>
+                <% }); %>
+            </div>
+
+            <button class="gl-partners-arrow gl-partners-arrow--next" id="gl-parteneri-next" aria-label="Următor">›</button>
+        </div>
+    </section>
+
+</main>
+
+<%# ── LIGHTBOX GALERIE ── %>
+<div id="gl-lightbox" class="pf-lightbox" role="dialog" aria-modal="true" aria-label="Vizualizare foto galerie" hidden>
+    <div class="pf-lightbox__backdrop" id="gl-lb-backdrop"></div>
+    <img src="" alt="" class="pf-lightbox__img" id="gl-lb-img">
+    <button class="pf-lightbox__close" id="gl-lb-close" aria-label="Închide">✕</button>
+</div>
+
+<%# ── SCRIPT PENTRU GALERIE LIGHTBOX ȘI CAROUSEL PARTENERI ── %>
+<script>
+(function () {
+    // ── 1. Lightbox Galerie ──
+    const glLightbox = document.getElementById('gl-lightbox');
+    const glLbImg    = document.getElementById('gl-lb-img');
+    const glLbClose  = document.getElementById('gl-lb-close');
+    const glLbBg     = document.getElementById('gl-lb-backdrop');
+
+    if (glLightbox) {
+        document.getElementById('page-galerie').addEventListener('click', function (e) {
+            const item = e.target.closest('[data-lightbox-src]');
+            if (item) {
+                const src = item.dataset.lightboxSrc;
+                if (src) {
+                    glLbImg.src = src;
+                    glLightbox.hidden = false;
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+        });
+
+        function closeGlLb() {
+            glLightbox.hidden = true;
+            document.body.style.overflow = '';
+            glLbImg.src = '';
+        }
+
+        if (glLbClose) glLbClose.addEventListener('click', closeGlLb);
+        if (glLbBg)    glLbBg.addEventListener('click', closeGlLb);
+
+        document.addEventListener('keydown', function (e) {
+            if (!glLightbox.hidden && e.key === 'Escape') closeGlLb();
+        });
+    }
+
+    // ── 2. Carousel Derulant Parteneri ──
+    const track = document.getElementById('gl-parteneri-track');
+    const prev  = document.getElementById('gl-parteneri-prev');
+    const next  = document.getElementById('gl-parteneri-next');
+
+    if (track && prev && next) {
+        const scrollAmount = 300;
+
+        prev.addEventListener('click', function () {
+            track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+
+        next.addEventListener('click', function () {
+            track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+    }
+})();
+</script>

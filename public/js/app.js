@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pages    = document.querySelectorAll('.page-view');
 
     /** Paginile valide ale site-ului */
-    const VALID_PAGES = ['acasa', 'despre', 'utilaje', 'portofoliu'];
+    const VALID_PAGES = ['acasa', 'despre', 'utilaje', 'portofoliu', 'galerie'];
 
     // ─── Salvare / Restaurare poziție scroll ──────────────
 
