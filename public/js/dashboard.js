@@ -13,7 +13,6 @@
     'use strict';
 
     // ─── Configurare ──────────────────────────────────────
-    const ADMIN_PASSWORD  = 'UBCiment';
     const AUTH_SESSION_KEY = 'ubc_admin_auth';
 
     // ─── Stare internă ────────────────────────────────────
@@ -27,10 +26,22 @@
         return sessionStorage.getItem(AUTH_SESSION_KEY) === 'true';
     }
 
-    function authenticate(password) {
-        if (password === ADMIN_PASSWORD) {
-            sessionStorage.setItem(AUTH_SESSION_KEY, 'true');
-            return true;
+    async function authenticate(password) {
+        try {
+            const res = await fetch('/api/admin/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password })
+            });
+            if (res.ok) {
+                const data = await res.json();
+                if (data.success) {
+                    sessionStorage.setItem(AUTH_SESSION_KEY, 'true');
+                    return true;
+                }
+            }
+        } catch (e) {
+            console.error('Eroare autentificare server:', e);
         }
         return false;
     }
@@ -119,10 +130,16 @@
         const close  = document.getElementById('ubc-login-close');
         const bkdrop = document.getElementById('ubc-login-backdrop');
 
-        function attemptLogin() {
+        async function attemptLogin() {
             const val = input.value.trim();
             if (!val) return;
-            if (authenticate(val)) {
+            btn.disabled = true;
+            btn.textContent = 'Se verifică...';
+            const ok = await authenticate(val);
+            btn.disabled = false;
+            btn.textContent = 'Intră în Dashboard →';
+
+            if (ok) {
                 modal.remove();
                 renderDashboard();
                 isOpen = true;

@@ -2,7 +2,7 @@
  * server.js — Server Express pentru site-ul UBC
  * Compilează SCSS → CSS la pornire și servește paginile EJS
  * Citește datele din data/utilaje.json și data/portofoliu.json
- * la fiecare request (hot-reload fără restart server).
+ * Încărcare securizată a parolelor din fișierul .env (ignorat de GitHub).
  */
 
 const express = require('express');
@@ -10,8 +10,31 @@ const sass    = require('sass');
 const path    = require('path');
 const fs      = require('fs');
 
+// Încărcare variabile din .env (fără dependințe externe)
+(function loadEnv() {
+    try {
+        const envPath = path.join(__dirname, '.env');
+        if (fs.existsSync(envPath)) {
+            const lines = fs.readFileSync(envPath, 'utf8').split('\n');
+            lines.forEach(line => {
+                const trimmed = line.trim();
+                if (trimmed && !trimmed.startsWith('#')) {
+                    const [key, ...vals] = trimmed.split('=');
+                    if (key && vals.length > 0) {
+                        process.env[key.trim()] = vals.join('=').trim();
+                    }
+                }
+            });
+        }
+    } catch (e) {
+        console.warn('⚠️  Nu pot citi .env:', e.message);
+    }
+})();
+
 const app  = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
+app.use(express.json());
 
 // ─────────────────────────────────────────────
 //  Compilare SCSS → public/css/main.css
@@ -21,7 +44,6 @@ function compileScss() {
         const scssPath = path.join(__dirname, 'scss', 'main.scss');
         const cssPath  = path.join(__dirname, 'public', 'css', 'main.css');
 
-        // Asigurăm că folderul public/css există
         fs.mkdirSync(path.join(__dirname, 'public', 'css'), { recursive: true });
 
         const result = sass.compile(scssPath, { style: 'expanded' });
@@ -60,10 +82,22 @@ function readJson(relativePath, key) {
 }
 
 // ─────────────────────────────────────────────
+//  API Autentificare Admin (Verificare pe server)
+// ─────────────────────────────────────────────
+app.post('/api/admin/login', (req, res) => {
+    const { password } = req.body || {};
+    const adminPass    = process.env.ADMIN_PASSWORD || 'UBCiment';
+
+    if (password && password === adminPass) {
+        return res.json({ success: true });
+    }
+    return res.status(401).json({ success: false, message: 'Parolă incorectă' });
+});
+
+// ─────────────────────────────────────────────
 //  Rute
 // ─────────────────────────────────────────────
 app.get('/', (req, res) => {
-    // Date citite la fiecare request → editezi JSON, dai refresh, gata
     const utilaje  = readJson('data/utilaje.json',    'utilaje');
     const proiecte = readJson('data/portofoliu.json', 'proiecte');
 

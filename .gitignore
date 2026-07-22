@@ -1,0 +1,13 @@
+# Node dependencies
+node_modules/
+
+# Environment variables & secrets (NICIODATĂ urcate pe GitHub!)
+.env
+.env.local
+.env.production
+
+# Logs & temp files
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
