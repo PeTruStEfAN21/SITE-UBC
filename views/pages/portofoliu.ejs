@@ -1,18 +1,127 @@
-<%# views/pages/portofoliu.ejs — Pagina 4: Portofoliu (Placeholder) %>
+<%# views/pages/portofoliu.ejs — Proiecte și Portofoliu %>
 
-<!-- ==========================================
-     PAGINA 4: PORTOFOLIU (PLACEHOLDER)
-     ========================================== -->
 <main id="page-portofoliu" class="page-view">
-    <section class="section-generica">
-        <h1 style="font-size: 3rem; font-weight: 900; margin-bottom: 10px;">Proiecte și <span style="color: var(--verde-ubc);">Portofoliu</span></h1>
-        <p style="color: var(--text-gri); font-size: 1.1rem;">Lucrări de referință, infrastructură și ansambluri rezidențiale livrate de UBC.</p>
 
-        <div class="placeholder-box">
-            <div style="font-size: 4rem; margin-bottom: 15px;">🏗️</div>
-            <h2>Galerie de Proiecte în Pregătire</h2>
-            <p>Pregătim documentația foto și datele tehnice pentru cele mai importante turnări de pe șantierele partenerilor noștri din județ.</p>
-            <a class="btn-menu active" data-target="acasa" style="cursor: pointer;">⬅️ Înapoi la Calculator</a>
+    <%# ── HEADER PAGINĂ (DIV, nu HTML header tag) ── %>
+    <div class="pf-header">
+        <div class="pf-header__inner">
+            <span class="pf-eyebrow">Rezultate Concrete pe Șantiere</span>
+            <h1>Proiecte și <span>Portofoliu UBC</span></h1>
+            <p>Lucrări de referință livrate de UBC în Oltenița și împrejurimi — peste 30 de turnări finalizate cu succes din 2003 până în prezent.</p>
+        </div>
+    </div>
+
+    <%# ── GALERIE FOTO ── %>
+    <section class="pf-gallery">
+        <div class="pf-grid">
+
+            <% const _proiecte = (typeof proiecte !== 'undefined' ? proiecte : (locals.proiecte || [])); %>
+            <% if (_proiecte && _proiecte.length > 0) { %>
+                <% _proiecte.forEach(function(proiect) { %>
+
+                <div class="pf-item" data-id="<%= proiect.id %>">
+                    <% if (proiect.foto && proiect.foto.trim() !== '') { %>
+                        <img
+                            src="<%= proiect.foto %>"
+                            alt="<%= proiect.alt || 'Proiect UBC Oltenița' %>"
+                            class="pf-item__img"
+                            loading="lazy"
+                            data-lightbox
+                        >
+                        <div class="pf-item__overlay">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                            </svg>
+                        </div>
+                    <% } else { %>
+                        <div class="pf-item__placeholder">
+                            <img src="/photos/Statie3.jpg" alt="Proiect UBC" class="pf-item__img" data-lightbox>
+                        </div>
+                    <% } %>
+                </div>
+
+                <% }) %>
+            <% } %>
+
         </div>
     </section>
+
 </main>
+
+<%# ── LIGHTBOX ── %>
+<div id="pf-lightbox" class="pf-lightbox" role="dialog" aria-modal="true" aria-label="Vizualizare foto" hidden>
+    <div class="pf-lightbox__backdrop" id="pf-lb-backdrop"></div>
+    <img src="" alt="" class="pf-lightbox__img" id="pf-lb-img">
+    <button class="pf-lightbox__close" id="pf-lb-close" aria-label="Închide">✕</button>
+    <button class="pf-lightbox__nav pf-lightbox__nav--prev" id="pf-lb-prev" aria-label="Anterior">‹</button>
+    <button class="pf-lightbox__nav pf-lightbox__nav--next" id="pf-lb-next" aria-label="Următor">›</button>
+</div>
+
+<%# ── LIGHTBOX JS ── %>
+<script>
+(function () {
+    const lightbox  = document.getElementById('pf-lightbox');
+    const lbImg     = document.getElementById('pf-lb-img');
+    const lbClose   = document.getElementById('pf-lb-close');
+    const lbBackdrop= document.getElementById('pf-lb-backdrop');
+    const lbPrev    = document.getElementById('pf-lb-prev');
+    const lbNext    = document.getElementById('pf-lb-next');
+
+    if (!lightbox) return;
+
+    let images   = [];
+    let current  = 0;
+
+    function getImages() {
+        images = Array.from(
+            document.querySelectorAll('#page-portofoliu .pf-item__img[data-lightbox]')
+        );
+    }
+
+    function openLightbox(img) {
+        getImages();
+        current = images.indexOf(img);
+        showImage(current);
+        lightbox.hidden = false;
+        document.body.style.overflow = 'hidden';
+        lbClose.focus();
+    }
+
+    function closeLightbox() {
+        lightbox.hidden = true;
+        document.body.style.overflow = '';
+        lbImg.src = '';
+    }
+
+    function showImage(idx) {
+        if (!images[idx]) return;
+        lbImg.src = images[idx].src;
+        lbImg.alt = images[idx].alt;
+        current = idx;
+        lbPrev.style.display = images.length > 1 ? '' : 'none';
+        lbNext.style.display = images.length > 1 ? '' : 'none';
+    }
+
+    document.getElementById('page-portofoliu').addEventListener('click', function (e) {
+        const img = e.target.closest('[data-lightbox]');
+        if (img) openLightbox(img);
+    });
+
+    lbClose.addEventListener('click', closeLightbox);
+    lbBackdrop.addEventListener('click', closeLightbox);
+
+    lbPrev.addEventListener('click', function () {
+        showImage((current - 1 + images.length) % images.length);
+    });
+    lbNext.addEventListener('click', function () {
+        showImage((current + 1) % images.length);
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (lightbox.hidden) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft')  lbPrev.click();
+        if (e.key === 'ArrowRight') lbNext.click();
+    });
+})();
+</script>

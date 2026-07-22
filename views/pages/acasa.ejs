@@ -7,6 +7,12 @@
 
     <!-- Hero Section -->
     <section class="hero">
+        <!-- Video fundal cinematic -->
+        <video class="hero__video-bg" autoplay muted loop playsinline poster="/photos/Statie.jpg">
+            <source src="/photos/statie_betoane_promo_v2.mp4" type="video/mp4">
+        </video>
+        <div class="hero__overlay"></div>
+
         <div class="hero-box">
             <h1>Beton de înaltă precizie.<br>Livrare rapidă.</h1>
             <p>Stație ecologică automatizată. Capacitate de producție industrială, calitate controlată prin laborator propriu și flotă modernă de cife și pompe pentru șantierul tău.</p>
@@ -19,7 +25,7 @@
     </section>
 
     <!-- Trust Bar -->
-    <section class="trust-bar">
+    <section class="trust-bar reveal">
         <div class="trust-item"><h3>ISO 9001</h3><p>Calitate Certificată</p></div>
         <div class="trust-item"><h3>ISC</h3><p>Laborator Autorizat</p></div>
         <div class="trust-item"><h3>24/7</h3><p>Dispecerat &amp; Livrare</p></div>
@@ -28,7 +34,7 @@
     <!-- ══════════════════════════════════════
          CIFRE IMPACT — 30+ lucrări, din 2003
          ══════════════════════════════════════ -->
-    <section class="impact-stats">
+    <section class="impact-stats reveal">
         <div class="impact-stats__bg-text" aria-hidden="true">UBC</div>
         <div class="impact-stats__inner">
             <div class="impact-stat" data-count="30" data-suffix="+">
@@ -61,7 +67,7 @@
     <!-- ══════════════════════════════════════
          VIDEO — Prezentare stație UBC
          ══════════════════════════════════════ -->
-    <section class="video-section">
+    <section class="video-section reveal">
         <div class="video-section__header">
             <span class="video-section__tag">▶ Prezentare</span>
             <h2>Vezi stația noastră în acțiune</h2>
@@ -85,7 +91,7 @@
     </section>
 
     <!-- Calculator Dinamic -->
-    <section id="calculator" class="calc-section">
+    <section id="calculator" class="calc-section reveal">
         <h2 style="font-size: 2.4rem; margin-bottom: 10px; font-weight: 900;">Calculează Volumul Exact</h2>
         <p style="color: var(--text-gri); margin-bottom: 40px;">Introdu dimensiunile elementului de turnat pentru a afla necesarul de beton.</p>
 
@@ -105,18 +111,34 @@
                 </div>
             </div>
 
+            <!-- Rezultat vizual: coloană beton animată + date numerice -->
             <div class="calc-result-box">
-                <span style="color: var(--text-gri); font-size: 0.85rem; text-transform: uppercase; font-weight: 700; letter-spacing: 1px;">Volum Total Necesar:</span>
-                <h3 id="rezultat-volum">0.00 <span style="font-size: 1.8rem; font-weight: 700;">m³</span></h3>
+                <!-- Pilonul de beton animat -->
+                <div class="calc-pillar-wrap">
+                    <div class="calc-pillar">
+                        <div class="calc-pillar__fill" id="calc-pillar-fill">
+                            <div class="calc-pillar__wave"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rezultate numerice -->
+                <div class="calc-result-text">
+                    <span class="calc-result-label">Volum Total Necesar:</span>
+                    <h3 id="rezultat-volum">0.00 <span style="font-size: 1.8rem; font-weight: 700;">m³</span></h3>
+                    <div class="calc-breakdown" id="calc-breakdown">
+                        <small id="calc-trucks-text">Introdu dimensiunile mai sus</small>
+                    </div>
+                </div>
             </div>
 
             <a href="tel:0724349503" id="btn-comanda-calc" class="btn-suna" style="width: 100%; justify-content: center; padding: 16px; opacity: 0.5; pointer-events: none;">Introdu dimensiunile pentru comandă</a>
-            <p style="font-size: 0.8rem; color: var(--text-gri); margin-top: 15px;">* Un operator va prelua instant valoarea calculată pentru alocarea cifelor.</p>
+
         </div>
     </section>
 
     <!-- Clase și Specificații Beton -->
-    <section id="produse" class="produse">
+    <section id="produse" class="produse reveal">
         <h2 style="font-size: 2.6rem; margin-bottom: 15px; font-weight: 900;">Clase și Specificații Beton</h2>
         <p style="color: var(--text-gri); font-size: 1.1rem; max-width: 650px; margin: 0 auto 40px auto;">Selectează categoria de turnare pentru a vizualiza rețetele noastre omologate conform standardelor europene.</p>
 

@@ -1,6 +1,8 @@
 /**
  * server.js — Server Express pentru site-ul UBC
  * Compilează SCSS → CSS la pornire și servește paginile EJS
+ * Citește datele din data/utilaje.json și data/portofoliu.json
+ * la fiecare request (hot-reload fără restart server).
  */
 
 const express = require('express');
@@ -44,10 +46,28 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // ─────────────────────────────────────────────
+//  Helper: citire JSON cu fallback la array gol
+// ─────────────────────────────────────────────
+function readJson(relativePath, key) {
+    try {
+        const raw  = fs.readFileSync(path.join(__dirname, relativePath), 'utf8');
+        const data = JSON.parse(raw);
+        return data[key] || [];
+    } catch (err) {
+        console.warn(`⚠️  Nu pot citi ${relativePath}: ${err.message}`);
+        return [];
+    }
+}
+
+// ─────────────────────────────────────────────
 //  Rute
 // ─────────────────────────────────────────────
 app.get('/', (req, res) => {
-    res.render('index');
+    // Date citite la fiecare request → editezi JSON, dai refresh, gata
+    const utilaje  = readJson('data/utilaje.json',    'utilaje');
+    const proiecte = readJson('data/portofoliu.json', 'proiecte');
+
+    res.render('index', { utilaje, proiecte });
 });
 
 // ─────────────────────────────────────────────

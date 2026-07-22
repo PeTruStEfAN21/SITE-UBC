@@ -1,46 +1,296 @@
-<%# views/pages/despre.ejs — Pagina 2: Despre Noi (Manifest Industrial) %>
+<%# views/pages/despre.ejs — Pagina Despre Noi: Scrollytelling cu fundal paralax %>
 
-<!-- ==========================================
-     PAGINA 2: DESPRE NOI (MANIFEST INDUSTRIAL)
-     ========================================== -->
 <main id="page-despre" class="page-view">
-    <section class="section-generica">
-        <h1 style="font-size: 3rem; font-weight: 900; margin-bottom: 10px;">Despre <span style="color: var(--verde-ubc);">UBC</span></h1>
-        <p style="color: var(--text-gri); font-size: 1.1rem;">Tradiție, precizie inginerească și respect pentru termenii de livrare.</p>
 
-        <div class="despre-hero">
-            <div class="despre-grid">
-                <div class="despre-text">
-                    <h2>PRODUCȚIE AUTOMATIZATĂ.<br><span>CALITATE GARANTATĂ.</span></h2>
-                    <p>Înființată cu viziunea de a aduce rigurozitate și punctualitate pe fiecare șantier din regiune, stația de betoane <strong>Union Business Company (UBC)</strong> reprezintă intersecția dintre tehnologia modernă de preparare și expertiza inginerască. Ne desfășurăm activitatea prin procese de malaxare 100% automatizate, eliminând eroarea umană și garantând că fiecare metru cub livrat respectă cu strictețe rețeta omologată și curba granulometrică.</p>
-                    <p>Fie că alimentăm fundația unei locuințe individuale sau infrastructura unui proiect industrial complex, ne angajăm să oferim nu doar un material de construcție excepțional, ci și un parteneriat logistic fiabil, bazat pe transparență și dispecerat activ 24/7.</p>
-                </div>
-                <div style="text-align: center;">
-                    <!-- Casetă vizuală de impact -->
-                    <div style="background: rgba(46, 204, 113, 0.08); border: 2px solid var(--verde-ubc); padding: 40px 30px; border-radius: 16px; box-shadow: 0 0 30px rgba(46, 204, 113, 0.15);">
-                        <h3 style="font-size: 4rem; color: var(--text-alb); font-weight: 900; line-height: 1;">60+</h3>
-                        <p style="color: var(--verde-ubc); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; margin-bottom: 25px;">m³ / Oră Capacitate</p>
-                        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 20px 0;">
-                        <p style="color: var(--text-gri); font-size: 0.95rem;">Certificare ISO 9001 &amp; Laborator autorizat pentru toate clasele de beton livrate.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Cei 3 Piloni de Forță -->
-        <div class="despre-piloni">
-            <div class="pilon-box">
-                <h3>⚙️ Tehnologie Automatizată</h3>
-                <p>Stația noastră utilizează sisteme de cântărire electronică de înaltă precizie pentru agregate, ciment, apă și aditivi plastifianți, asigurând o omogenitate perfectă a amestecului.</p>
-            </div>
-            <div class="pilon-box">
-                <h3>🔬 Laborator Autorizat ISC</h3>
-                <p>Calitatea nu este o promisiune, ci un calcul matematic. Testăm continuu rezistența la compresiune, tasarea și impermeabilitatea probelor pentru fiecare lot produs.</p>
-            </div>
-            <div class="pilon-box">
-                <h3>🚛 Logistică și Flotă Proprie</h3>
-                <p>Deținem o flotă modernă de cife de mare capacitate și pompe auto-elevatoare, eliminând timpii morți de turnare și prevenind priza prematură a betonului pe traseu.</p>
+    <!-- ══════════════════════════════════════════════
+         SECȚIUNEA 1: HERO FULLSCREEN
+         ══════════════════════════════════════════════ -->
+    <section class="dp-section dp-hero">
+        <div class="dp-overlay"></div>
+        <div class="dp-content dp-hero__content">
+            <span class="dp-eyebrow dp-reveal">Din 2003 &bull; Oltenița, Călărași</span>
+            <h1 class="dp-reveal dp-reveal--delay-1">
+                Despre <span>UBC</span>
+            </h1>
+            <p class="dp-hero__sub dp-reveal dp-reveal--delay-2">
+                Două decenii de tradiție industrială, precizie certificată<br>și livrare garantată pe orice șantier.
+            </p>
+            <div class="dp-scroll-hint dp-reveal dp-reveal--delay-3">
+                <span>Descoperă povestea</span>
+                <div class="dp-scroll-arrow"></div>
             </div>
         </div>
     </section>
+
+    <!-- ══════════════════════════════════════════════
+         SECȚIUNEA 2: POVESTEA NOASTRĂ
+         ══════════════════════════════════════════════ -->
+    <section class="dp-section dp-story">
+        <div class="dp-overlay dp-overlay--story"></div>
+        <div class="dp-content dp-story__content">
+
+            <div class="dp-story__left">
+                <div class="dp-year-badge dp-reveal">2003</div>
+                <h2 class="dp-reveal dp-reveal--delay-1">O fundație solidă,<br>construită în timp</h2>
+                <p class="dp-reveal dp-reveal--delay-2">
+                    Union Business Company ia naștere la Oltenița, pe malul Dunării, într-un moment în care industria construcțiilor din Călărași ducea lipsă de un furnizor local cu adevărat de încredere. Viziunea fondatorilor era simplă dar ambițioasă: o stație de betoane care să funcționeze la standarde industriale, indiferent de dimensiunea comenzii.
+                </p>
+                <p class="dp-reveal dp-reveal--delay-3">
+                    Două decenii mai târziu, cu peste <strong>30 de lucrări finalizate</strong> — de la fundații rezidențiale simple până la infrastructuri industriale complexe — UBC rămâne partenerul pe care constructorii îl apelează când contează termenul și calitatea simultan.
+                </p>
+            </div>
+
+            <div class="dp-story__right dp-reveal dp-reveal--delay-2">
+                <div class="dp-milestone-list">
+                    <div class="dp-milestone">
+                        <span class="dp-milestone__text">Înființarea stației de betoane în Oltenița, Călărași</span>
+                    </div>
+                    <div class="dp-milestone">
+                        <span class="dp-milestone__text">Prima certificare națională de calitate a producției</span>
+                    </div>
+                    <div class="dp-milestone">
+                        <span class="dp-milestone__text">Extinderea flotei de autobetoniere și pompe</span>
+                    </div>
+                    <div class="dp-milestone">
+                        <span class="dp-milestone__text">Autorizare laborator ISC — testare independentă</span>
+                    </div>
+                    <div class="dp-milestone">
+                        <span class="dp-milestone__text">Modernizare completă a sistemului automatizat de dozare</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         SECȚIUNEA 3: CIFRE DE IMPACT
+         ══════════════════════════════════════════════ -->
+    <section class="dp-section dp-stats">
+        <div class="dp-content">
+            <span class="dp-eyebrow dp-reveal" style="display:block; text-align:center;">Performanță măsurată</span>
+            <h2 class="dp-reveal dp-reveal--delay-1">Câteva cifre care vorbesc de la sine</h2>
+            <div class="dp-stats__grid">
+                <div class="dp-stat dp-reveal dp-reveal--delay-1">
+                    <div class="dp-stat__num">
+                        <span class="dp-counter" data-target="2003">0</span>
+                    </div>
+                    <div class="dp-stat__label">Anul înființării</div>
+                </div>
+                <div class="dp-stat dp-reveal dp-reveal--delay-2">
+                    <div class="dp-stat__num">
+                        <span class="dp-counter" data-target="30">0</span><span class="dp-stat__suffix">+</span>
+                    </div>
+                    <div class="dp-stat__label">Lucrări finalizate</div>
+                </div>
+                <div class="dp-stat dp-reveal dp-reveal--delay-3">
+                    <div class="dp-stat__num">
+                        <span class="dp-counter" data-target="60">0</span><span class="dp-stat__suffix">+</span>
+                    </div>
+                    <div class="dp-stat__label">m³ / Oră Capacitate</div>
+                </div>
+                <div class="dp-stat dp-reveal dp-reveal--delay-4">
+                    <div class="dp-stat__num">24/7</div>
+                    <div class="dp-stat__label">Dispecerat Activ</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         SECȚIUNEA 4: PILONII DE FORȚĂ
+         ══════════════════════════════════════════════ -->
+    <section class="dp-section dp-pillars">
+        <div class="dp-overlay"></div>
+        <div class="dp-content">
+            <span class="dp-eyebrow dp-reveal" style="display:block; text-align:center;">Ce ne diferențiază</span>
+            <h2 class="dp-section-title dp-reveal dp-reveal--delay-1">Pilonii care susțin calitatea</h2>
+            <div class="dp-pillars__grid">
+
+                <div class="dp-pillar-card dp-reveal dp-reveal--delay-1">
+                    <div class="dp-pillar-icon">⚙️</div>
+                    <h3>Tehnologie Automatizată</h3>
+                    <p>Stația funcționează prin sisteme computerizate de cântărire electronică de înaltă precizie pentru agregate, ciment, apă și aditivi plastifianți. Fiecare rețetă este executată cu toleranțe de ±0.5%, garantând omogenitatea amestecului și respectarea exactă a clasei de beton comandate.</p>
+                    <div class="dp-pillar-detail">
+                        <span>✓ Dozare electronică automată per șarjă</span>
+                        <span>✓ Malaxare controlată computerizat</span>
+                        <span>✓ Înregistrare digitală a fiecărei rețete</span>
+                    </div>
+                </div>
+
+                <div class="dp-pillar-card dp-reveal dp-reveal--delay-2">
+                    <div class="dp-pillar-icon">🔬</div>
+                    <h3>Laborator Autorizat ISC</h3>
+                    <p>Calitatea nu e o promisiune verbală — e un rezultat măsurat. Laboratorul nostru autorizat de Inspectoratul de Stat în Construcții efectuează teste de rezistență la compresiune, tasare Abrams și impermeabilitate pentru fiecare lot, cu emitere de buletin de analiză cu valoare legală.</p>
+                    <div class="dp-pillar-detail">
+                        <span>✓ Rezistență la compresiune (7 și 28 de zile)</span>
+                        <span>✓ Tasare Abrams — consistență amestec</span>
+                        <span>✓ Impermeabilitate și durabilitate certificată</span>
+                    </div>
+                </div>
+
+                <div class="dp-pillar-card dp-reveal dp-reveal--delay-3">
+                    <div class="dp-pillar-icon">🚛</div>
+                    <h3>Flotă Proprie de Livrare</h3>
+                    <p>Deținem o flotă modernă de autobetoniere (cife) de mare capacitate și pompe auto-elevatoare pentru turnare în zone greu accesibile sau la înălțime. Controlul total al logisticii de la stație la șantier elimină timpii morți și previne priza prematură a betonului pe traseu.</p>
+                    <div class="dp-pillar-detail">
+                        <span>✓ Autobetoniere monitorizate GPS în timp real</span>
+                        <span>✓ Pompe pentru turnare la înălțime</span>
+                        <span>✓ Dispecerat coordonat non-stop</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         SECȚIUNEA 5: CERTIFICĂRI DETALIATE
+         ══════════════════════════════════════════════ -->
+    <section class="dp-section dp-certs">
+        <div class="dp-overlay dp-overlay--certs"></div>
+        <div class="dp-content dp-certs__content">
+
+            <div class="dp-certs__left">
+                <span class="dp-eyebrow dp-reveal">Calitate dovedită, nu declarată</span>
+                <h2 class="dp-reveal dp-reveal--delay-1">Certificările<br>noastre</h2>
+                <p class="dp-reveal dp-reveal--delay-2">
+                    Fiecare metru cub de beton produs de UBC vine însoțit de garanția unor sisteme de calitate recunoscute la nivel național și european. Nu funcționăm pe baza promisiunilor verbale — avem documentele care atestă fiecare proces.
+                </p>
+            </div>
+
+            <div class="dp-certs__right">
+
+                <div class="dp-cert-card dp-reveal dp-reveal--delay-1">
+                    <div class="dp-cert-badge">ISO<br><small>9001</small></div>
+                    <div class="dp-cert-info">
+                        <h3>ISO 9001:2015 — Management al Calității</h3>
+                        <p>Sistemul de Management al Calității certificat ISO 9001 garantează că toate procesele noastre — de la recepția materiilor prime până la livrarea finală pe șantier — respectă un standard internațional riguros. Auditurile externe anuale verifică continuu conformitatea și impun îmbunătățirea proceselor.</p>
+                        <ul>
+                            <li>Control riguros al tuturor proceselor de producție</li>
+                            <li>Trasabilitate completă a fiecărei comenzi livrate</li>
+                            <li>Îmbunătățire continuă auditată extern și documentată</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="dp-cert-card dp-reveal dp-reveal--delay-2">
+                    <div class="dp-cert-badge">ISC<br><small>Lab</small></div>
+                    <div class="dp-cert-info">
+                        <h3>Laborator Autorizat ISC</h3>
+                        <p>Autorizarea ISC (Inspectoratul de Stat în Construcții) reprezintă cel mai înalt nivel de recunoaștere oficială pentru un laborator de materiale în România. Ne permite să emitem buletine de analiză cu valoare legală, acceptate de proiectanți, diriginți de șantier și autorități locale.</p>
+                        <ul>
+                            <li>Buletine de analiză cu valoare juridică deplină</li>
+                            <li>Acceptat de diriginți de șantier și proiectanți</li>
+                            <li>Acoperire toate clasele de beton: C8/10 — C35/45</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         SECȚIUNEA 6: VIZIUNEA NOASTRĂ
+         ══════════════════════════════════════════════ -->
+    <section class="dp-section dp-vision">
+        <div class="dp-overlay"></div>
+        <div class="dp-content dp-vision__content">
+            <span class="dp-eyebrow dp-reveal">Valorile care ne definesc</span>
+            <h2 class="dp-reveal dp-reveal--delay-1">
+                Nu vindem beton.<br><span>Construim parteneriate.</span>
+            </h2>
+            <p class="dp-reveal dp-reveal--delay-2">
+                Înțelegem că un șantier nu poate aștepta. De aceea, fiecare comandă UBC vine cu angajamentul nostru personal: beton conform rețetei omologate, livrat la timp, cu documentație completă, prin oameni care răspund la telefon indiferent de oră.
+            </p>
+            <div class="dp-vision__values dp-reveal dp-reveal--delay-3">
+                <div class="dp-value">
+                    <span class="dp-value__icon">🤝</span>
+                    <span>Seriozitate</span>
+                </div>
+                <div class="dp-value">
+                    <span class="dp-value__icon">⏱️</span>
+                    <span>Punctualitate</span>
+                </div>
+                <div class="dp-value">
+                    <span class="dp-value__icon">📋</span>
+                    <span>Transparență</span>
+                </div>
+                <div class="dp-value">
+                    <span class="dp-value__icon">🏗️</span>
+                    <span>Profesionalism</span>
+                </div>
+            </div>
+            <a href="tel:0724349503" id="btn-cta-despre" class="btn-suna dp-vision__cta dp-reveal dp-reveal--delay-4">
+                📞 &nbsp;Contactează Dispeceratul
+            </a>
+        </div>
+    </section>
+
 </main>
+
+<!-- ══════════════════════════════════════════════
+     JS SCROLL INTERACTIV — Reveal + Contoare
+     ══════════════════════════════════════════════ -->
+<script>
+(function () {
+    if (!('IntersectionObserver' in window)) {
+        document.querySelectorAll('#page-despre .dp-reveal').forEach(el => el.classList.add('dp-reveal--visible'));
+        document.querySelectorAll('#page-despre .dp-counter').forEach(el => { el.textContent = el.dataset.target; });
+        return;
+    }
+
+    // ── Reveal observer ────────────────────────────────
+    const revealObs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('dp-reveal--visible');
+                revealObs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('#page-despre .dp-reveal').forEach(el => revealObs.observe(el));
+
+    // ── Counter observer ───────────────────────────────
+    function animateDpCounter(el, target) {
+        const dur = target > 1000 ? 1400 : 1800;
+        const start = performance.now();
+        const easeOut = t => 1 - Math.pow(1 - t, 3);
+        const tick = now => {
+            const elapsed = Math.min(now - start, dur);
+            const pct = easeOut(elapsed / dur);
+            el.textContent = Math.round(pct * target).toLocaleString('ro-RO');
+            if (elapsed < dur) requestAnimationFrame(tick);
+            else el.textContent = target.toLocaleString('ro-RO');
+        };
+        requestAnimationFrame(tick);
+    }
+
+    const counterObs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = parseInt(entry.target.dataset.target, 10);
+                animateDpCounter(entry.target, target);
+                counterObs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.4 });
+
+    document.querySelectorAll('#page-despre .dp-counter').forEach(el => counterObs.observe(el));
+
+    // ── Active section highlight ───────────────────────
+    const sectionObs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('dp-section--active');
+            } else {
+                entry.target.classList.remove('dp-section--active');
+            }
+        });
+    }, { threshold: 0.25 });
+
+    document.querySelectorAll('#page-despre .dp-section').forEach(el => sectionObs.observe(el));
+})();
+</script>

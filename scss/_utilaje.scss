@@ -1,0 +1,379 @@
+// ══════════════════════════════════════════════════════════
+//  scss/_utilaje.scss
+//  Pagina Flotă & Utilaje — Hero showcase Statie3.jpg + carduri
+// ══════════════════════════════════════════════════════════
+
+// ─── Header pagină ─────────────────────────────────────────
+.ut-header {
+    padding: 100px 40px 40px;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(14,18,22,1) 0%, rgba(10,12,14,0.95) 100%);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+
+    @media (max-width: 600px) { padding: 80px 22px 30px; }
+}
+
+.ut-header__inner {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.ut-eyebrow {
+    display: inline-block;
+    font-size: 0.70rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--verde-ubc);
+    margin-bottom: 14px;
+
+    &::before { content: '─── '; opacity: 0.4; }
+}
+
+.ut-header {
+    h1 {
+        font-size: clamp(2.4rem, 6vw, 4.2rem);
+        font-weight: 900;
+        margin-bottom: 16px;
+        span { color: var(--verde-ubc); }
+    }
+    p {
+        color: rgba(255,255,255,0.48);
+        font-size: 1.05rem;
+        line-height: 1.75;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+
+// ─── HERO SHOWCASE (Statie3.jpg) ─────────────────────────
+.ut-hero-showcase {
+    max-width: 1200px;
+    margin: 40px auto 60px;
+    padding: 0 30px;
+
+    @media (max-width: 600px) { padding: 0 16px; margin: 30px auto 40px; }
+}
+
+.ut-showcase-card {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    background: rgba(18, 22, 27, 0.92);
+    border: 1px solid rgba(46, 204, 113, 0.25);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 35px rgba(46, 204, 113, 0.1);
+    backdrop-filter: blur(12px);
+
+    @media (max-width: 960px) { grid-template-columns: 1fr; }
+}
+
+.ut-showcase-card__image-wrap {
+    position: relative;
+    min-height: 380px;
+    overflow: hidden;
+}
+
+.ut-showcase-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.7s ease;
+
+    .ut-showcase-card:hover & {
+        transform: scale(1.04);
+    }
+}
+
+.ut-showcase-card__badge {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    background: rgba(10, 12, 14, 0.88);
+    border: 1px solid var(--verde-ubc);
+    padding: 12px 20px;
+    border-radius: 14px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+
+    span {
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        color: var(--verde-ubc);
+    }
+
+    strong {
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: var(--text-alb);
+        line-height: 1.1;
+    }
+}
+
+.ut-showcase-card__content {
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @media (max-width: 600px) { padding: 30px 22px; }
+
+    h2 {
+        font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+        font-weight: 900;
+        line-height: 1.2;
+        margin: 14px 0 18px;
+        color: var(--text-alb);
+
+        span { color: var(--verde-ubc); }
+    }
+
+    p {
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 1rem;
+        line-height: 1.8;
+        margin-bottom: 28px;
+    }
+}
+
+.ut-showcase-features {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 24px;
+}
+
+.ut-sc-feat {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    strong {
+        display: block;
+        font-size: 0.95rem;
+        color: var(--text-alb);
+        font-weight: 700;
+    }
+
+    small {
+        color: rgba(255, 255, 255, 0.45);
+        font-size: 0.82rem;
+    }
+}
+
+.ut-sc-icon {
+    font-size: 1.5rem;
+    background: rgba(46, 204, 113, 0.1);
+    border: 1px solid rgba(46, 204, 113, 0.25);
+    border-radius: 12px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+// ─── Titlu listă ───────────────────────────────────────────
+.ut-list-title {
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    padding: 0 30px;
+    text-align: center;
+
+    h2 {
+        font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+        font-weight: 900;
+        margin-bottom: 10px;
+        span { color: var(--verde-ubc); }
+    }
+
+    p {
+        color: rgba(255, 255, 255, 0.45);
+        font-size: 0.98rem;
+    }
+}
+
+// ─── Lista de utilaje ──────────────────────────────────────
+.ut-list {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px 80px;
+
+    @media (max-width: 600px) { padding: 0 16px 60px; }
+}
+
+// ─── Card utilaj ──────────────────────────────────────────
+.ut-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 440px;
+    background: rgba(16, 20, 25, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 35px;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+        border-color: rgba(46, 204, 113, 0.35);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    // Layout inversat (foto dreapta, info stânga)
+    &--reverse {
+        .ut-card__media { order: 2; }
+        .ut-card__info  { order: 1; }
+    }
+
+    @media (max-width: 900px) {
+        grid-template-columns: 1fr;
+        &--reverse .ut-card__media { order: 1; }
+        &--reverse .ut-card__info  { order: 2; }
+    }
+}
+
+// ─── Media (foto) ──────────────────────────────────────────
+.ut-card__media {
+    position: relative;
+    overflow: hidden;
+    background: #0d1014;
+    min-height: 320px;
+}
+
+.ut-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.6s ease;
+
+    .ut-card:hover & { transform: scale(1.04); }
+}
+
+.ut-card__placeholder {
+    width: 100%;
+    height: 100%;
+}
+
+// ─── Badge categorie ───────────────────────────────────────
+.ut-cat-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    border: 1px solid;
+    z-index: 2;
+}
+
+.ut-cat--produc\Ție-central\Ă,
+.ut-cat--productie-centrala,
+.ut-cat--produc\Ție,
+.ut-cat--productie {
+    background: rgba(46, 204, 113, 0.15);
+    border-color: rgba(46, 204, 113, 0.4);
+    color: #2ECC71;
+}
+.ut-cat--transport-beton {
+    background: rgba(52, 152, 219, 0.15);
+    border-color: rgba(52, 152, 219, 0.4);
+    color: #3498DB;
+}
+.ut-cat--pompare-beton {
+    background: rgba(245, 166, 35, 0.15);
+    border-color: rgba(245, 166, 35, 0.4);
+    color: #F5A623;
+}
+.ut-cat--control-calitate {
+    background: rgba(155, 89, 182, 0.15);
+    border-color: rgba(155, 89, 182, 0.4);
+    color: #9B59B6;
+}
+
+// ─── Info utilaj ───────────────────────────────────────────
+.ut-card__info {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @media (max-width: 1100px) { padding: 32px 26px; }
+    @media (max-width: 600px)  { padding: 26px 20px; }
+}
+
+.ut-card__titlu {
+    font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 14px;
+    color: var(--text-alb);
+}
+
+.ut-card__desc {
+    color: rgba(255,255,255,0.58);
+    font-size: 0.94rem;
+    line-height: 1.72;
+    margin-bottom: 24px;
+}
+
+// ─── Specificații tehnice ──────────────────────────────────
+.ut-specs {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 20px;
+}
+
+.ut-specs__title {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.28);
+    margin-bottom: 12px;
+}
+
+.ut-specs__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 16px;
+
+    @media (max-width: 500px) { grid-template-columns: 1fr; }
+}
+
+.ut-spec {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.05);
+
+    &:hover { border-color: rgba(46,204,113,0.2); }
+}
+
+.ut-spec__label {
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.32);
+}
+
+.ut-spec__val {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--verde-ubc);
+}

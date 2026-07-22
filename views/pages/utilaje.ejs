@@ -1,18 +1,93 @@
-<%# views/pages/utilaje.ejs — Pagina 3: Utilaje (Placeholder) %>
+<%# views/pages/utilaje.ejs — Flotă și Utilaje UBC cu Statie3.jpg pe prim plan %>
 
-<!-- ==========================================
-     PAGINA 3: UTILAJE (PLACEHOLDER)
-     ========================================== -->
 <main id="page-utilaje" class="page-view">
-    <section class="section-generica">
-        <h1 style="font-size: 3rem; font-weight: 900; margin-bottom: 10px;">Flotă și <span style="color: var(--verde-ubc);">Utilaje</span></h1>
-        <p style="color: var(--text-gri); font-size: 1.1rem;">Echipamente de mare capacitate pregătite pentru orice provocare de turnare.</p>
 
-        <div class="placeholder-box">
-            <div style="font-size: 4rem; margin-bottom: 15px;">🚧</div>
-            <h2>Secțiune în Curs de Actualizare</h2>
-            <p>Urmează să publicăm aici specificațiile tehnice detaliate ale cifelor, pompelor staționare și ale malaxorului central Constmach.</p>
-            <a class="btn-menu active" data-target="acasa" style="cursor: pointer;">⬅️ Înapoi la Calculator</a>
+    <%# ── HEADER PAGINĂ (DIV, nu HTML header tag) ── %>
+    <div class="ut-header">
+        <div class="ut-header__inner">
+            <span class="ut-eyebrow">Dotare Tehnică Industrială</span>
+            <h1>Flotă și <span>Utilaje UBC</span></h1>
+            <p>Echipamente de mare capacitate și tehnologie automatizată pregătite pentru orice provocare pe șantier — de la fundații rezidențiale la infrastructuri industriale masive.</p>
+        </div>
+    </div>
+
+    <%# ── HERO FEATURED SHOWCASE (Statie3.jpg să sară în ochi) ── %>
+    <section class="ut-hero-showcase">
+        <div class="ut-showcase-card">
+            <div class="ut-showcase-card__image-wrap">
+                <img src="/photos/Statie3.jpg" alt="Stația de betoane UBC" class="ut-showcase-card__img">
+                <div class="ut-showcase-card__badge">
+                    <span>⚡ CAPACITATE MAXIMĂ</span>
+                    <strong>60 m³ / Oră</strong>
+                </div>
+            </div>
+            <div class="ut-showcase-card__content">
+                <span class="ut-cat-badge ut-cat--productie">Inima Stației UBC</span>
+                <h2>Stația Centrală de Betoane <span>UBC</span></h2>
+                <p>Proces industrial 100% automatizat cu sistem electronic de cântărire și dozare a agregatelor, cimentului, apei și aditivilor. Elimină complet erorile umane și garantează că fiecare șarjă de beton livrată în Oltenița respectă cu strictețe rețeta omologată.</p>
+            </div>
         </div>
     </section>
+
+    <%# ── LISTA DE UTILAJE DIN JSON ── %>
+    <section class="ut-list">
+        <div class="ut-list-title">
+            <h2>Toată Echiparea <span>Noastră</span></h2>
+            <p>Echipamente și flotă proprie pentru producție, transport și pompare pe orice șantier</p>
+        </div>
+
+        <% const _utilaje = (typeof utilaje !== 'undefined' ? utilaje : (locals.utilaje || [])); %>
+        <% if (_utilaje && _utilaje.length > 0) { %>
+            <% _utilaje.forEach(function(utilaj, index) { %>
+
+            <article class="ut-card <%= index % 2 !== 0 ? 'ut-card--reverse' : '' %>" id="utilaj-<%= utilaj.id %>">
+
+                <%# Foto utilaj %>
+                <div class="ut-card__media">
+                    <% if (utilaj.foto && utilaj.foto.trim() !== '') { %>
+                        <img
+                            src="<%= utilaj.foto %>"
+                            alt="<%= utilaj.titlu %>"
+                            class="ut-card__img"
+                            loading="lazy"
+                        >
+                    <% } else { %>
+                        <div class="ut-card__placeholder">
+                            <img src="/photos/Statie3.jpg" alt="Utilaj UBC" class="ut-card__img">
+                        </div>
+                    <% } %>
+
+                    <%# Badge categorie %>
+                    <span class="ut-cat-badge ut-cat--<%= utilaj.categorie.toLowerCase().replace(/[\s\/]+/g, '-') %>">
+                        <%= utilaj.categorie %>
+                    </span>
+                </div>
+
+                <%# Informații utilaj %>
+                <div class="ut-card__info">
+                    <h3 class="ut-card__titlu"><%= utilaj.titlu %></h3>
+                    <p class="ut-card__desc"><%= utilaj.descriere %></p>
+
+                    <% if (utilaj.specificatii && utilaj.specificatii.length > 0) { %>
+                    <div class="ut-specs">
+                        <h4 class="ut-specs__title">Specificații tehnice</h4>
+                        <div class="ut-specs__grid">
+                            <% utilaj.specificatii.forEach(function(spec) { %>
+                            <div class="ut-spec">
+                                <span class="ut-spec__label"><%= spec.label %></span>
+                                <span class="ut-spec__val"><%= spec.valoare %></span>
+                            </div>
+                            <% }) %>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+
+            </article>
+
+            <% }) %>
+        <% } %>
+
+    </section>
+
 </main>

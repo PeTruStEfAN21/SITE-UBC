@@ -22,8 +22,11 @@
 // 6. Pagina Despre Noi
 @use 'despre';
 
-// 7. Pagini Placeholder (Utilaje, Portofoliu)
-@use 'placeholder';
+// 7. Pagina Utilaje (Flotă & Echipamente)
+@use 'utilaje';
+
+// 8. Pagina Portofoliu (Galerie Proiecte)
+@use 'portofoliu';
 
 // 8. Secțiunea Contact & Footer
 @use 'contact';

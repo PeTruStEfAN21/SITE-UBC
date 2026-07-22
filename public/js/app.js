@@ -247,6 +247,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnComanda = document.getElementById('btn-comanda-calc');
     const telNumber  = '0724349503';
 
+    // Referinte pentru vizualul pilonului de beton
+    const pillarFill   = document.getElementById('calc-pillar-fill');
+    const pillarTrucks = document.getElementById('calc-pillar-trucks');
+    const calcBreakdown  = document.getElementById('calc-breakdown');
+    const calcTrucksText = document.getElementById('calc-trucks-text');
+    const MAX_PILLAR_VOL = 25; // 25 m³ = 100% umplere vizuala
+
     // Limită rezonabilă pentru un calcul (m³) — alertăm dacă e prea mare
     const VOLUM_MAX_ALERT = 500;
     const VOLUM_MIN_VALID = 0.001;
@@ -264,6 +271,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (h < 0) { h = 0; inputH.value = 0; }
 
         const volum = L * l * h;
+
+        // ─── Animatie vizuala pilon beton ───────────────
+        if (pillarFill) {
+            const fillPct = Math.min((volum / MAX_PILLAR_VOL) * 100, 100);
+            pillarFill.style.height = `${fillPct}%`;
+        }
+        const trucks = volum > 0 ? Math.ceil(volum / 8) : 0;
+        if (pillarTrucks) pillarTrucks.textContent = trucks;
+        if (calcBreakdown && calcTrucksText) {
+            if (volum > 0) {
+                calcTrucksText.textContent =
+                    `≈ ${trucks} cifă${trucks !== 1 ? '' : ''} × 8 m³ — livrare estimată`;
+            } else {
+                calcTrucksText.textContent = 'Introdu dimensiunile mai sus';
+            }
+        }
+        // ────────────────────────────────────────────────
 
         // Afișăm rezultatul
         if (afisaj) {
@@ -532,6 +556,29 @@ document.addEventListener('DOMContentLoaded', () => {
         counters.forEach(el => {
             el.textContent = parseInt(el.dataset.target, 10).toLocaleString('ro-RO');
         });
+    }
+
+    // ═══════════════════════════════════════════════════════
+    //  SCROLL REVEAL — Animă secțiunile la scroll
+    // ═══════════════════════════════════════════════════════
+    const revealEls = document.querySelectorAll('.reveal');
+
+    if (revealEls.length > 0 && 'IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('reveal--visible');
+                revealObserver.unobserve(entry.target);
+            });
+        }, {
+            threshold: 0.10,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        revealEls.forEach(el => revealObserver.observe(el));
+    } else {
+        // Fallback: arata imediat daca browser-ul nu suporta IO
+        revealEls.forEach(el => el.classList.add('reveal--visible'));
     }
 
     // Ascunde iframe-ul gol și arată placeholder-ul

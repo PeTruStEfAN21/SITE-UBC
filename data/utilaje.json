@@ -1,0 +1,79 @@
+{
+  "utilaje": [
+    {
+      "id": "statie-ubc",
+      "titlu": "Stație de Betoane Automatizată UBC",
+      "categorie": "Producție Centrală",
+      "foto": "/photos/Statie3.jpg",
+      "descriere": "Inima operațiunilor UBC din Oltenița. Stația noastră de betoane este un ansamblu industrial complet automatizat, cu sistem electronic de dozare de înaltă precizie pentru agregate, ciment, apă și aditivi. Garantăm o capacitate de producție de 60 m³ pe oră, respectând cu strictețe curba granulometrică și rețeta omologată pentru orice clasă de beton.",
+      "specificatii": [
+        { "label": "Capacitate producție", "valoare": "60 m³ / oră" },
+        { "label": "Malaxor industrial", "valoare": "1.000 litri / șarjă" },
+        { "label": "Dozare electronică", "valoare": "Automatizată 100%" },
+        { "label": "Clase beton", "valoare": "C8/10 până la C35/45" },
+        { "label": "Silo-uri ciment", "valoare": "Capacitate extinsă" },
+        { "label": "Certificare", "valoare": "ISO 9001:2015" }
+      ]
+    },
+    {
+      "id": "flota-autobetoniere",
+      "titlu": "Flotă Autobetoniere (Cife) de 8 m³",
+      "categorie": "Transport Beton",
+      "foto": "/photos/Statie2.jpg",
+      "descriere": "Flota proprie de autobetoniere UBC asigură transportul rapid și în condiții optime al betonului proaspăt pe orice șantier. Tobe malaxoare mențin betonul în mișcare continuă, prevenind segregarea și priza prematură pe traseu. Toate cifele sunt monitorizate prin dispecerat GPS 24/7.",
+      "specificatii": [
+        { "label": "Capacitate tobă", "valoare": "8 m³ per cifă" },
+        { "label": "Agitare continuă", "valoare": "Tobe hidraulice" },
+        { "label": "Rază acoperire", "valoare": "Oltenița + 50 km" },
+        { "label": "Monitorizare", "valoare": "Dispecerat GPS 24/7" },
+        { "label": "Turnare directă", "valoare": "Jgheab extensibil" },
+        { "label": "Disponibilitate", "valoare": "Turnări simultane" }
+      ]
+    },
+    {
+      "id": "pompa-auto-elevatoare",
+      "titlu": "Pompă Auto-Elevatoare (Autopompă)",
+      "categorie": "Pompare Beton",
+      "foto": "/photos/Statie5.jpg",
+      "descriere": "Echipament specializat dotat cu braț articulat hidraulic pentru pomparea betonului la înălțime sau în zone greu accesibile (planșee, etaje, fundații adânci sau peste clădiri existente). Asigură un debit constant de pompare fără pierderi de material.",
+      "specificatii": [
+        { "label": "Lungime braț", "valoare": "28 metri" },
+        { "label": "Debit pompare", "valoare": "80 m³ / oră" },
+        { "label": "Articulație", "valoare": "Braț 4 secțiuni" },
+        { "label": "Rotire braț", "valoare": "360° continuu" },
+        { "label": "Stabilizare", "valoare": "Cale hidraulice" },
+        { "label": "Aplicații", "valoare": "Planșee & Înălțime" }
+      ]
+    },
+    {
+      "id": "pompa-stationara",
+      "titlu": "Pompă Staționară de Beton",
+      "categorie": "Pompare Beton",
+      "foto": "/photos/Statie4.jpg",
+      "descriere": "Pompă de înaltă presiune utilizată pentru turnări pe distanțe lungi pe orizontală sau verticale înguste unde autopompa nu poate manevra. Conectată la conducte speciale de oțel și furtunuri flexibile de înaltă rezistență.",
+      "specificatii": [
+        { "label": "Presiune pompare", "valoare": "100 bar" },
+        { "label": "Distanță orizontală", "valoare": "Până la 300 m" },
+        { "label": "Distanță verticală", "valoare": "Până la 80 m" },
+        { "label": "Debit reglabil", "valoare": "20 - 60 m³ / h" },
+        { "label": "Furtun flexibil", "valoare": "Turnare de precizie" },
+        { "label": "Montaj pe șantier", "valoare": "Rapid & Eficient" }
+      ]
+    },
+    {
+      "id": "laborator-control",
+      "titlu": "Laborator Mobil & Control Calitate ISC",
+      "categorie": "Control & Calitate",
+      "foto": "/photos/Statie.jpg",
+      "descriere": "Laborator autorizat de Inspectoratul de Stat în Construcții. Prelevăm cuburi de probă din fiecare lot livrat, efectuând teste de rezistență la compresiune (7 și 28 de zile), tasare Abrams și durabilitate, cu emiterea buletinului de analiză cu valoare legală.",
+      "specificatii": [
+        { "label": "Autorizație", "valoare": "ISC Grad II" },
+        { "label": "Test Compresiune", "valoare": "Prepresă hidraulică" },
+        { "label": "Verificare Tasare", "valoare": "Con Abrams" },
+        { "label": "Buletin analiză", "valoare": "Legal per livrare" },
+        { "label": "Probe martor", "valoare": "Păstrate 28 zile" },
+        { "label": "Certificare lot", "valoare": "Garantată 100%" }
+      ]
+    }
+  ]
+}
