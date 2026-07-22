@@ -46,12 +46,108 @@
     }
 }
 
+// ─── Secțiune Prestări Servicii în Portofoliu ─────────────
+.pf-servicii-section {
+    max-width: 1400px;
+    margin: 40px auto 20px;
+    padding: 0 30px;
+
+    @media (max-width: 600px) { padding: 0 16px; margin: 30px auto 10px; }
+}
+
+.pf-servicii-card {
+    background: rgba(16, 20, 25, 0.85);
+    border: 1px solid rgba(46, 204, 113, 0.2);
+    border-radius: 20px;
+    padding: 38px 32px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.pf-servicii-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 26px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    .pf-servicii-icon {
+        font-size: 1.8rem;
+        background: rgba(46, 204, 113, 0.1);
+        border: 1px solid rgba(46, 204, 113, 0.25);
+        border-radius: 12px;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    h2 {
+        font-size: clamp(1.5rem, 3vw, 2.2rem);
+        font-weight: 900;
+        color: var(--text-alb);
+
+        span { color: var(--verde-ubc); }
+    }
+
+    p {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.92rem;
+    }
+}
+
+.pf-servicii-grid-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 28px;
+    list-style: none;
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+
+    li {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.95rem;
+        font-weight: 500;
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+
+        span {
+            color: var(--verde-ubc);
+            font-weight: 900;
+        }
+    }
+}
+
+.pf-gallery-title {
+    text-align: center;
+    margin-bottom: 30px;
+
+    h2 {
+        font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+        font-weight: 900;
+        color: var(--text-alb);
+
+        span { color: var(--verde-ubc); }
+    }
+
+    p {
+        color: rgba(255, 255, 255, 0.45);
+        font-size: 0.95rem;
+    }
+}
+
 // ─── Galerie ───────────────────────────────────────────────
 .pf-gallery {
-    padding: 50px 30px 80px;
+    padding: 30px 30px 80px;
     background: #0a0c0e;
 
-    @media (max-width: 600px) { padding: 36px 16px 60px; }
+    @media (max-width: 600px) { padding: 20px 16px 60px; }
 }
 
 .pf-grid {

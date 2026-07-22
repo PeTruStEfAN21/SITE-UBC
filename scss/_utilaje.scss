@@ -1,9 +1,8 @@
 // ══════════════════════════════════════════════════════════
 //  scss/_utilaje.scss
-//  Pagina Flotă & Utilaje — Hero showcase Statie3.jpg + carduri
+//  Pagina Flotă & Utilaje — Hero showcase + listă simplificată
 // ══════════════════════════════════════════════════════════
 
-// ─── Header pagină ─────────────────────────────────────────
 .ut-header {
     padding: 100px 40px 40px;
     text-align: center;
@@ -46,10 +45,10 @@
     }
 }
 
-// ─── HERO SHOWCASE (Statie3.jpg) ─────────────────────────
+// ── HERO SHOWCASE (Statie3.jpg) ─────────────────────────
 .ut-hero-showcase {
     max-width: 1200px;
-    margin: 40px auto 60px;
+    margin: 40px auto 50px;
     padding: 0 30px;
 
     @media (max-width: 600px) { padding: 0 16px; margin: 30px auto 40px; }
@@ -136,244 +135,125 @@
         color: rgba(255, 255, 255, 0.65);
         font-size: 1rem;
         line-height: 1.8;
-        margin-bottom: 28px;
     }
 }
 
-.ut-showcase-features {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    padding-top: 24px;
-}
-
-.ut-sc-feat {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-
-    strong {
-        display: block;
-        font-size: 0.95rem;
-        color: var(--text-alb);
-        font-weight: 700;
-    }
-
-    small {
-        color: rgba(255, 255, 255, 0.45);
-        font-size: 0.82rem;
-    }
-}
-
-.ut-sc-icon {
-    font-size: 1.5rem;
-    background: rgba(46, 204, 113, 0.1);
-    border: 1px solid rgba(46, 204, 113, 0.25);
-    border-radius: 12px;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-// ─── Titlu listă ───────────────────────────────────────────
-.ut-list-title {
-    max-width: 1200px;
-    margin: 0 auto 40px;
-    padding: 0 30px;
-    text-align: center;
-
-    h2 {
-        font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-        font-weight: 900;
-        margin-bottom: 10px;
-        span { color: var(--verde-ubc); }
-    }
-
-    p {
-        color: rgba(255, 255, 255, 0.45);
-        font-size: 0.98rem;
-    }
-}
-
-// ─── Lista de utilaje ──────────────────────────────────────
-.ut-list {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 30px 80px;
-
-    @media (max-width: 600px) { padding: 0 16px 60px; }
-}
-
-// ─── Card utilaj ──────────────────────────────────────────
-.ut-card {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 440px;
-    background: rgba(16, 20, 25, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 20px;
-    overflow: hidden;
-    margin-bottom: 35px;
-    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-
-    &:hover {
-        transform: translateY(-5px);
-        border-color: rgba(46, 204, 113, 0.35);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    }
-
-    // Layout inversat (foto dreapta, info stânga)
-    &--reverse {
-        .ut-card__media { order: 2; }
-        .ut-card__info  { order: 1; }
-    }
-
-    @media (max-width: 900px) {
-        grid-template-columns: 1fr;
-        &--reverse .ut-card__media { order: 1; }
-        &--reverse .ut-card__info  { order: 2; }
-    }
-}
-
-// ─── Media (foto) ──────────────────────────────────────────
-.ut-card__media {
-    position: relative;
-    overflow: hidden;
-    background: #0d1014;
-    min-height: 320px;
-}
-
-.ut-card__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    transition: transform 0.6s ease;
-
-    .ut-card:hover & { transform: scale(1.04); }
-}
-
-.ut-card__placeholder {
-    width: 100%;
-    height: 100%;
-}
-
-// ─── Badge categorie ───────────────────────────────────────
 .ut-cat-badge {
-    position: absolute;
-    top: 20px;
-    left: 20px;
+    display: inline-block;
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     padding: 6px 14px;
     border-radius: 20px;
-    backdrop-filter: blur(8px);
     border: 1px solid;
-    z-index: 2;
+    width: fit-content;
 }
 
-.ut-cat--produc\Ție-central\Ă,
-.ut-cat--productie-centrala,
-.ut-cat--produc\Ție,
 .ut-cat--productie {
     background: rgba(46, 204, 113, 0.15);
     border-color: rgba(46, 204, 113, 0.4);
     color: #2ECC71;
 }
-.ut-cat--transport-beton {
-    background: rgba(52, 152, 219, 0.15);
-    border-color: rgba(52, 152, 219, 0.4);
-    color: #3498DB;
-}
-.ut-cat--pompare-beton {
-    background: rgba(245, 166, 35, 0.15);
-    border-color: rgba(245, 166, 35, 0.4);
-    color: #F5A623;
-}
-.ut-cat--control-calitate {
-    background: rgba(155, 89, 182, 0.15);
-    border-color: rgba(155, 89, 182, 0.4);
-    color: #9B59B6;
+
+// ─── LISTĂ SIMPLIFICATĂ UTILAJE ─────────────────────────────
+.ut-simple-list-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px 80px;
+
+    @media (max-width: 600px) { padding: 0 18px 60px; }
 }
 
-// ─── Info utilaj ───────────────────────────────────────────
-.ut-card__info {
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.ut-list-title {
+    text-align: center;
+    margin-bottom: 40px;
 
-    @media (max-width: 1100px) { padding: 32px 26px; }
-    @media (max-width: 600px)  { padding: 26px 20px; }
+    h2 {
+        font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+        font-weight: 900;
+        margin-bottom: 10px;
+        color: var(--text-alb);
+
+        span { color: var(--verde-ubc); }
+    }
+
+    p {
+        color: rgba(255, 255, 255, 0.48);
+        font-size: 0.98rem;
+    }
 }
 
-.ut-card__titlu {
-    font-size: clamp(1.3rem, 2.2vw, 1.75rem);
-    font-weight: 900;
-    line-height: 1.2;
-    margin-bottom: 14px;
-    color: var(--text-alb);
-}
-
-.ut-card__desc {
-    color: rgba(255,255,255,0.58);
-    font-size: 0.94rem;
-    line-height: 1.72;
-    margin-bottom: 24px;
-}
-
-// ─── Specificații tehnice ──────────────────────────────────
-.ut-specs {
-    border-top: 1px solid rgba(255,255,255,0.06);
-    padding-top: 20px;
-}
-
-.ut-specs__title {
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.28);
-    margin-bottom: 12px;
-}
-
-.ut-specs__grid {
+.ut-simple-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px 16px;
+    gap: 30px;
 
-    @media (max-width: 500px) { grid-template-columns: 1fr; }
+    @media (max-width: 840px) {
+        grid-template-columns: 1fr;
+    }
 }
 
-.ut-spec {
+.ut-simple-card {
+    background: rgba(16, 20, 25, 0.85);
+    border: 1px solid rgba(46, 204, 113, 0.18);
+    border-radius: 20px;
+    padding: 36px 30px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.ut-simple-card__head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    h3 {
+        font-size: 1.3rem;
+        font-weight: 900;
+        color: var(--text-alb);
+    }
+
+    small {
+        color: rgba(255, 255, 255, 0.45);
+        font-size: 0.8rem;
+        display: block;
+    }
+}
+
+.ut-simple-icon {
+    font-size: 1.6rem;
+    background: rgba(46, 204, 113, 0.1);
+    border: 1px solid rgba(46, 204, 113, 0.25);
+    border-radius: 12px;
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.ut-simple-ul {
+    list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    padding: 8px 12px;
-    background: rgba(255,255,255,0.03);
-    border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.05);
+    gap: 12px;
 
-    &:hover { border-color: rgba(46,204,113,0.2); }
-}
+    li {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.98rem;
+        font-weight: 500;
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
 
-.ut-spec__label {
-    font-size: 0.66rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.32);
-}
-
-.ut-spec__val {
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: var(--verde-ubc);
+        span {
+            color: var(--verde-ubc);
+            font-weight: 900;
+        }
+    }
 }

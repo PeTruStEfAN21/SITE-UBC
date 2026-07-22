@@ -152,11 +152,19 @@
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
     gap: 80px;
-    align-items: start;
+    align-items: center; // Aliniere verticală pe centru
 
     @media (max-width: 900px) {
         grid-template-columns: 1fr;
         gap: 50px;
+    }
+}
+
+.dp-story__right {
+    margin-top: 40px; // Coborâm lista pentru a fi aliniată cu titlul și textul
+
+    @media (max-width: 900px) {
+        margin-top: 0;
     }
 }
 

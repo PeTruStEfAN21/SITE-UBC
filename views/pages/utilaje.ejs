@@ -1,21 +1,21 @@
-<%# views/pages/utilaje.ejs — Flotă și Utilaje UBC cu Statie3.jpg pe prim plan %>
+<%# views/pages/utilaje.ejs — Flotă și Utilaje UBC (Design simplificat) %>
 
 <main id="page-utilaje" class="page-view">
 
-    <%# ── HEADER PAGINĂ (DIV, nu HTML header tag) ── %>
+    <%# ── HEADER PAGINĂ ── %>
     <div class="ut-header">
         <div class="ut-header__inner">
             <span class="ut-eyebrow">Dotare Tehnică Industrială</span>
             <h1>Flotă și <span>Utilaje UBC</span></h1>
-            <p>Echipamente de mare capacitate și tehnologie automatizată pregătite pentru orice provocare pe șantier — de la fundații rezidențiale la infrastructuri industriale masive.</p>
+            <p>Echipamente de mare capacitate și tehnologie automatizată pregătite pentru orice provocare pe șantier — de la producție și transport beton până la închiriere de utilaje grele.</p>
         </div>
     </div>
 
-    <%# ── HERO FEATURED SHOWCASE (Statie3.jpg să sară în ochi) ── %>
+    <%# ── HERO FEATURED SHOWCASE (Poza de ansamblu Statie3.jpg) ── %>
     <section class="ut-hero-showcase">
         <div class="ut-showcase-card">
             <div class="ut-showcase-card__image-wrap">
-                <img src="/photos/Statie3.jpg" alt="Stația de betoane UBC" class="ut-showcase-card__img">
+                <img src="/photos/Statie3.jpg" alt="Ansamblu Stație de betoane UBC Oltenița" class="ut-showcase-card__img">
                 <div class="ut-showcase-card__badge">
                     <span>⚡ CAPACITATE MAXIMĂ</span>
                     <strong>60 m³ / Oră</strong>
@@ -24,70 +24,62 @@
             <div class="ut-showcase-card__content">
                 <span class="ut-cat-badge ut-cat--productie">Inima Stației UBC</span>
                 <h2>Stația Centrală de Betoane <span>UBC</span></h2>
-                <p>Proces industrial 100% automatizat cu sistem electronic de cântărire și dozare a agregatelor, cimentului, apei și aditivilor. Elimină complet erorile umane și garantează că fiecare șarjă de beton livrată în Oltenița respectă cu strictețe rețeta omologată.</p>
+                <p>Proces industrial 100% automatizat cu sistem electronic de cântărire și dozare a agregatelor, cimentului, apei și aditivilor. Elimină complet erorile umane și garantează că fiecare șarjă de beton livrată în Oltenița și împrejurimi respectă cu strictețe rețeta omologată.</p>
             </div>
         </div>
     </section>
 
-    <%# ── LISTA DE UTILAJE DIN JSON ── %>
-    <section class="ut-list">
+    <%# ── LISTA UTILAJE ȘI ECHIPAMENTE ── %>
+    <section class="ut-simple-list-section">
         <div class="ut-list-title">
-            <h2>Toată Echiparea <span>Noastră</span></h2>
-            <p>Echipamente și flotă proprie pentru producție, transport și pompare pe orice șantier</p>
+            <h2>Echipamente și <span>Utilaje Disponibile</span></h2>
+            <p>Lista completă de utilaje disponibile pentru lucrări de construcții și închiriere</p>
         </div>
 
-        <% const _utilaje = (typeof utilaje !== 'undefined' ? utilaje : (locals.utilaje || [])); %>
-        <% if (_utilaje && _utilaje.length > 0) { %>
-            <% _utilaje.forEach(function(utilaj, index) { %>
+        <div class="ut-simple-grid">
 
-            <article class="ut-card <%= index % 2 !== 0 ? 'ut-card--reverse' : '' %>" id="utilaj-<%= utilaj.id %>">
-
-                <%# Foto utilaj %>
-                <div class="ut-card__media">
-                    <% if (utilaj.foto && utilaj.foto.trim() !== '') { %>
-                        <img
-                            src="<%= utilaj.foto %>"
-                            alt="<%= utilaj.titlu %>"
-                            class="ut-card__img"
-                            loading="lazy"
-                        >
-                    <% } else { %>
-                        <div class="ut-card__placeholder">
-                            <img src="/photos/Statie3.jpg" alt="Utilaj UBC" class="ut-card__img">
-                        </div>
-                    <% } %>
-
-                    <%# Badge categorie %>
-                    <span class="ut-cat-badge ut-cat--<%= utilaj.categorie.toLowerCase().replace(/[\s\/]+/g, '-') %>">
-                        <%= utilaj.categorie %>
-                    </span>
-                </div>
-
-                <%# Informații utilaj %>
-                <div class="ut-card__info">
-                    <h3 class="ut-card__titlu"><%= utilaj.titlu %></h3>
-                    <p class="ut-card__desc"><%= utilaj.descriere %></p>
-
-                    <% if (utilaj.specificatii && utilaj.specificatii.length > 0) { %>
-                    <div class="ut-specs">
-                        <h4 class="ut-specs__title">Specificații tehnice</h4>
-                        <div class="ut-specs__grid">
-                            <% utilaj.specificatii.forEach(function(spec) { %>
-                            <div class="ut-spec">
-                                <span class="ut-spec__label"><%= spec.label %></span>
-                                <span class="ut-spec__val"><%= spec.valoare %></span>
-                            </div>
-                            <% }) %>
-                        </div>
+            <!-- Card 1: Închiriere Utilaje -->
+            <div class="ut-simple-card">
+                <div class="ut-simple-card__head">
+                    <div class="ut-simple-icon">🚜</div>
+                    <div>
+                        <h3>Închiriere Utilaje Grele</h3>
+                        <small>Echipamente pregătite pentru șantier</small>
                     </div>
-                    <% } %>
                 </div>
+                <ul class="ut-simple-ul">
+                    <li><span>•</span> Buldoexcavatoare</li>
+                    <li><span>•</span> Automacara 12.5 Tone</li>
+                    <li><span>•</span> Încărcătoare frontale</li>
+                    <li><span>•</span> Miniîncărcătoare frontale</li>
+                    <li><span>•</span> Vibrocompactoare</li>
+                    <li><span>•</span> Nacelă</li>
+                    <li><span>•</span> Repartizator asfalt</li>
+                    <li><span>•</span> Autospecială Vidanja cu autocurățător</li>
+                    <li><span>•</span> Transport materiale și mărfuri</li>
+                    <li><span>•</span> Trailer Special de la 2 Tone la 28 Tone</li>
+                </ul>
+            </div>
 
-            </article>
+            <!-- Card 2: Producție & Transport Beton -->
+            <div class="ut-simple-card">
+                <div class="ut-simple-card__head">
+                    <div class="ut-simple-icon">🏗️</div>
+                    <div>
+                        <h3>Producție &amp; Pompare Beton</h3>
+                        <small>Flota proprie de livrare UBC</small>
+                    </div>
+                </div>
+                <ul class="ut-simple-ul">
+                    <li><span>•</span> Stație centrală de betoane automatizată (60 m³/h)</li>
+                    <li><span>•</span> Flotă autobetoniere (cife) de 8 m³ cu agitare continuă</li>
+                    <li><span>•</span> Pompă auto-elevatoare (autopompă) cu braț articulat de 28m</li>
+                    <li><span>•</span> Pompă staționară de înaltă presiune (distanțe mari/verticală)</li>
+                    <li><span>•</span> Laborator mobil autorizat ISC pentru probe &amp; rezistență</li>
+                </ul>
+            </div>
 
-            <% }) %>
-        <% } %>
-
+        </div>
     </section>
 
 </main>
