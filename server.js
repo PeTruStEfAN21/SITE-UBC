@@ -5,10 +5,12 @@
  * Încărcare securizată a parolelor din fișierul .env (ignorat de GitHub).
  */
 
-const express = require('express');
-const sass    = require('sass');
-const path    = require('path');
-const fs      = require('fs');
+const express   = require('express');
+const sass      = require('sass');
+const path      = require('path');
+const fs        = require('fs');
+const helmet    = require('helmet');
+const rateLimit = require('express-rate-limit');
 
 // Încărcare variabile din .env (fără dependințe externe)
 (function loadEnv() {
@@ -34,7 +36,50 @@ const fs      = require('fs');
 const app  = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
+// ─────────────────────────────────────────────
+//  SECURITATE & NUTRITION HEADERS
+// ─────────────────────────────────────────────
+app.disable('x-powered-by'); // Ascunde că serverul rulează Express
+
+// Configurare Helmet — Antete HTTP de securitate
+app.use(
+    helmet({
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: ["'self'"],
+                scriptSrc:  ["'self'", "'unsafe-inline'"],
+                styleSrc:   ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+                fontSrc:    ["'self'", "https://fonts.gstatic.com"],
+                imgSrc:     ["'self'", "data:", "blob:", "https:"],
+                frameSrc:   ["'self'", "https://www.google.com", "https://maps.google.com", "https://*.google.com"],
+                connectSrc: ["'self'"]
+            }
+        },
+        crossOriginEmbedderPolicy: false
+    })
+);
+
+// Limitează dimensiunea cererilor JSON la 10kb (previne atacuri cu fișiere masive)
+app.use(express.json({ limit: '10kb' }));
+
+// Rate Limiter Global — Maxim 300 cereri / 15 min per IP
+const globalLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 300,
+    message: '⚠️ Prea multe cereri de pe această adresă IP. Încearcă din nou peste 15 minute.',
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+app.use(globalLimiter);
+
+// Rate Limiter dedicat pentru Autentificare Admin — Maxim 5 încercări / 15 min
+const loginLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 5,
+    message: { success: false, message: '🔒 Prea multe încercări eșuate de autentificare. Acces blocat 15 minute.' },
+    standardHeaders: true,
+    legacyHeaders: false,
+});
 
 // ─────────────────────────────────────────────
 //  Compilare SCSS → public/css/main.css
@@ -82,9 +127,9 @@ function readJson(relativePath, key) {
 }
 
 // ─────────────────────────────────────────────
-//  API Autentificare Admin (Verificare pe server)
+//  API Autentificare Admin (Verificare pe server + Protecție Brute-Force)
 // ─────────────────────────────────────────────
-app.post('/api/admin/login', (req, res) => {
+app.post('/api/admin/login', loginLimiter, (req, res) => {
     const { password } = req.body || {};
     const adminPass    = process.env.ADMIN_PASSWORD || 'UBCiment';
 

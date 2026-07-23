@@ -1,0 +1,169 @@
+<%# views/pages/contact.ejs — Pagina Dedicată de Contact & Dispecerat UBC %>
+
+<main id="page-contact" class="page-view">
+
+    <%# ── HEADER PAGINĂ ── %>
+    <div class="cp-header">
+        <div class="cp-header__inner">
+            <span class="cp-eyebrow">Dispecerat &amp; Stație de Betoane Oltenița</span>
+            <h1>Contact <span>UBC Betoane</span></h1>
+            <p>Suntem la dispoziția ta pentru comenzi rapide de beton, oferte de preț personalizate, consultanță tehnică și programări de turnare pe orice șantier.</p>
+        </div>
+    </div>
+
+    <%# ── CARDURI PRIMARE DE CONTACT ── %>
+    <section class="cp-cards-section">
+        <div class="cp-cards-grid">
+
+            <!-- Card 1: Telefon Dispecerat -->
+            <div class="cp-card cp-card--phone">
+                <div class="cp-card__header">
+                    <div class="cp-card__icon">📞</div>
+                    <div>
+                        <span class="cp-card__tag">Dispecerat &amp; Comenzi</span>
+                        <h2>Telefon Direct</h2>
+                    </div>
+                </div>
+                <div class="cp-card__body">
+                    <a href="tel:0724349503" class="cp-card__main-val">0724 349 503</a>
+                    <p class="cp-card__desc">Preluare comenzi instant, alocare cife și coordonare pompe auto-elevatoare pe șantier.</p>
+                    <div class="cp-card__status">
+                        <span class="cp-status-dot"></span>
+                        <span>Dispecerat Activ &bull; Răspuns Imediat</span>
+                    </div>
+                </div>
+                <div class="cp-card__actions">
+                    <a href="tel:0724349503" class="btn-suna cp-card__btn">📞 Sună la Dispecerat</a>
+                </div>
+            </div>
+
+            <!-- Card 2: Email Oficial -->
+            <div class="cp-card cp-card--email">
+                <div class="cp-card__header">
+                    <div class="cp-card__icon">✉️</div>
+                    <div>
+                        <span class="cp-card__tag">Oferte &amp; Proiecte</span>
+                        <h2>Email Oficial</h2>
+                    </div>
+                </div>
+                <div class="cp-card__body">
+                    <a href="mailto:comenzi@ubcbeton.ro" class="cp-card__main-val cp-card__main-val--email">comenzi@ubcbeton.ro</a>
+                    <p class="cp-card__desc">Trimite-ne caietul de sarcini, proiectul tehnic sau solicitarea de ofertă de preț.</p>
+                    <div class="cp-card__status">
+                        <span class="cp-status-dot cp-status-dot--gold"></span>
+                        <span>Răspuns garantat în maxim 2 ore</span>
+                    </div>
+                </div>
+                <div class="cp-card__actions">
+                    <a href="mailto:comenzi@ubcbeton.ro" class="cp-btn-secondary cp-card__btn">✉️ Trimite Email</a>
+                </div>
+            </div>
+
+            <!-- Card 3: Adresă Stație -->
+            <div class="cp-card cp-card--location">
+                <div class="cp-card__header">
+                    <div class="cp-card__icon">📍</div>
+                    <div>
+                        <span class="cp-card__tag">Adresă Producție</span>
+                        <h2>Stația de Betoane</h2>
+                    </div>
+                </div>
+                <div class="cp-card__body">
+                    <div class="cp-card__main-val cp-card__main-val--text">Șoseaua Călărași nr. 4</div>
+                    <p class="cp-card__desc">Oltenița, Județul Călărași &bull; Punct de plecare cife și încărcare utilaje.</p>
+                    <div class="cp-card__status">
+                        <span class="cp-status-dot"></span>
+                        <span>Acces facil autocamioane &amp; utilaje grele</span>
+                    </div>
+                </div>
+                <div class="cp-card__actions">
+                    <a href="https://maps.google.com/?q=Union+Business+Company+Oltenita" target="_blank" rel="noopener noreferrer" class="cp-btn-secondary cp-card__btn">🧭 Deschide în Google Maps</a>
+                </div>
+            </div>
+
+            <!-- Card 4: Program Operativ -->
+            <div class="cp-card cp-card--hours">
+                <div class="cp-card__header">
+                    <div class="cp-card__icon">🕒</div>
+                    <div>
+                        <span class="cp-card__tag">Program Operativ</span>
+                        <h2>Orar de Livrare</h2>
+                    </div>
+                </div>
+                <div class="cp-card__body">
+                    <ul class="cp-hours-list">
+                        <li>
+                            <span>Luni &ndash; Vineri:</span>
+                            <strong>07:00 &ndash; 18:00</strong>
+                        </li>
+                        <li>
+                            <span>Sâmbătă:</span>
+                            <strong>07:00 &ndash; 14:00</strong>
+                        </li>
+                        <li>
+                            <span>Duminică &amp; Nopți:</span>
+                            <strong style="color: var(--verde-ubc);">Turnări programate 24/7</strong>
+                        </li>
+                    </ul>
+                    <div class="cp-card__status">
+                        <span class="cp-status-dot"></span>
+                        <span>Dispecerat disponibil non-stop pentru urgențe</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <%# ── SECȚIUNEA HARTĂ GOOGLE MAPS INTERACTIVĂ ── %>
+    <section class="cp-map-section">
+        <div class="cp-map-box">
+            <div class="cp-map-header">
+                <div>
+                    <span class="cp-tag-mini">📍 Localizare &amp; Traseu</span>
+                    <h2>Stația Centrală de Betoane <span>UBC Oltenița</span></h2>
+                </div>
+                <p>Șoseaua Călărași nr. 4, Oltenița, Jud. Călărași</p>
+            </div>
+            <div class="cp-map-frame">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1432.6888258392178!2d26.651077334196202!3d44.09619896736037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40ae2d00575448bd%3A0x6bf40eecfd2a7de2!2sUNION%20BUSINESS%20COMPANY%20-%20OLTENITA!5e0!3m2!1sro!2sro!4v1782927108176!5m2!1sro!2sro"
+                    allowfullscreen=""
+                    loading="lazy"
+                    title="Hartă Google Maps Stația de Betoane UBC Oltenița">
+                </iframe>
+            </div>
+            <div class="cp-map-footer">
+                <span>💡 Livrare rapidă cu autobetoniere proprii în tot județul Călărași și zonele limitrofe</span>
+            </div>
+        </div>
+    </section>
+
+    <%# ── PILONI DE ÎNCREDERE & GARANȚII ── %>
+    <section class="cp-trust-section">
+        <div class="cp-trust-grid">
+            <div class="cp-trust-item">
+                <div class="cp-trust-icon">💡</div>
+                <div>
+                    <h4>Consultanță Tehnică Gratuită</h4>
+                    <p>Nu știi ce clasă de beton se potrivește? Inginerii noștri te ajută să alegi rețeta optimă pentru fundație, placă sau trotuar.</p>
+                </div>
+            </div>
+            <div class="cp-trust-item">
+                <div class="cp-trust-icon">📋</div>
+                <div>
+                    <h4>Documentație &amp; Buletine ISC</h4>
+                    <p>Fiecare livrare vine cu aviz de însoțire a mărfii și buletin de încercare emis de laboratorul nostru autorizat ISC.</p>
+                </div>
+            </div>
+            <div class="cp-trust-item">
+                <div class="cp-trust-icon">⏱️</div>
+                <div>
+                    <h4>Punctualitate pe Șantier</h4>
+                    <p>Programarea ritmului de sosire a cifelor se face cu precizie pentru a evita timpii morți la turnare și priza prematură.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>

@@ -83,7 +83,7 @@
             line-height: 1;
             animation: ubcLogoGlow 3.8s ease forwards 0.1s;
         }
-        .ubc-intro-logo-main .u-letter { color: #2ECC71; }
+        .ubc-intro-logo-main .u-letter { color: #27D045; }
         .ubc-intro-logo-sub {
             font-family: 'Montserrat', sans-serif;
             font-size: clamp(0.7rem, 2vw, 1rem);
@@ -488,7 +488,7 @@
                 <!-- TEXT UBC pe toba -->
                 <text x="200" y="90"
                       text-anchor="middle"
-                      fill="#2ECC71"
+                      fill="#27D045"
                       font-size="32"
                       font-weight="900"
                       font-family="Montserrat, sans-serif"

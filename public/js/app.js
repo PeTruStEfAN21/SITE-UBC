@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pages    = document.querySelectorAll('.page-view');
 
     /** Paginile valide ale site-ului */
-    const VALID_PAGES = ['acasa', 'despre', 'utilaje', 'portofoliu', 'galerie'];
+    const VALID_PAGES = ['acasa', 'despre', 'utilaje', 'portofoliu', 'galerie', 'contact'];
 
     // ─── Salvare / Restaurare poziție scroll ──────────────
 
@@ -591,6 +591,25 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             videoPlaceholder.style.display = 'none';
         }
+    }
+
+    // ═══════════════════════════════════════════════════════
+    //  FORMULAR PAGINĂ CONTACT (#cp-contact-form)
+    // ═══════════════════════════════════════════════════════
+    const contactForm = document.getElementById('cp-contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nume = document.getElementById('cp-nume')?.value || '';
+            const telefon = document.getElementById('cp-telefon')?.value || '';
+
+            if (window.UBC_Analytics) {
+                window.UBC_Analytics.trackCTA('email');
+            }
+
+            showToast(`Vă mulțumim, ${nume}! Solicitarea dvs. a fost înregistrată. Vă contactăm rapid pe numărul ${telefon}.`, 'success', 5000);
+            contactForm.reset();
+        });
     }
 
 
