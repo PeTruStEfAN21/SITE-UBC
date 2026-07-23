@@ -135,3 +135,9 @@ footer {
     font-size: 0.85rem;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
+
+// Când pagina dedicată de contact (#page-contact) este activă, ascundem secțiunea globală de contact și footer-ul
+#page-contact.active ~ .contact-section,
+#page-contact.active ~ footer {
+    display: none !important;
+}

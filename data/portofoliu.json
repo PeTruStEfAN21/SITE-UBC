@@ -1,12 +1,34 @@
 {
   "proiecte": [
-    { "id": 1, "foto": "/photos/Statie3.jpg", "alt": "Stația de betoane UBC Oltenița" },
-    { "id": 2, "foto": "/photos/Statie.jpg", "alt": "Complex infrastructură Oltenița" },
-    { "id": 3, "foto": "/photos/Statie2.jpg", "alt": "Alimentare cife șantier" },
-    { "id": 4, "foto": "/photos/Statie4.jpg", "alt": "Turnare beton staționar" },
-    { "id": 5, "foto": "/photos/Statie5.jpg", "alt": "Turnare la înălțime cu autopompă" },
-    { "id": 6, "foto": "/photos/Statie3.jpg", "alt": "Hala industrială & infrastructură" },
-    { "id": 7, "foto": "/photos/Statie2.jpg", "alt": "Turnare fundație rezidențială" },
-    { "id": 8, "foto": "/photos/Statie4.jpg", "alt": "Livrare beton Oltenița" }
+    {
+      "id": 1,
+      "categorie": "civile",
+      "foto": "/photos/portofoliu.jpeg",
+      "alt": "Construcții Civile și Industriale - Proiect 1"
+    },
+    {
+      "id": 2,
+      "categorie": "civile",
+      "foto": "/photos/portofoliu2.png",
+      "alt": "Construcții Civile și Industriale - Proiect 2"
+    },
+    {
+      "id": 3,
+      "categorie": "civile",
+      "foto": "/photos/portofoliu3.png",
+      "alt": "Construcții Civile și Industriale - Proiect 3"
+    },
+    {
+      "id": 4,
+      "categorie": "utilitare",
+      "foto": "/photos/constructii_etilitare(apa_canal_drum).jpg",
+      "alt": "Construcții Utilitare (Apă, Canal, Drumuri) - Proiect 1"
+    },
+    {
+      "id": 5,
+      "categorie": "utilitare",
+      "foto": "/photos/constructii_etilitare(apa_canal_drum)2.jpg",
+      "alt": "Construcții Utilitare (Apă, Canal, Drumuri) - Proiect 2"
+    }
   ]
 }

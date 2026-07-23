@@ -1,17 +1,96 @@
-<%# views/pages/portofoliu.ejs — Proiecte și Portofoliu %>
+<%# views/pages/portofoliu.ejs — Portofoliu Proiecte %>
 
 <main id="page-portofoliu" class="page-view">
 
-    <%# ── HEADER PAGINĂ (DIV, nu HTML header tag) ── %>
+    <%# ── HEADER PAGINĂ (TITLU MARE) ── %>
     <div class="pf-header">
         <div class="pf-header__inner">
-            <span class="pf-eyebrow">Rezultate Concrete pe Șantiere</span>
-            <h1>Proiecte și <span>Portofoliu UBC</span></h1>
-            <p>Lucrări de referință livrate de UBC în Oltenița și împrejurimi — peste 30 de turnări finalizate cu succes din 2003 până în prezent.</p>
+            <span class="pf-eyebrow">Lucrări &amp; Portofoliu</span>
+            <h1>Portofoliu <span>Proiecte</span></h1>
+            <p>Proiecte de referință executate de UBC — garanția calității și durabilității pe fiecare șantier.</p>
         </div>
     </div>
 
-    <%# ── SECȚIUNE PRESTĂRI SERVICII ── %>
+    <%
+        const _defaultCivile = [
+            { id: 1, categorie: "civile", foto: "/photos/portofoliu.jpeg", alt: "Construcții Civile și Industriale - Proiect 1" },
+            { id: 2, categorie: "civile", foto: "/photos/portofoliu2.png", alt: "Construcții Civile și Industriale - Proiect 2" },
+            { id: 3, categorie: "civile", foto: "/photos/portofoliu3.png", alt: "Construcții Civile și Industriale - Proiect 3" }
+        ];
+
+        const _defaultUtilitare = [
+            { id: 4, categorie: "utilitare", foto: "/photos/constructii_etilitare(apa_canal_drum).jpg", alt: "Construcții Utilitare (Apă, Canal, Drumuri) - Proiect 1" },
+            { id: 5, categorie: "utilitare", foto: "/photos/constructii_etilitare(apa_canal_drum)2.jpg", alt: "Construcții Utilitare (Apă, Canal, Drumuri) - Proiect 2" }
+        ];
+
+        const _allProiecte = (typeof proiecte !== 'undefined' && proiecte.length > 0)
+            ? proiecte
+            : ((locals.proiecte && locals.proiecte.length > 0) ? locals.proiecte : []);
+
+        const _civileList = _allProiecte.filter(p => p.categorie === 'civile').length > 0
+            ? _allProiecte.filter(p => p.categorie === 'civile')
+            : _defaultCivile;
+
+        const _utilitareList = _allProiecte.filter(p => p.categorie === 'utilitare').length > 0
+            ? _allProiecte.filter(p => p.categorie === 'utilitare')
+            : _defaultUtilitare;
+    %>
+
+    <%# ── SECȚIUNEA 1: CONSTRUCȚII CIVILE ȘI INDUSTRIALE ── %>
+    <section class="pf-gallery">
+        <div class="pf-gallery-title">
+            <h2>Construcții <span>Civile și Industriale</span></h2>
+            <p>Hale industriale, ansambluri rezidențiale, structuri monolite și fundații</p>
+        </div>
+
+        <div class="pf-grid">
+            <% _civileList.forEach(function(proiect) { %>
+                <div class="pf-item" data-id="<%= proiect.id %>">
+                    <img
+                        src="<%= proiect.foto %>"
+                        alt="<%= proiect.alt || 'Construcții Civile și Industriale UBC' %>"
+                        class="pf-item__img"
+                        loading="lazy"
+                        data-lightbox
+                    >
+                    <div class="pf-item__overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                        </svg>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </section>
+
+    <%# ── SECȚIUNEA 2: CONSTRUCȚII UTILITARE (APĂ, CANAL, DRUMURI) ── %>
+    <section class="pf-gallery pf-gallery--sec">
+        <div class="pf-gallery-title">
+            <h2>Construcții <span>Edilitare (Apă, Canal, Drumuri)</span></h2>
+            <p>Infrastructură edilitară, rețele de apă și canalizare, terasamente și drumuri</p>
+        </div>
+
+        <div class="pf-grid">
+            <% _utilitareList.forEach(function(proiect) { %>
+                <div class="pf-item" data-id="<%= proiect.id %>">
+                    <img
+                        src="<%= proiect.foto %>"
+                        alt="<%= proiect.alt || 'Construcții Utilitare (Apă, Canal, Drumuri) UBC' %>"
+                        class="pf-item__img"
+                        loading="lazy"
+                        data-lightbox
+                    >
+                    <div class="pf-item__overlay">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                        </svg>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </section>
+
+    <%# ── SECȚIUNE PRESTĂRI SERVICII (JOS) ── %>
     <section class="pf-servicii-section">
         <div class="pf-servicii-card">
             <div class="pf-servicii-head">
@@ -40,45 +119,6 @@
                 <li><span>✓</span> Lucrări de instalații electrice de joasă tensiune</li>
                 <li><span>✓</span> Concasare materiale</li>
             </ul>
-        </div>
-    </section>
-
-    <%# ── GALERIE FOTO ── %>
-    <section class="pf-gallery">
-        <div class="pf-gallery-title">
-            <h2>Galerie <span>Proiecte</span></h2>
-            <p>Imagini de pe șantierele și turnările noastre din regiune</p>
-        </div>
-        <div class="pf-grid">
-
-            <% const _proiecte = (typeof proiecte !== 'undefined' ? proiecte : (locals.proiecte || [])); %>
-            <% if (_proiecte && _proiecte.length > 0) { %>
-                <% _proiecte.forEach(function(proiect) { %>
-
-                <div class="pf-item" data-id="<%= proiect.id %>">
-                    <% if (proiect.foto && proiect.foto.trim() !== '') { %>
-                        <img
-                            src="<%= proiect.foto %>"
-                            alt="<%= proiect.alt || 'Proiect UBC Oltenița' %>"
-                            class="pf-item__img"
-                            loading="lazy"
-                            data-lightbox
-                        >
-                        <div class="pf-item__overlay">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
-                            </svg>
-                        </div>
-                    <% } else { %>
-                        <div class="pf-item__placeholder">
-                            <img src="/photos/Statie3.jpg" alt="Proiect UBC" class="pf-item__img" data-lightbox>
-                        </div>
-                    <% } %>
-                </div>
-
-                <% }) %>
-            <% } %>
-
         </div>
     </section>
 
