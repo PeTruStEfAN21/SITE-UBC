@@ -1,12 +1,80 @@
-<%# views/partials/head.ejs — <head> comun pentru toate paginile %>
+<%# views/partials/head.ejs — <head> comun pentru toate paginile (SEO & Meta Google Preview) %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UBC | Stație de Betoane Călărași</title>
-    <link rel="icon" type="image/png" href="/photos/favicon.png">
-    <meta name="description" content="Stație ecologică automatizată de betoane în Oltenița, Călărași. Producție 100+ m³/oră, laborator autorizat ISC, flotă proprie, livrare 24/7.">
+    <title>UBC Vindem Beton | Stație de Betoane Oltenița &amp; Călărași</title>
+
+    <!-- Meta SEO Principale -->
+    <meta name="description" content="Stație automatizată de betoane în Oltenița, Călărași. Producție și livrare beton certificat ISC (B150, B200, B250, B300, B350, B400), flotă cife și autopompe. Dispecerat comenzi: 0724 349 503.">
+    <meta name="keywords" content="ubc betoane, vindem beton oltenita, statie de betoane oltenita, pret beton calarasi, b250 oltenita, cifa beton calarasi, pompa beton oltenita, ubc.ro">
+    <meta name="author" content="Union Business Company - UBC">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+    <!-- Favicon & Iconițe -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/photos/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/photos/favicon.png">
+    <link rel="apple-touch-icon" href="/photos/favicon.png">
+    <link rel="shortcut icon" href="/photos/favicon.png">
+
+    <!-- Open Graph / Social Media Preview (Facebook, WhatsApp, Google Preview) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="UBC - Union Business Company">
+    <meta property="og:title" content="UBC Vindem Beton | Stație de Betoane Oltenița &amp; Călărași">
+    <meta property="og:description" content="Producție și livrare beton certificat ISC în Oltenița și județul Călărași. Capacitate 60 m³/h, laborator propriu, flotă cife și autopompe. Dispecerat: 0724 349 503.">
+    <meta property="og:image" content="/photos/favicon.png">
+    <meta property="og:image:alt" content="UBC Stație de Betoane Oltenița">
+    <meta property="og:locale" content="ro_RO">
+
+    <!-- Twitter Card Preview -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="UBC Vindem Beton | Stație de Betoane Oltenița">
+    <meta name="twitter:description" content="Producție și livrare beton certificat ISC în Oltenița și Călărași. Comandă la 0724 349 503.">
+    <meta name="twitter:image" content="/photos/favicon.png">
+
+    <!-- Structură JSON-LD Schema.org pentru Google Search Rich Snippet -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "UNION BUSINESS COMPANY - UBC OLTENITA",
+      "image": "/photos/favicon.png",
+      "telephone": "0724349503",
+      "email": "comenzi@ubcbeton.ro",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Șoseaua Călărași nr. 4",
+        "addressLocality": "Oltenița",
+        "addressRegion": "Călărași",
+        "postalCode": "915400",
+        "addressCountry": "RO"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 44.0961989,
+        "longitude": 26.6510773
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "07:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "07:00",
+          "closes": "14:00"
+        }
+      ],
+      "priceRange": "$$"
+    }
+    </script>
+
+    <!-- Fonturi Google & CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/main.css">
+
     <script>
         (function() {
             try {
