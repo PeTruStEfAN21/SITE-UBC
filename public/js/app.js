@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputH     = document.getElementById('grosime');
     const afisaj     = document.getElementById('rezultat-volum');
     const btnComanda = document.getElementById('btn-comanda-calc');
-    const telNumber  = '0724349503';
+    const telNumber  = '0720006655';
 
     // Referinte pentru vizualul pilonului de beton
     const pillarFill   = document.getElementById('calc-pillar-fill');

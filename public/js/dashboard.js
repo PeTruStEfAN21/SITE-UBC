@@ -565,12 +565,40 @@
             .replace(/"/g, '&quot;');
     }
 
-    // ─── Keyboard Shortcut ────────────────────────────────
+    // ─── Keyboard & Mobile Triggers ───────────────────────
 
+    // 1. Shortcut tastatură (Desktop: Ctrl+Shift+D)
     document.addEventListener('keydown', function (e) {
         if (e.ctrlKey && e.shiftKey && e.key === 'D') {
             e.preventDefault();
             toggleDashboard();
+        }
+    });
+
+    // 2. Secret Hash URL: #admin (pentru orice dispozitiv)
+    function checkHashTrigger() {
+        if (window.location.hash === '#admin') {
+            openDashboard();
+        }
+    }
+    window.addEventListener('hashchange', checkHashTrigger);
+    document.addEventListener('DOMContentLoaded', checkHashTrigger);
+    checkHashTrigger();
+
+    // 3. Triple-Tap / 3 click-uri rapide pe Logo-ul UBC (pentru Telefon)
+    let logoTapCount = 0;
+    let logoTapTimer = null;
+    document.addEventListener('click', function (e) {
+        const logo = e.target.closest('.logo-ubc');
+        if (logo) {
+            logoTapCount++;
+            clearTimeout(logoTapTimer);
+            if (logoTapCount >= 3) {
+                logoTapCount = 0;
+                openDashboard();
+            } else {
+                logoTapTimer = setTimeout(() => { logoTapCount = 0; }, 800);
+            }
         }
     });
 
