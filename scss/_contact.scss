@@ -8,6 +8,7 @@
 .contact-section {
     padding: 90px 40px;
     background-color: var(--bg-primar);
+    transition: background-color 0.4s ease;
 }
 
 .contact-container {
@@ -23,20 +24,22 @@
     background-color: var(--bg-secundar);
     padding: 45px;
     border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
     text-align: left;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
 
     h2 {
         font-size: 2.4rem;
         margin-bottom: 10px;
         font-weight: 900;
+        color: var(--text-alb);
     }
 }
 
 .info-block {
     margin-top: 20px;
     padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid var(--border-subtle);
     transition: border-color 0.3s;
 
     h4 {
@@ -65,7 +68,7 @@
         font-weight: 700;
         text-decoration: none;
         padding: 10px 16px;
-        margin: -10px -16px;    // contrabalansăm padding-ul ca să nu deplaseze layout-ul
+        margin: -10px -16px;
         border-radius: 10px;
         border: 1px solid transparent;
         transition:
@@ -75,7 +78,6 @@
             box-shadow     0.25s ease,
             transform      0.2s ease;
 
-        // Linie animată sub text
         position: relative;
         &::after {
             content: '';
@@ -91,7 +93,7 @@
         }
 
         &:hover {
-            color: var(--verde-glow);
+            color: var(--verde-ubc);
             background: rgba(46, 204, 113, 0.1);
             border-color: rgba(46, 204, 113, 0.25);
             box-shadow: 0 4px 20px rgba(46, 204, 113, 0.15);
@@ -108,14 +110,13 @@
     }
 }
 
-
 .contact-map {
     flex: 1.2;
     position: relative;
     min-height: 450px;
     border-radius: 16px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-subtle);
 
     iframe {
         position: absolute;
@@ -128,16 +129,51 @@
 }
 
 footer {
-    background-color: #0c0d0e;
+    background-color: var(--footer-bg);
     padding: 40px;
     text-align: center;
     color: var(--text-gri);
     font-size: 0.85rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid var(--border-subtle);
+    transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
 // Când pagina dedicată de contact (#page-contact) este activă, ascundem secțiunea globală de contact și footer-ul
 #page-contact.active ~ .contact-section,
 #page-contact.active ~ footer {
     display: none !important;
+}
+
+// ═══════════════════════════════════════════
+//  SUPRASCRIERI EXPLICITE PENTRU LIGHT MODE
+// ═══════════════════════════════════════════
+[data-theme="light"], body.light-theme {
+    .contact-section {
+        background-color: #F8FAFC;
+    }
+
+    .contact-info {
+        background-color: #FFFFFF;
+        border: 2px solid #0F172A !important; // Chenar negru definit
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+
+        h2 { color: #0F172A !important; }
+        p  { color: #334155 !important; }
+    }
+
+    .info-block {
+        border-top: 1px solid #E2E8F0;
+        h4 { color: #15803D !important; }
+        p, a { color: #0F172A !important; }
+    }
+
+    .contact-map {
+        border: 2px solid #0F172A !important;
+    }
+
+    footer {
+        background-color: #E2E8F0;
+        color: #1E293B !important;
+        border-top: 2px solid #0F172A;
+    }
 }

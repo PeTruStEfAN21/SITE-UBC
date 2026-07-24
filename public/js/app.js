@@ -637,8 +637,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ═══════════════════════════════════════════════════════
-    //  9. INIT — Mesaj de confirmare în consolă
+    //  9. INIT & THEME TOGGLE
     // ═══════════════════════════════════════════════════════
+
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+
+    function updateThemeUI(theme) {
+        if (theme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.body.classList.add('light-theme');
+            if (themeToggleBtn) {
+                themeToggleBtn.textContent = '🌙';
+                themeToggleBtn.setAttribute('title', 'Comută la Dark Mode');
+            }
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.body.classList.remove('light-theme');
+            if (themeToggleBtn) {
+                themeToggleBtn.textContent = '☀️';
+                themeToggleBtn.setAttribute('title', 'Comută la Light Mode');
+            }
+        }
+    }
+
+    const currentTheme = localStorage.getItem('ubc_theme') || 'light';
+    updateThemeUI(currentTheme);
+
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const activeTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            localStorage.setItem('ubc_theme', activeTheme);
+            updateThemeUI(activeTheme);
+            showToast(activeTheme === 'light' ? 'Tema luminoasă (Light Mode) activată' : 'Tema întunecată (Dark Mode) activată', 'info', 2000);
+        });
+    }
 
     console.log('%c[UBC App] ✅ Toate modulele front-end active!', 'color:#2ECC71; font-weight:bold; font-size:12px;');
     console.log('%c  → Ctrl+Shift+D pentru Dashboard Admin', 'color:#a0a6ac; font-size:11px;');

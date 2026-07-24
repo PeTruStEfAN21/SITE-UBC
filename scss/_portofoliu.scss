@@ -1,14 +1,15 @@
 // ══════════════════════════════════════════════════════════
 //  scss/_portofoliu.scss
-//  Pagina Portofoliu — galerie foto 4 coloane + lightbox
+//  Pagina Portofoliu — galerie foto 3 coloane + lightbox + servicii
 // ══════════════════════════════════════════════════════════
 
 // ─── Header pagină ─────────────────────────────────────────
 .pf-header {
     padding: 100px 40px 60px;
     text-align: center;
-    background: linear-gradient(180deg, rgba(14,18,22,1) 0%, rgba(10,12,14,0.95) 100%);
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    background: var(--bg-secundar);
+    border-bottom: 1px solid var(--border-subtle);
+    transition: background-color 0.4s ease, border-color 0.4s ease;
 
     @media (max-width: 600px) { padding: 80px 22px 44px; }
 }
@@ -35,10 +36,11 @@
         font-size: clamp(2.4rem, 6vw, 4.2rem);
         font-weight: 900;
         margin-bottom: 16px;
+        color: var(--text-alb);
         span { color: var(--verde-ubc); }
     }
     p {
-        color: rgba(255,255,255,0.48);
+        color: var(--text-gri);
         font-size: 1.05rem;
         line-height: 1.75;
         max-width: 560px;
@@ -49,19 +51,19 @@
 // ─── Secțiune Prestări Servicii în Portofoliu ─────────────
 .pf-servicii-section {
     max-width: 1400px;
-    margin: 40px auto 20px;
+    margin: 40px auto 40px;
     padding: 0 30px;
 
-    @media (max-width: 600px) { padding: 0 16px; margin: 30px auto 10px; }
+    @media (max-width: 600px) { padding: 0 16px; margin: 30px auto 30px; }
 }
 
 .pf-servicii-card {
-    background: rgba(16, 20, 25, 0.85);
-    border: 1px solid rgba(46, 204, 113, 0.2);
+    background: var(--glass-bg);
+    border: 2px solid var(--glass-border);
     border-radius: 20px;
     padding: 38px 32px;
     backdrop-filter: blur(12px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--card-shadow);
 }
 
 .pf-servicii-head {
@@ -70,7 +72,7 @@
     gap: 16px;
     margin-bottom: 26px;
     padding-bottom: 18px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid var(--border-subtle);
 
     .pf-servicii-icon {
         font-size: 1.8rem;
@@ -94,28 +96,27 @@
     }
 
     p {
-        color: rgba(255, 255, 255, 0.5);
-        font-size: 0.92rem;
+        color: var(--text-gri);
+        font-size: 0.95rem;
     }
 }
 
 .pf-servicii-grid-list {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px 28px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px 24px;
     list-style: none;
 
-    @media (max-width: 768px) {
-        grid-template-columns: 1fr;
-    }
+    @media (max-width: 900px) { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 550px) { grid-template-columns: 1fr; }
 
     li {
-        color: rgba(255, 255, 255, 0.8);
+        color: var(--text-alb);
         font-size: 0.95rem;
         font-weight: 500;
         display: flex;
         align-items: baseline;
-        gap: 10px;
+        gap: 8px;
 
         span {
             color: var(--verde-ubc);
@@ -137,7 +138,7 @@
     }
 
     p {
-        color: rgba(255, 255, 255, 0.45);
+        color: var(--text-gri);
         font-size: 0.95rem;
     }
 }
@@ -145,12 +146,13 @@
 // ─── Galerie ───────────────────────────────────────────────
 .pf-gallery {
     padding: 40px 30px 60px;
-    background: #0a0c0e;
+    background: var(--bg-primar);
+    transition: background-color 0.4s ease;
 
     @media (max-width: 600px) { padding: 30px 16px 40px; }
 
     &--sec {
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        border-top: 1px solid var(--border-subtle);
         padding-top: 60px;
     }
 }
@@ -171,8 +173,9 @@
     position: relative;
     aspect-ratio: 4 / 3;
     overflow: hidden;
-    border-radius: 8px;
-    background: #0d1014;
+    border-radius: 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
     cursor: pointer;
 
     &:hover .pf-item__overlay {
@@ -184,7 +187,6 @@
     }
 }
 
-// Fotografia
 .pf-item__img {
     width: 100%;
     height: 100%;
@@ -194,7 +196,6 @@
     transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-// Overlay la hover (expand icon)
 .pf-item__overlay {
     position: absolute;
     inset: 0;
@@ -204,105 +205,45 @@
     justify-content: center;
     opacity: 0;
     transition: opacity 0.3s ease;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(3px);
 
     svg {
-        width: 28px;
-        height: 28px;
-        color: #fff;
-        opacity: 0.9;
-        filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
-    }
-}
-
-// Placeholder când foto lipsește
-.pf-item__placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: rgba(14, 18, 22, 0.95);
-    border: 1px dashed rgba(46,204,113,0.1);
-    border-radius: 8px;
-    cursor: default;
-
-    svg {
-        width: 56px;
-        height: auto;
-        opacity: 0.5;
-    }
-
-    span {
-        font-size: 0.72rem;
-        font-weight: 600;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: rgba(255,255,255,0.18);
-    }
-}
-
-// ─── Empty state ───────────────────────────────────────────
-.pf-empty {
-    grid-column: 1 / -1;
-    padding: 60px;
-    text-align: center;
-    color: rgba(255,255,255,0.28);
-
-    code {
-        background: rgba(46,204,113,0.08);
-        border: 1px solid rgba(46,204,113,0.2);
-        border-radius: 4px;
-        padding: 2px 8px;
-        font-size: 0.85rem;
+        width: 32px;
+        height: 32px;
         color: var(--verde-ubc);
+        filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6));
     }
 }
 
-// ══════════════════════════════════════════════════════════
-//  LIGHTBOX
-// ══════════════════════════════════════════════════════════
+// ─── Lightbox ─────────────────────────────────────────────
 .pf-lightbox {
     position: fixed;
     inset: 0;
-    z-index: 99999;
+    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: pfLbFadeIn 0.2s ease;
+    padding: 20px;
 
-    &[hidden] { display: none; }
-}
-
-@keyframes pfLbFadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    &[hidden] { display: none !important; }
 }
 
 .pf-lightbox__backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(4, 6, 8, 0.95);
-    backdrop-filter: blur(6px);
-    cursor: pointer;
+    background: rgba(10, 12, 14, 0.92);
+    backdrop-filter: blur(8px);
 }
 
 .pf-lightbox__img {
     position: relative;
     z-index: 1;
     max-width: 90vw;
-    max-height: 88vh;
+    max-height: 85vh;
     object-fit: contain;
-    border-radius: 6px;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
-    animation: pfLbSlideIn 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@keyframes pfLbSlideIn {
-    from { transform: scale(0.93); opacity: 0; }
-    to   { transform: scale(1);    opacity: 1; }
+    border-radius: 12px;
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
 }
 
 .pf-lightbox__close {
@@ -310,23 +251,23 @@
     top: 20px;
     right: 24px;
     z-index: 2;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 1.4rem;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    width: 42px;
-    height: 42px;
-    color: rgba(255,255,255,0.75);
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: all 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
 
     &:hover {
-        background: rgba(255,255,255,0.16);
-        color: #fff;
-        transform: rotate(90deg);
+        background: rgba(231, 76, 60, 0.8);
+        border-color: #e74c3c;
+        transform: scale(1.1);
     }
 }
 
@@ -335,34 +276,61 @@
     top: 50%;
     transform: translateY(-50%);
     z-index: 2;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 50%;
-    width: 52px;
-    height: 52px;
-    color: rgba(255,255,255,0.7);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
     font-size: 1.8rem;
-    line-height: 1;
-    cursor: pointer;
-    transition: all 0.2s;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
 
     &:hover {
-        background: rgba(46,204,113,0.15);
-        border-color: rgba(46,204,113,0.35);
-        color: #fff;
+        background: var(--verde-ubc);
+        border-color: var(--verde-ubc);
+        color: #000;
+        transform: translateY(-50%) scale(1.1);
     }
 
-    &--prev { left: 20px; }
-    &--next { right: 20px; }
+    &--prev { left: 24px; }
+    &--next { right: 24px; }
+}
 
-    @media (max-width: 600px) {
-        width: 40px;
-        height: 40px;
-        font-size: 1.4rem;
-        &--prev { left: 8px; }
-        &--next { right: 8px; }
+// ═══════════════════════════════════════════
+//  SUPRASCRIERI EXPLICITE PENTRU LIGHT MODE
+// ═══════════════════════════════════════════
+[data-theme="light"], body.light-theme {
+    .pf-header {
+        background: #FFFFFF;
+        border-bottom: 2px solid #0F172A;
+
+        h1 { color: #0F172A !important; }
+        p  { color: #334155 !important; }
+    }
+
+    .pf-servicii-card,
+    .pf-item {
+        background: #FFFFFF !important;
+        border: 2px solid #0F172A !important; // Chenare negre/închise definite
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .pf-servicii-head {
+        border-bottom: 1px solid #E2E8F0;
+        h2 { color: #0F172A !important; }
+        p  { color: #334155 !important; }
+    }
+
+    .pf-servicii-grid-list li {
+        color: #1E293B !important;
+    }
+
+    .pf-gallery-title {
+        h2 { color: #0F172A !important; }
+        p  { color: #334155 !important; }
     }
 }

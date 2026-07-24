@@ -6,8 +6,9 @@
 .ut-header {
     padding: 100px 40px 40px;
     text-align: center;
-    background: linear-gradient(180deg, rgba(14,18,22,1) 0%, rgba(10,12,14,0.95) 100%);
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    background: var(--bg-secundar);
+    border-bottom: 1px solid var(--border-subtle);
+    transition: background-color 0.4s ease, border-color 0.4s ease;
 
     @media (max-width: 600px) { padding: 80px 22px 30px; }
 }
@@ -34,10 +35,11 @@
         font-size: clamp(2.4rem, 6vw, 4.2rem);
         font-weight: 900;
         margin-bottom: 16px;
+        color: var(--text-alb);
         span { color: var(--verde-ubc); }
     }
     p {
-        color: rgba(255,255,255,0.48);
+        color: var(--text-gri);
         font-size: 1.05rem;
         line-height: 1.75;
         max-width: 600px;
@@ -57,11 +59,11 @@
 .ut-showcase-card {
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
-    background: rgba(18, 22, 27, 0.92);
-    border: 1px solid rgba(46, 204, 113, 0.25);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 35px rgba(46, 204, 113, 0.1);
+    box-shadow: var(--card-shadow);
     backdrop-filter: blur(12px);
 
     @media (max-width: 960px) { grid-template-columns: 1fr; }
@@ -90,7 +92,7 @@
     position: absolute;
     bottom: 24px;
     left: 24px;
-    background: rgba(10, 12, 14, 0.88);
+    background: var(--glass-bg);
     border: 1px solid var(--verde-ubc);
     padding: 12px 20px;
     border-radius: 14px;
@@ -132,7 +134,7 @@
     }
 
     p {
-        color: rgba(255, 255, 255, 0.65);
+        color: var(--text-gri);
         font-size: 1rem;
         line-height: 1.8;
     }
@@ -179,7 +181,7 @@
     }
 
     p {
-        color: rgba(255, 255, 255, 0.48);
+        color: var(--text-gri);
         font-size: 0.98rem;
     }
 }
@@ -195,12 +197,12 @@
 }
 
 .ut-simple-card {
-    background: rgba(16, 20, 25, 0.85);
-    border: 1px solid rgba(46, 204, 113, 0.18);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     border-radius: 20px;
     padding: 36px 30px;
     backdrop-filter: blur(12px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--card-shadow);
 }
 
 .ut-simple-card__head {
@@ -209,7 +211,7 @@
     gap: 14px;
     margin-bottom: 24px;
     padding-bottom: 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid var(--border-subtle);
 
     h3 {
         font-size: 1.3rem;
@@ -218,7 +220,7 @@
     }
 
     small {
-        color: rgba(255, 255, 255, 0.45);
+        color: var(--text-gri);
         font-size: 0.8rem;
         display: block;
     }
@@ -244,7 +246,7 @@
     gap: 12px;
 
     li {
-        color: rgba(255, 255, 255, 0.8);
+        color: var(--text-alb);
         font-size: 0.98rem;
         font-weight: 500;
         display: flex;
@@ -255,5 +257,39 @@
             color: var(--verde-ubc);
             font-weight: 900;
         }
+    }
+}
+
+// ═══════════════════════════════════════════
+//  SUPRASCRIERI EXPLICITE PENTRU LIGHT MODE
+// ═══════════════════════════════════════════
+[data-theme="light"], body.light-theme {
+    .ut-header {
+        background: #FFFFFF;
+        border-bottom: 2px solid #0F172A;
+
+        h1 { color: #0F172A !important; }
+        p  { color: #334155 !important; }
+    }
+
+    .ut-showcase-card,
+    .ut-simple-card {
+        background: #FFFFFF !important;
+        border: 2px solid #0F172A !important; // Chenar negru/închis bine definit!
+        box-shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
+
+        h2, h3 { color: #0F172A !important; }
+        p, small, li { color: #334155 !important; }
+    }
+
+    .ut-showcase-card__badge {
+        background: #0F172A !important; // Casetă neagră cu scris alb pe imagine!
+        border: 2px solid #0F172A !important;
+        strong { color: #FFFFFF !important; }
+        span { color: #22C55E !important; }
+    }
+
+    .ut-simple-card__head {
+        border-bottom: 1px solid #E2E8F0;
     }
 }

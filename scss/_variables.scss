@@ -1,10 +1,9 @@
-// ══════════════════════════════════════
+// ══════════════════════════════════════════════════════════
 //  scss/_variables.scss
-//  Variabile SCSS + CSS Custom Properties
-// ══════════════════════════════════════
+//  Variabile SCSS + CSS Custom Properties + Light/Dark Theme
+// ══════════════════════════════════════════════════════════
 
-// --- Variabile SCSS (pentru calcule interne SCSS) ---
-$verde-ubc:   #27D045; // Verde crud, raw, eco-industrial proaspăt
+$verde-ubc:   #27D045; // Verde raw, eco-industrial proaspăt
 $verde-glow:  #52F177; // Accent verde-lumina intensă
 $bg-primar:   #141618;
 $bg-secundar: #202428;
@@ -12,13 +11,39 @@ $bg-card:     #282D32;
 $text-alb:    #FFFFFF;
 $text-gri:    #A0A6AC;
 
-// --- CSS Custom Properties (disponibile global în browser) ---
 :root {
-    --verde-ubc:   #{$verde-ubc};
-    --verde-glow:  #{$verde-glow};
-    --bg-primar:   #{$bg-primar};
-    --bg-secundar: #{$bg-secundar};
-    --bg-card:     #{$bg-card};
-    --text-alb:    #{$text-alb};
-    --text-gri:    #{$text-gri};
+    --verde-ubc:       #{$verde-ubc};
+    --verde-glow:      #{$verde-glow};
+    --bg-primar:       #141618;
+    --bg-secundar:     #202428;
+    --bg-card:         #282D32;
+    --text-alb:        #FFFFFF;
+    --text-gri:        #A0A6AC;
+    --border-subtle:   rgba(255, 255, 255, 0.08);
+    --glass-bg:        rgba(16, 20, 25, 0.85);
+    --glass-border:    rgba(46, 204, 113, 0.2);
+    --card-shadow:     0 15px 35px rgba(0, 0, 0, 0.3);
+    --header-bg:        rgba(20, 22, 24, 0.85);
+    --footer-bg:        #0c0d0e;
+    --input-bg:         rgba(255, 255, 255, 0.05);
+    --intro-bg:         #0a0c0e;
+}
+
+[data-theme="light"],
+body.light-theme {
+    --bg-primar:       #F8FAFC;
+    --bg-secundar:     #FFFFFF;
+    --bg-card:         #FFFFFF;
+    --text-alb:        #0F172A; // Text principal vizibil 100% (gri-negru închis)
+    --text-gri:        #334155; // Text secundar vizibil (slate)
+    --verde-ubc:       #15803D; // Verde bogat & lizibil pe fundal deschis
+    --verde-glow:      #16A34A;
+    --border-subtle:   rgba(15, 23, 42, 0.2);
+    --glass-bg:        #FFFFFF;
+    --glass-border:    #0F172A; // Chenar negru/închis bine definit pe light mode!
+    --card-shadow:     0 12px 30px rgba(15, 23, 42, 0.1), 0 0 0 1px rgba(15, 23, 42, 0.15);
+    --header-bg:        rgba(255, 255, 255, 0.96);
+    --footer-bg:        #E2E8F0;
+    --input-bg:         #F1F5F9;
+    --intro-bg:         #F8FAFC;
 }

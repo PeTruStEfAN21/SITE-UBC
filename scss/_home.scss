@@ -27,7 +27,7 @@
         z-index: 0;
     }
 
-    // Overlay semi-transparent
+    // Overlay semi-transparent (variază în funcție de temă)
     &__overlay {
         position: absolute;
         inset: 0;
@@ -38,22 +38,25 @@
             rgba(10, 12, 14, 0.80) 100%
         );
         z-index: 1;
+        transition: background 0.4s ease;
     }
 }
 
 .hero-box {
-    background: rgba(26, 28, 30, 0.85);
+    background: var(--glass-bg);
     padding: 50px 60px;
     border-radius: 16px;
     max-width: 850px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 2px solid var(--glass-border);
     border-left: 6px solid var(--verde-ubc);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+    box-shadow: var(--card-shadow);
     backdrop-filter: blur(12px);
     z-index: 2;
+    transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 .hero h1 {
+    color: var(--text-alb);
     font-size: 3.4rem;
     font-weight: 900;
     margin-bottom: 20px;
@@ -82,8 +85,9 @@
     display: flex;
     justify-content: space-around;
     text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
 .trust-item {
@@ -109,19 +113,33 @@
     text-align: center;
 }
 
+.calc-section {
+    background-color: var(--bg-primar);
+    color: var(--text-alb);
+    transition: background-color 0.4s ease, color 0.4s ease;
+
+    h2 { color: var(--text-alb); }
+    p { color: var(--text-gri); }
+}
+
 .produse {
     background-color: var(--bg-secundar);
+    transition: background-color 0.4s ease;
+
+    h2 { color: var(--text-alb); }
+    p { color: var(--text-gri); }
 }
 
 // === CALCULATOR ===
 .calc-box {
-    background-color: var(--bg-secundar);
+    background-color: var(--glass-bg);
     max-width: 700px;
     margin: 0 auto;
     padding: 45px;
     border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(46, 204, 113, 0.2);
+    box-shadow: var(--card-shadow);
+    border: 2px solid var(--glass-border);
+    transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 .calc-inputs-wrapper {
@@ -148,8 +166,8 @@
 .calc-input {
     width: 100%;
     padding: 14px;
-    background-color: var(--bg-primar);
-    border: 1px solid #34495E;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-subtle);
     color: var(--text-alb);
     border-radius: 8px;
     font-size: 1.1rem;
@@ -164,24 +182,17 @@
     }
 }
 
-.calc-result-box {
-    margin: 30px 0;
-    padding: 25px;
-    background: rgba(20, 22, 24, 0.8);
-    border-radius: 12px;
-    border: 1px dashed rgba(255, 255, 255, 0.1);
-}
-
 // === CALCULATOR — Rezultat box cu pilon animat ===
 .calc-result-box {
     margin: 30px 0;
     padding: 25px 30px;
-    background: rgba(20, 22, 24, 0.8);
+    background: var(--input-bg);
     border-radius: 12px;
-    border: 1px solid rgba(46, 204, 113, 0.15);
+    border: 1px solid var(--glass-border);
     display: flex;
     align-items: center;
     gap: 30px;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
 // Wrapper pilon + eticheta cife
@@ -197,14 +208,14 @@
 .calc-pillar {
     width: 60px;
     height: 140px;
-    border: 2px solid rgba(46, 204, 113, 0.35);
+    border: 2px solid var(--verde-ubc);
     border-radius: 10px;
     position: relative;
     overflow: hidden;
-    background: rgba(14, 16, 18, 0.9);
+    background: var(--bg-secundar);
     box-shadow:
         0 0 20px rgba(46, 204, 113, 0.08),
-        inset 0 0 20px rgba(0, 0, 0, 0.4);
+        inset 0 0 20px rgba(0, 0, 0, 0.2);
 
     // Marcaje de nivel (linii orizontale subtile)
     &::before {
@@ -215,7 +226,7 @@
             180deg,
             transparent 0px,
             transparent 27px,
-            rgba(255,255,255,0.04) 28px
+            var(--border-subtle) 28px
         );
         z-index: 1;
         pointer-events: none;
@@ -248,35 +259,15 @@
         border-radius: 50%;
         animation: wave-sway 2.2s ease-in-out infinite;
     }
-
-    &__label {
-        text-align: center;
-
-        span {
-            display: block;
-            font-size: 1.6rem;
-            font-weight: 900;
-            color: var(--verde-ubc);
-            line-height: 1;
-        }
-
-        small {
-            font-size: 0.68rem;
-            color: var(--text-gri);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-    }
 }
 
-// Textul cu volumul numeric
-.calc-result-text {
+.calc-result-info {
     flex: 1;
     text-align: left;
 
-    .calc-result-label {
+    span {
         color: var(--text-gri);
-        font-size: 0.82rem;
+        font-size: 0.85rem;
         text-transform: uppercase;
         font-weight: 700;
         letter-spacing: 1px;
@@ -297,9 +288,9 @@
 .calc-breakdown {
     margin-top: 12px;
     padding: 10px 14px;
-    background: rgba(46, 204, 113, 0.07);
+    background: rgba(46, 204, 113, 0.08);
     border-radius: 8px;
-    border: 1px solid rgba(46, 204, 113, 0.15);
+    border: 1px solid rgba(46, 204, 113, 0.2);
     font-size: 0.82rem;
     color: var(--text-gri);
     line-height: 1.5;
@@ -321,9 +312,9 @@
 }
 
 .tab-btn {
-    background: rgba(20, 22, 24, 0.6);
+    background: var(--input-bg);
     color: var(--text-gri);
-    border: 2px solid rgba(255, 255, 255, 0.08);
+    border: 2px solid var(--border-subtle);
     padding: 14px 35px;
     font-size: 1.1rem;
     font-weight: 900;
@@ -332,10 +323,10 @@
     transition: all 0.3s;
 
     &.active {
-        background: linear-gradient(135deg, rgba(46, 204, 113, 0.2), rgba(39, 174, 96, 0.3));
-        color: var(--text-alb);
+        background: var(--verde-ubc);
+        color: #FFFFFF !important;
         border-color: var(--verde-ubc);
-        box-shadow: 0 0 25px rgba(46, 204, 113, 0.3);
+        box-shadow: 0 0 25px rgba(46, 204, 113, 0.35);
     }
 }
 
@@ -353,11 +344,12 @@
 }
 
 .card {
-    background-color: var(--bg-card);
+    background-color: var(--glass-bg);
     padding: 40px 30px;
     border-radius: 16px;
     width: 340px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 2px solid var(--glass-border);
+    box-shadow: var(--card-shadow);
     text-align: left;
     position: relative;
     overflow: hidden;
@@ -368,14 +360,15 @@
 
     &:hover {
         transform: translateY(-8px);
-        border-color: rgba(46, 204, 113, 0.5);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        border-color: var(--verde-ubc);
+        box-shadow: 0 20px 40px rgba(46, 204, 113, 0.2);
     }
 
     h3 {
         font-size: 2.3rem;
         margin-bottom: 5px;
         font-weight: 900;
+        color: var(--text-alb);
     }
 
     .standard {
@@ -409,16 +402,92 @@
 
     &.heavy {
         background: rgba(255, 76, 76, 0.15);
-        color: #FF4C4C;
+        color: #DC2626;
         border-color: rgba(255, 76, 76, 0.3);
     }
 }
 
 .card-footer-info {
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid var(--border-subtle);
     padding-top: 15px;
     font-size: 0.85rem;
     font-weight: 700;
+    color: var(--text-gri);
+}
+
+// ═══════════════════════════════════════════
+//  SUPRASCRIERI EXPLICITE PENTRU LIGHT MODE
+// ═══════════════════════════════════════════
+[data-theme="light"], body.light-theme {
+    .hero__overlay {
+        background: linear-gradient(
+            160deg,
+            rgba(248, 250, 252, 0.60) 0%,
+            rgba(241, 245, 249, 0.45) 50%,
+            rgba(248, 250, 252, 0.60) 100%
+        );
+    }
+
+    .hero-box {
+        background: #FFFFFF;
+        border: 2px solid #0F172A; // Chenar negru/închis bine definit
+        box-shadow: 0 20px 45px rgba(15, 23, 42, 0.14);
+
+        h1 { color: #0F172A !important; }
+        p  { color: #334155 !important; }
+    }
+
+    .trust-bar {
+        background: #FFFFFF;
+        border-top: 2px solid #0F172A;
+        border-bottom: 2px solid #0F172A;
+
+        .trust-item h3 { color: #15803D !important; }
+        .trust-item p  { color: #0F172A !important; }
+    }
+
+    .calc-box {
+        background: #FFFFFF;
+        border: 2px solid #0F172A;
+        box-shadow: 0 15px 40px rgba(15, 23, 42, 0.12);
+    }
+
+    .calc-input {
+        background: #F8FAFC;
+        color: #0F172A !important;
+        border: 2px solid #334155;
+
+        &:focus {
+            border-color: #15803D;
+        }
+    }
+
+    .calc-result-box {
+        background: #F1F5F9;
+        border: 2px solid #0F172A;
+    }
+
+    .tab-btn {
+        background: #FFFFFF;
+        color: #0F172A;
+        border: 2px solid #0F172A;
+
+        &.active {
+            background: #15803D;
+            color: #FFFFFF !important;
+            border-color: #15803D;
+        }
+    }
+
+    .card {
+        background: #FFFFFF;
+        border: 2px solid #0F172A;
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+
+        h3 { color: #0F172A !important; }
+        p  { color: #334155 !important; }
+        .card-footer-info { color: #475569 !important; border-top: 1px solid #E2E8F0; }
+    }
 }
 
 // ═══════════════════════════════════════════

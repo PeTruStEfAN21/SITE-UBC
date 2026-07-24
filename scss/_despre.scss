@@ -609,7 +609,50 @@
 }
 
 // ══════════════════════════════════════════════════════════
-//  CLASE VECHI (backward compat) — Șterse, nu mai sunt folosite
+//  SUPRASCRIERI EXPLICITE PENTRU LIGHT MODE
 // ══════════════════════════════════════════════════════════
-// .despre-hero, .despre-grid, .despre-text, .despre-piloni, .pilon-box
-// — Nu mai sunt referențiate în noua versiune a paginii
+[data-theme="light"], body.light-theme {
+    .dp-overlay {
+        background: rgba(248, 250, 252, 0.88);
+    }
+    .dp-overlay--story,
+    .dp-overlay--certs {
+        background: linear-gradient(135deg, rgba(248, 250, 252, 0.92) 0%, rgba(241, 245, 249, 0.82) 100%);
+    }
+
+    .dp-hero h1,
+    .dp-story__left h2,
+    .dp-certs__left h2,
+    .dp-vision h2,
+    .dp-stat__val,
+    .dp-pillar-card h3,
+    .dp-cert-card h3 {
+        color: #0F172A !important;
+    }
+
+    .dp-hero__sub,
+    .dp-story__left p,
+    .dp-certs__left p,
+    .dp-vision p,
+    .dp-pillar-card p,
+    .dp-cert-card p {
+        color: #334155 !important;
+    }
+
+    .dp-cert-card,
+    .dp-stat-card,
+    .dp-pillar-card,
+    .dp-manifest-box,
+    .dp-lab-card {
+        background: #FFFFFF !important;
+        border: 2px solid #0F172A !important; // Chenare negru/închis bine definite!
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .dp-milestone {
+        border-bottom-color: #E2E8F0;
+        &__title { color: #0F172A !important; }
+        &__desc { color: #475569 !important; }
+    }
+}
+
