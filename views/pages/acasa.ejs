@@ -5,15 +5,12 @@
      ========================================== -->
 <main id="page-acasa" class="page-view active">
 
-    <!-- 1. Video Banner Hero (YouTube Embed — 0 MB consumat pe Render!) -->
+    <!-- 1. Video Banner Hero (Cloudinary — 0 MB pe Render, fără restricții) -->
     <section class="hero-video-banner">
         <div class="hero-video-wrapper">
-            <iframe class="hero-video-player"
-                src="https://www.youtube.com/embed/0xU1nTxVyCE?autoplay=1&mute=1&loop=1&playlist=0xU1nTxVyCE&playsinline=1"
-                title="Stație de Betoane UBC Oltenița"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-            </iframe>
+            <video class="hero-video-player" autoplay muted loop playsinline preload="none" poster="/photos/Statie.jpg">
+                <source src="https://res.cloudinary.com/jgg9yhty/video/upload/v1785071342/statie_betoane_promo_v4_bluewave_hhmbh1.mp4" type="video/mp4">
+            </video>
         </div>
     </section>
 
@@ -135,13 +132,18 @@
             <p>Producție 100% automatizată, control de calitate în timp real și flotă proprie de livrare.</p>
         </div>
         <div class="video-wrapper">
-            <iframe
+            <video
                 id="ubc-video"
-                src="https://www.youtube.com/embed/0xU1nTxVyCE?autoplay=1&mute=1&loop=1&playlist=0xU1nTxVyCE&playsinline=1"
-                title="Prezentare Stație Betoane UBC Oltenița"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-            </iframe>
+                controls
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="none"
+                poster="/photos/Statie.jpg"
+                aria-label="Prezentare Stație Betoane UBC Oltenița">
+                <source src="https://res.cloudinary.com/jgg9yhty/video/upload/v1785071342/statie_betoane_promo_v4_bluewave_hhmbh1.mp4" type="video/mp4">
+            </video>
         </div>
     </section>
 

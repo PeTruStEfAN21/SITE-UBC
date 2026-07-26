@@ -6,10 +6,10 @@
 
 // === PAGINA ACASĂ (HERO VIDEO & ANUNȚ) ===
 
-// 1. BANNER VIDEO HERO (YOUTUBE EMBED - 0MB BANDWIDTH)
+// 1. BANNER VIDEO HERO (CLOUDINARY - 0MB pe Render, fără restricții)
 .hero-video-banner {
     width: 100%;
-    padding-top: 75px; // spațiu pentru header fix
+    padding-top: 75px;
     background-color: var(--bg-primar);
     position: relative;
 
@@ -18,7 +18,7 @@
         max-width: 1400px;
         margin: 0 auto;
         position: relative;
-        padding-top: 56.25%; // Aspect ratio 16:9 responsive!
+        max-height: 520px;
         border-radius: 0 0 20px 20px;
         overflow: hidden;
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
@@ -27,12 +27,12 @@
     }
 
     .hero-video-player {
-        position: absolute;
-        inset: 0;
         width: 100%;
         height: 100%;
-        border: none;
+        max-height: 520px;
+        object-fit: cover;
         display: block;
+        border: none;
     }
 }
 
