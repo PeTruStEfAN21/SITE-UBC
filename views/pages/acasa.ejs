@@ -5,12 +5,15 @@
      ========================================== -->
 <main id="page-acasa" class="page-view active">
 
-    <!-- 1. Video Banner Hero (Sus, calitate clară, rulare continuă) -->
+    <!-- 1. Video Banner Hero (YouTube Embed — 0 MB consumat pe Render!) -->
     <section class="hero-video-banner">
         <div class="hero-video-wrapper">
-            <video class="hero-video-player" autoplay muted loop playsinline preload="auto" poster="/photos/Statie.jpg">
-                <source src="/photos/statie_betoane_promo_v4_bluewave.mp4" type="video/mp4">
-            </video>
+            <iframe class="hero-video-player"
+                src="https://www.youtube-nocookie.com/embed/0xU1nTxVyCE?autoplay=1&mute=1&loop=1&playlist=0xU1nTxVyCE&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+                title="Stație de Betoane UBC Oltenița"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
         </div>
     </section>
 
@@ -123,7 +126,7 @@
     </section>
 
     <!-- ══════════════════════════════════════
-         VIDEO — Prezentare stație UBC
+         VIDEO — Prezentare stație UBC (YouTube Embed)
          ══════════════════════════════════════ -->
     <section class="video-section reveal">
         <div class="video-section__header">
@@ -132,23 +135,13 @@
             <p>Producție 100% automatizată, control de calitate în timp real și flotă proprie de livrare.</p>
         </div>
         <div class="video-wrapper">
-            <!--
-                Video local servit de Express din public/photos/
-                Dacă vrei YouTube/Vimeo în viitor, înlocuiește <video> cu <iframe src="...">
-            -->
-            <video
+            <iframe
                 id="ubc-video"
-                controls
-                autoplay
-                muted
-                loop
-                playsinline
-                preload="auto"
-                poster="/photos/Statie.jpg"
-                aria-label="Prezentare Stație Betoane UBC Oltenița">
-                <source src="/photos/statie_betoane_promo_v4_bluewave.mp4" type="video/mp4">
-                Browserul tău nu suportă redarea video.
-            </video>
+                src="https://www.youtube-nocookie.com/embed/0xU1nTxVyCE?autoplay=1&mute=1&loop=1&playlist=0xU1nTxVyCE&controls=1&rel=0&modestbranding=1&playsinline=1"
+                title="Prezentare Stație Betoane UBC Oltenița"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
         </div>
     </section>
 
