@@ -292,9 +292,10 @@
     &__num {
         font-size: clamp(2.8rem, 5vw, 4.2rem);
         font-weight: 900;
-        color: var(--text-alb);
+        color: #FFFFFF !important;
+        text-shadow: 0 0 25px rgba(39, 208, 69, 0.4);
         line-height: 1;
-        margin-bottom: 12px;
+        margin-bottom: 14px;
         display: flex;
         align-items: baseline;
         justify-content: center;
@@ -303,15 +304,17 @@
 
     &__suffix {
         font-size: clamp(1.8rem, 3vw, 2.6rem);
-        color: var(--verde-ubc);
+        color: var(--verde-ubc) !important;
+        font-weight: 900;
+        text-shadow: 0 0 15px rgba(39, 208, 69, 0.6);
     }
 
     &__label {
-        color: rgba(255,255,255,0.38);
-        font-size: 0.78rem;
+        color: rgba(255, 255, 255, 0.90) !important;
+        font-size: 0.85rem;
         text-transform: uppercase;
         letter-spacing: 0.14em;
-        font-weight: 700;
+        font-weight: 800;
     }
 }
 
