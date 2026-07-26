@@ -35,15 +35,20 @@
     <meta name="twitter:description" content="Producție și livrare beton certificat ISC în Oltenița și Călărași. Comandă la 0724 349 503.">
     <meta name="twitter:image" content="/photos/favicon.png">
 
-    <!-- Structură JSON-LD Schema.org pentru Google Search Rich Snippet -->
+    <!-- Structură JSON-LD Schema.org pentru Google Search Rich Snippet & Local SEO -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "UNION BUSINESS COMPANY - UBC OLTENITA",
-      "image": "/photos/favicon.png",
-      "telephone": "0724349503",
+      "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
+      "name": "UBC - Stație de Betoane Oltenița",
+      "alternateName": "Union Business Company UBC",
+      "description": "Stație automatizată de betoane în Oltenița. Producție și livrare beton certificat ISC: B150, B200, B250, B300, B350, B400. Flotă proprie de cife și autopompe. Dispecerat 24/7.",
+      "url": "https://www.ubc.ro",
+      "logo": "https://www.ubc.ro/photos/favicon.png",
+      "image": "https://www.ubc.ro/photos/favicon.png",
+      "telephone": "+40724349503",
       "email": "comenzi@ubcbeton.ro",
+      "foundingDate": "2003",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Șoseaua Călărași nr. 4",
@@ -56,6 +61,28 @@
         "@type": "GeoCoordinates",
         "latitude": 44.0961989,
         "longitude": 26.6510773
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Oltenița" },
+        { "@type": "City", "name": "Călărași" },
+        { "@type": "City", "name": "Slobozia" },
+        { "@type": "City", "name": "Giurgiu" },
+        { "@type": "AdministrativeArea", "name": "Județul Călărași" },
+        { "@type": "AdministrativeArea", "name": "Județul Ilfov" }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Tipuri de Beton",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Beton B150 Oltenița" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Beton B200 Oltenița" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Beton B250 Oltenița" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Beton B300 Oltenița" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Beton B350 Oltenița" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Beton B400 Oltenița" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Livrare beton cu cifă Oltenița" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pompare beton Călărași" } }
+        ]
       },
       "openingHoursSpecification": [
         {
@@ -71,7 +98,12 @@
           "closes": "14:00"
         }
       ],
-      "priceRange": "$$"
+      "priceRange": "$$",
+      "currenciesAccepted": "RON",
+      "paymentAccepted": "Numerar, Transfer bancar, Card",
+      "sameAs": [
+        "https://www.ubc.ro"
+      ]
     }
     </script>
 
