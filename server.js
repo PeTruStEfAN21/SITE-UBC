@@ -47,12 +47,12 @@ app.use(
         contentSecurityPolicy: {
             directives: {
                 defaultSrc: ["'self'"],
-                scriptSrc:  ["'self'", "'unsafe-inline'"],
+                scriptSrc:  ["'self'", "'unsafe-inline'", "https://www.youtube.com", "https://s.ytimg.com"],
                 styleSrc:   ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
                 fontSrc:    ["'self'", "https://fonts.gstatic.com"],
-                imgSrc:     ["'self'", "data:", "blob:", "https:"],
-                frameSrc:   ["'self'", "https://www.google.com", "https://maps.google.com", "https://*.google.com"],
-                connectSrc: ["'self'"]
+                imgSrc:     ["'self'", "data:", "blob:", "https:", "https://i.ytimg.com", "https://*.ytimg.com"],
+                frameSrc:   ["'self'", "https://www.google.com", "https://maps.google.com", "https://*.google.com", "https://www.youtube.com", "https://youtube.com", "https://www.youtube-nocookie.com", "https://*.youtube.com", "https://*.youtube-nocookie.com"],
+                connectSrc: ["'self'", "https://www.youtube.com", "https://*.googlevideo.com"]
             }
         },
         crossOriginEmbedderPolicy: false
