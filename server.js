@@ -47,12 +47,13 @@ app.use(
         contentSecurityPolicy: {
             directives: {
                 defaultSrc: ["'self'"],
-                scriptSrc:  ["'self'", "'unsafe-inline'", "https://www.youtube.com", "https://s.ytimg.com"],
+                scriptSrc:  ["'self'", "'unsafe-inline'"],
                 styleSrc:   ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
                 fontSrc:    ["'self'", "https://fonts.gstatic.com"],
-                imgSrc:     ["'self'", "data:", "blob:", "https:", "https://i.ytimg.com", "https://*.ytimg.com"],
-                frameSrc:   ["'self'", "https://www.google.com", "https://maps.google.com", "https://*.google.com", "https://www.youtube.com", "https://youtube.com", "https://www.youtube-nocookie.com", "https://*.youtube.com", "https://*.youtube-nocookie.com"],
-                connectSrc: ["'self'", "https://www.youtube.com", "https://*.googlevideo.com"]
+                imgSrc:     ["'self'", "data:", "blob:", "https:"],
+                mediaSrc:   ["'self'", "https://res.cloudinary.com", "blob:"],
+                frameSrc:   ["'self'", "https://www.google.com", "https://maps.google.com", "https://*.google.com"],
+                connectSrc: ["'self'", "https://res.cloudinary.com", "https://api.cloudinary.com"]
             }
         },
         crossOriginEmbedderPolicy: false
