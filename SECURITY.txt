@@ -1,0 +1,36 @@
+===================================================================
+  SECURITY POLICY & RESPONSIBLE DISCLOSURE - UNION BUSINESS COMPANY (UBC)
+===================================================================
+
+Contact: mailto:ubcbeton@gmail.com
+Phone: tel:+40720006655
+Preferred-Languages: ro, en
+Canonical: https://github.com/PeTruStEfAN21/SITE-UBC/blob/main/SECURITY.md
+Policy: https://www.ubc.ro/security
+
+1. REPORTING VULNERABILITIES
+-------------------------------------------------------------------
+If you discover a security vulnerability in the UBC web application, 
+please notify us responsibly via email at ubcbeton@gmail.com before 
+making public disclosure.
+
+Please include:
+- A detailed description of the issue
+- Steps to reproduce or proof-of-concept
+- Affected URLs or parameters
+
+2. RESPONSE TIMELINE
+-------------------------------------------------------------------
+- Initial Acknowledgement: Within 24-48 hours
+- Status Update & Fix: Within 3 business days
+
+3. IMPLEMENTED SECURITY CONTROLS
+-------------------------------------------------------------------
+- HTTPS Forced Encryption via SSL/TLS
+- HTTP Security Headers via Helmet (CSP, HSTS, X-Frame-Options)
+- Input Sanitization & Anti-XSS Protection (EJS Templating)
+- Secure Environment Configuration via Render Secrets
+
+===================================================================
+  Union Business Company (UBC) - Oltenita, Calarasi, Romania
+===================================================================
