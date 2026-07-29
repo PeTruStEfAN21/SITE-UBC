@@ -100,35 +100,16 @@
         .ubc-intro-road {
             position: absolute;
             bottom: calc(50% - 85px);
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg,
-                transparent 0%,
-                rgba(255,255,255,0.06) 20%,
-                rgba(255,255,255,0.06) 80%,
-                transparent 100%
-            );
-            z-index: 1;
-        }
-        .ubc-intro-road::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(46,204,113,0.4), transparent);
-            animation: ubcRoadShine 3.8s ease forwards 0.2s;
-            opacity: 0;
-        }
-
-        /* ── Camion ────────────────────────────────────── */
+            /* ── Camion ────────────────────────────────────── */
         .ubc-intro-truck-wrap {
             position: absolute;
             bottom: calc(50% - 185px);
             left: 0;
-            width: clamp(380px, 55vw, 600px);
+            width: clamp(380px, 52vw, 560px);
             z-index: 3;
             animation: ubcTruckPark ${TRUCK_DUR_S}s ease forwards 0.15s;
-            transform: translateX(-700px);
+            transform: translateX(calc(100vw + 350px));
+            --truck-park-x: calc(50vw - 280px);
         }
         .ubc-intro-truck-wrap svg {
             width: 100%;
@@ -310,10 +291,10 @@
         @keyframes ubcTruckPark {
             0%   { transform: translateX(calc(100vw + 350px)); animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); }
             /* Ajunge la centru si se opreste */
-            34%  { transform: translateX(calc(50vw - 360px)); animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+            34%  { transform: translateX(var(--truck-park-x)); animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
             /* Hold la parcare */
-            36%  { transform: translateX(calc(50vw - 360px)); }
-            79%  { transform: translateX(calc(50vw - 360px)); animation-timing-function: ease-in; }
+            36%  { transform: translateX(var(--truck-park-x)); }
+            79%  { transform: translateX(var(--truck-park-x)); animation-timing-function: ease-in; }
             /* Iesire stanga */
             100% { transform: translateX(calc(-100vw - 350px)); }
         }
@@ -328,8 +309,6 @@
             /* Porneste la iesire */
             100% { transform: rotate(-4000deg); }
         }
-
-
 
         /* Stream de beton care curge */
         @keyframes ubcPourDown {
@@ -406,6 +385,51 @@
 
         @keyframes ubcSubReveal {
             0%,10% { opacity: 0; transform: translateY(8px); }
+            25%    { opacity: 1; transform: translateY(0); }
+            82%    { opacity: 1; }
+            100%   { opacity: 0; }
+        }
+
+        @keyframes ubcRoadShine {
+            0%   { opacity: 0; transform: translateX(-100%); }
+            20%  { opacity: 1; }
+            82%  { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Responsive mobile */
+        @media (max-width: 600px) {
+            .ubc-intro-truck-wrap {
+                width: 290px;
+                --truck-park-x: calc(50vw - 145px);
+                bottom: calc(50% - 140px);
+            }
+            .ubc-intro-road {
+                bottom: calc(50% - 66px);
+            }
+            .ubc-pour-stream,
+            .ubc-pour-splash {
+                left: calc(50% + 95px);
+            }
+            .ubc-pour-stream {
+                bottom: calc(50% - 155px);
+            }
+            .ubc-pour-splash {
+                bottom: calc(50% - 220px);
+            }
+        }
+
+        @media (max-width: 380px) {
+            .ubc-intro-truck-wrap {
+                width: 250px;
+                --truck-park-x: calc(50vw - 125px);
+                bottom: calc(50% - 130px);
+            }
+            .ubc-pour-stream,
+            .ubc-pour-splash {
+                left: calc(50% + 80px);
+            }
+        }rm: translateY(8px); }
             25%    { opacity: 1; transform: translateY(0); }
             82%    { opacity: 1; }
             100%   { opacity: 0; }
