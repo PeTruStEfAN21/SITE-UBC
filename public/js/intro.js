@@ -306,16 +306,16 @@
 
         /* ════ KEYFRAMES ════════════════════════════════ */
 
-        /* Camion: intra → parcare → iesire */
+        /* Camion: intra din dreapta → parcare → iesire stanga */
         @keyframes ubcTruckPark {
-            0%   { transform: translateX(-700px); animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+            0%   { transform: translateX(calc(100vw + 350px)); animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); }
             /* Ajunge la centru si se opreste */
-            34%  { transform: translateX(calc(50vw - 100px)); animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+            34%  { transform: translateX(calc(50vw - 360px)); animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
             /* Hold la parcare */
-            36%  { transform: translateX(calc(50vw - 100px)); }
-            79%  { transform: translateX(calc(50vw - 100px)); animation-timing-function: ease-in; }
-            /* Iesire dreapta */
-            100% { transform: translateX(calc(100vw + 250px)); }
+            36%  { transform: translateX(calc(50vw - 360px)); }
+            79%  { transform: translateX(calc(50vw - 360px)); animation-timing-function: ease-in; }
+            /* Iesire stanga */
+            100% { transform: translateX(calc(-100vw - 350px)); }
         }
 
         /* Roti: se opresc la parcare, pornesc la iesire */
@@ -442,315 +442,281 @@
         document.head.appendChild(style);
     }
 
-    // ─── SVG Autobetonieră realistă (după model referință) ───
+    // ─── SVG Autobetonieră realistă (Model fidel Photo 2) ───
     function buildTruckSVG() {
         return `
-        <svg viewBox="0 0 660 235" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+        <svg viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
             <defs>
-                <linearGradient id="drumWhite" x1="0%" y1="0%" x2="0%" y2="100%">
+                <!-- Gradiente culori -->
+                <linearGradient id="cabBodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%"   style="stop-color:#FFFFFF"/>
-                    <stop offset="40%"  style="stop-color:#F2F4F6"/>
-                    <stop offset="100%" style="stop-color:#D8DCE0"/>
+                    <stop offset="65%"  style="stop-color:#F0F3F6"/>
+                    <stop offset="100%" style="stop-color:#D8DEE4"/>
                 </linearGradient>
-                <linearGradient id="cabWhite" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%"   style="stop-color:#F8F8F8"/>
-                    <stop offset="100%" style="stop-color:#DEDEDE"/>
+
+                <linearGradient id="drumMainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%"   style="stop-color:#FFFFFF"/>
+                    <stop offset="35%"  style="stop-color:#F5F7F9"/>
+                    <stop offset="75%"  style="stop-color:#E1E6EB"/>
+                    <stop offset="100%" style="stop-color:#C8D0D8"/>
                 </linearGradient>
-                <linearGradient id="cabFront" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%"   style="stop-color:#E0E0E0"/>
-                    <stop offset="100%" style="stop-color:#C0C0C0"/>
-                </linearGradient>
-                <linearGradient id="ubcG" x1="0%" y1="0%" x2="100%" y2="100%">
+
+                <linearGradient id="ubcLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%"   style="stop-color:#2ECC71"/>
-                    <stop offset="100%" style="stop-color:#1A8A48"/>
+                    <stop offset="50%"  style="stop-color:#27AE60"/>
+                    <stop offset="100%" style="stop-color:#1E8449"/>
                 </linearGradient>
-                <linearGradient id="drumEndGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%"   style="stop-color:#C8CDD3"/>
-                    <stop offset="100%" style="stop-color:#E8ECEF"/>
+
+                <linearGradient id="ubcAccentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%"   style="stop-color:#00B4DB"/>
+                    <stop offset="100%" style="stop-color:#0083B0"/>
                 </linearGradient>
-                <radialGradient id="wheelRad" cx="50%" cy="40%" r="60%">
-                    <stop offset="0%"   style="stop-color:#3A4050"/>
-                    <stop offset="100%" style="stop-color:#0A0C10"/>
+
+                <radialGradient id="tyreGrad" cx="50%" cy="40%" r="55%">
+                    <stop offset="0%"   style="stop-color:#2C3238"/>
+                    <stop offset="100%" style="stop-color:#121518"/>
                 </radialGradient>
+
+                <linearGradient id="rimGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%"   style="stop-color:#E2E8F0"/>
+                    <stop offset="50%"  style="stop-color:#CBD5E1"/>
+                    <stop offset="100%" style="stop-color:#94A3B8"/>
+                </linearGradient>
             </defs>
 
             <!-- ══ UMBRA SOL ══ -->
-            <ellipse cx="325" cy="228" rx="315" ry="7" fill="rgba(0,0,0,0.28)"/>
+            <ellipse cx="340" cy="232" rx="330" ry="7" fill="rgba(0,0,0,0.35)"/>
 
-            <!-- ══ CADRU / ȘASIU ══ -->
-            <rect x="15"  y="162" width="605" height="13" rx="3" fill="#1A1A1F"/>
-            <rect x="15"  y="173" width="605" height="7"  rx="2" fill="#242428"/>
-            <!-- Traverse șasiu -->
-            <rect x="55"  y="158" width="9" height="22" rx="2" fill="#1E1E22"/>
-            <rect x="118" y="158" width="9" height="22" rx="2" fill="#1E1E22"/>
-            <rect x="186" y="158" width="9" height="22" rx="2" fill="#1E1E22"/>
-            <rect x="260" y="158" width="9" height="22" rx="2" fill="#1E1E22"/>
-            <rect x="330" y="158" width="9" height="22" rx="2" fill="#1E1E22"/>
-            <!-- Sub-cadru suport tobă -->
-            <rect x="15" y="155" width="380" height="9" rx="3" fill="#242428"/>
+            <!-- ══ ȘASIU & BAZĂ ══ -->
+            <!-- Longeroane șasiu -->
+            <rect x="25" y="166" width="620" height="14" rx="3" fill="#212529"/>
+            <rect x="25" y="177" width="620" height="6"  rx="2" fill="#151719"/>
 
-            <!-- ══ SUPORT SPATE TOBĂ (A-FRAME) ══ -->
-            <polygon points="28,122 56,122 68,168 16,168" fill="#1A1A1F"/>
-            <polygon points="32,124 52,124 62,166 20,166" fill="#2A2A30"/>
-            <rect x="16" y="145" width="52" height="6" rx="2" fill="#323238"/>
+            <!-- BARA DE PROTECȚIE LATERALĂ ALBĂ (SAFETY SIDE GUARDS - EXACT CA ÎN POZA 2) -->
+            <rect x="245" y="165" width="185" height="7" rx="3" fill="#F8F9FA" stroke="#CFD4DA" stroke-width="1"/>
+            <rect x="245" y="177" width="185" height="7" rx="3" fill="#F8F9FA" stroke="#CFD4DA" stroke-width="1"/>
+            <rect x="255" y="160" width="8"   height="28" rx="2" fill="#E9ECEF" stroke="#CED4DA" stroke-width="1"/>
+            <rect x="335" y="160" width="8"   height="28" rx="2" fill="#E9ECEF" stroke="#CED4DA" stroke-width="1"/>
+            <rect x="415" y="160" width="8"   height="28" rx="2" fill="#E9ECEF" stroke="#CED4DA" stroke-width="1"/>
 
-            <!-- ══ SUPORT FAȚĂ TOBĂ ══ -->
-            <rect x="225" y="115" width="24" height="52" rx="4" fill="#1A1A1F"/>
-            <rect x="229" y="118" width="16" height="46" rx="3" fill="#2A2A30"/>
-            <rect x="223" y="135" width="28" height="6"  rx="2" fill="#323238"/>
+            <!-- Echipament pompă / rezervor alb în spatele cabinei -->
+            <rect x="260" y="132" width="70" height="30" rx="5" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1"/>
+            <rect x="265" y="136" width="60" height="18" rx="3" fill="#E2E8F0"/>
+            <circle cx="318" cy="145" r="4" fill="#64748B"/>
 
-            <!-- ══ REZERVOR COMBUSTIBIL ══ -->
-            <rect x="265" y="140" width="72" height="26" rx="7" fill="#1A1A1F"/>
-            <rect x="270" y="144" width="62" height="16" rx="5" fill="#242428"/>
-
-            <!-- ════════════════════════════════
-                 TOBĂ BETONIERĂ — forma realistă
-                 ════════════════════════════════ -->
-            <!-- Corp principal tobă (mare, albă, ușor înclinată) -->
-            <path d="
-                M 58 28
-                C 62 8, 98 2, 155 4
-                L 318 4
-                C 368 4, 382 28, 382 85
-                C 382 142, 368 162, 318 162
-                L 80 162
-                C 32 162, 18 140, 18 92
-                C 18 48, 38 28, 58 28 Z
-            " fill="url(#drumWhite)" stroke="#C8D0D8" stroke-width="1.5"/>
-
-            <!-- Highlight superior (luciu) -->
-            <path d="
-                M 62 32
-                C 66 14, 100 8, 154 8
-                L 316 8
-                C 362 8, 374 30, 374 82
-                L 364 80
-                C 362 34, 350 14, 314 12
-                L 154 12
-                C 102 12, 70 16, 66 34 Z
-            " fill="rgba(255,255,255,0.55)"/>
-
-            <!-- Umbra inferioară tobă -->
-            <path d="
-                M 62 158
-                C 34 158, 22 138, 22 94
-                L 30 96
-                C 30 134, 40 154, 64 154
-                L 316 154
-                C 352 154, 368 136, 370 100
-                L 378 102
-                C 376 140, 360 162, 316 162
-                L 80 162 Z
-            " fill="rgba(0,0,0,0.07)"/>
-
-            <!-- Nervuri elicoidale (lamele de amestecare) -->
-            <path d="M 56 24 Q 220 4  375 44"  fill="none" stroke="#B8C4CC" stroke-width="5.5" stroke-linecap="round" opacity="0.85"/>
-            <path d="M 36 54 Q 208 30 376 72"  fill="none" stroke="#B8C4CC" stroke-width="6.5" stroke-linecap="round" opacity="0.80"/>
-            <path d="M 24 86 Q 200 62 376 100" fill="none" stroke="#B8C4CC" stroke-width="6.5" stroke-linecap="round" opacity="0.75"/>
-            <path d="M 24 116 Q 196 94 372 128" fill="none" stroke="#B8C4CC" stroke-width="5.5" stroke-linecap="round" opacity="0.68"/>
-            <path d="M 30 144 Q 196 126 368 152" fill="none" stroke="#B8C4CC" stroke-width="4.5" stroke-linecap="round" opacity="0.58"/>
-
-            <!-- Față tobă spate (capac eliptic stânga) -->
-            <ellipse cx="32" cy="95" rx="14" ry="67" fill="url(#drumEndGrad)" stroke="#A8B4BC" stroke-width="1.5"/>
-            <ellipse cx="32" cy="95" rx="7"  ry="50" fill="none" stroke="#C0C8D0" stroke-width="1"/>
-
-            <!-- Inel rotație față tobă (rulment) -->
-            <ellipse cx="368" cy="83" rx="16" ry="79" fill="none" stroke="#7A8A95" stroke-width="8"/>
-            <ellipse cx="368" cy="83" rx="8"  ry="62" fill="none" stroke="#A0B0B8" stroke-width="2"/>
-
-            <!-- ── LOGO UBC ── -->
-            <g transform="translate(210, 83)">
-                <!-- Cerc alb fundal -->
-                <circle cx="0" cy="0" r="58" fill="rgba(255,255,255,0.95)"/>
-                <!-- Cerc verde UBC -->
-                <circle cx="0" cy="0" r="52" fill="url(#ubcG)"/>
-                <circle cx="0" cy="0" r="52" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2.5"/>
-                <!-- Inel interior -->
-                <circle cx="0" cy="0" r="44" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
-                <!-- Text UBC -->
-                <text x="0" y="12" text-anchor="middle" fill="#FFFFFF"
-                      font-size="30" font-weight="900"
-                      font-family="Montserrat, Arial Black, sans-serif"
-                      letter-spacing="3">UBC</text>
-            </g>
-
-            <!-- ══ JGHEAB EVACUARE BETON (spate-stânga) ══ -->
-            <!-- Braț principal -->
-            <path d="M 24 158 L -8 198 L 6 204 L 40 164 Z"
-                  fill="#5A6068" stroke="#3A4048" stroke-width="1.5"/>
-            <!-- Extensie rabatabilă -->
-            <path d="M -8 198 L -20 218 L -6 224 L 6 204 Z"
-                  fill="#6A7078"/>
-            <!-- Caneluri jgheab -->
-            <line x1="-5"  y1="200" x2="36" y2="162" stroke="#7A8088" stroke-width="1.5" opacity="0.6"/>
-            <line x1="-10" y1="204" x2="32" y2="166" stroke="#7A8088" stroke-width="1"   opacity="0.4"/>
-
-            <!-- ══ SCĂRIȚĂ ACCES TOBĂ (față-dreapta la noi = stânga în imagine) ══ -->
-            <!-- Montant stânga -->
-            <rect x="384" y="14" width="6" height="148" rx="2" fill="#A0A8B0"/>
-            <!-- Montant dreapta -->
-            <rect x="410" y="14" width="6" height="148" rx="2" fill="#A0A8B0"/>
-            <!-- Trepte scăriță -->
-            <rect x="384" y="24"  width="32" height="6" rx="2" fill="#8A9298"/>
-            <rect x="384" y="40"  width="32" height="6" rx="2" fill="#8A9298"/>
-            <rect x="384" y="56"  width="32" height="6" rx="2" fill="#8A9298"/>
-            <rect x="384" y="72"  width="32" height="6" rx="2" fill="#8A9298"/>
-            <rect x="384" y="88"  width="32" height="6" rx="2" fill="#8A9298"/>
-            <rect x="384" y="104" width="32" height="6" rx="2" fill="#8A9298"/>
-            <rect x="384" y="120" width="32" height="6" rx="2" fill="#8A9298"/>
-            <rect x="384" y="136" width="32" height="6" rx="2" fill="#8A9298"/>
-            <!-- Platformă pâlnie sus -->
-            <rect x="382" y="8" width="38" height="10" rx="3" fill="#B0B8C0"/>
-            <polygon points="380,0 422,0 425,10 377,10" fill="#9AA2AA"/>
+            <!-- APĂRĂTORI ROȚI SPATE (FENDERS PROFILATE, ÎNTUNECATE) -->
+            <path d="M 430 178 L 440 162 L 610 162 L 620 178 Z" fill="#2B3036"/>
+            <rect x="438" y="160" width="174" height="6" rx="2" fill="#1D2125"/>
 
             <!-- ══════════════════════════════════
-                 CABINĂ (Hino / Asian cab-over, ALBĂ)
+                 CABINĂ (STÂNGA — MODEL HINO ALB FOTO 2)
                  ══════════════════════════════════ -->
-            <!-- Corp cabină principal — ALBY -->
+            <!-- Corp cabină principal alb -->
             <path d="
-                M 418 62
-                C 422 40, 448 24, 480 22
-                L 580 22
-                Q 616 22 622 58
-                L 624 178
-                L 416 178 Z
-            " fill="url(#cabWhite)" stroke="#C8C8C8" stroke-width="1.5"/>
+                M 105 58
+                C 115 36, 140 26, 175 24
+                L 230 24
+                C 236 24, 240 28, 242 34
+                L 245 178
+                L 85 178
+                L 85 105
+                C 85 85, 95 68, 105 58 Z
+            " fill="url(#cabBodyGrad)" stroke="#CBD5E1" stroke-width="1.5"/>
 
-            <!-- Față cabină (panou frontal) -->
+            <!-- Panta bot cabină stânga -->
             <path d="
-                M 580 22 Q 620 26 624 60
-                L 624 178 L 608 178 L 608 32 Z
-            " fill="url(#cabFront)"/>
+                M 85 105 C 85 85, 95 68, 105 58
+                L 115 58 Q 98 72 95 105 L 85 105 Z
+            " fill="#E2E8F0"/>
 
-            <!-- Panou sub parbriz (capota rotunjita) -->
+            <!-- Bara protecție și pasaj roată față închis la culoare -->
             <path d="
-                M 418 120 L 618 120 L 622 135 L 416 135 Z
-            " fill="#E0E0E0"/>
+                M 85 145 L 85 180 L 140 180 L 140 176
+                A 40 40 0 0 0 215 176 L 245 176 L 245 145 Z
+            " fill="#33383F"/>
+            <path d="M 85 145 L 245 145 L 245 152 L 85 152 Z" fill="#212529"/>
 
-            <!-- Parbriz mare ══ -->
-            <path d="M 428 68 L 606 68 L 606 118 L 428 122 Z"
-                  fill="#4A6E85" opacity="0.72"/>
-            <!-- Highlight parbriz -->
-            <path d="M 433 71 Q 515 69 570 71 L 566 81 Q 512 79 435 81 Z"
-                  fill="rgba(255,255,255,0.14)"/>
+            <!-- Semnalizator colț față portocaliu (specific Hino) -->
+            <path d="M 86 122 Q 86 142 98 145 L 102 122 Z" fill="#FF9800"/>
+            <path d="M 88 124 Q 88 140 97 143 L 100 124 Z" fill="#FFB74D"/>
+
+            <!-- Parbriz (Geam închis la culoare) -->
+            <path d="M 108 62 L 230 62 L 230 110 L 104 110 Z" fill="#2C3E50"/>
+            <path d="M 112 65 Q 170 63 222 65 L 216 76 Q 168 74 114 76 Z" fill="rgba(255,255,255,0.15)"/>
+            <path d="M 108 62 L 230 62 L 230 110 L 104 110 Z" fill="none" stroke="#1E293B" stroke-width="3"/>
             <!-- Ștergătoare -->
-            <line x1="446" y1="120" x2="530" y2="117" stroke="#2A2A2A" stroke-width="2.5" stroke-linecap="round"/>
-            <line x1="533" y1="117" x2="600" y2="115" stroke="#2A2A2A" stroke-width="2" stroke-linecap="round"/>
+            <line x1="125" y1="106" x2="175" y2="102" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="178" y1="102" x2="225" y2="99"  stroke="#0F172A" stroke-width="2.5" stroke-linecap="round"/>
 
-            <!-- Acoperiș cabină + spoiler -->
-            <path d="M 420 60 L 610 60 L 615 68 L 418 68 Z" fill="#D5D5D5"/>
-            <rect x="420" y="54" width="194" height="8" rx="3" fill="#C8C8C8"/>
+            <!-- Geam ușă laterală cu decupaj Hino -->
+            <path d="M 130 116 L 205 116 L 205 72 L 130 72 Z" fill="#2C3E50" stroke="#1E293B" stroke-width="2"/>
+            <!-- Notched window cutout -->
+            <polygon points="130,116 160,116 130,95" fill="#F0F3F6"/>
 
-            <!-- Lumini gabarit acoperiș (portocalii) -->
-            <rect x="440" y="46" width="42" height="10" rx="4" fill="#F0A020" opacity="0.9"/>
-            <rect x="494" y="46" width="18" height="10" rx="4" fill="#F0A020" opacity="0.75"/>
-            <rect x="522" y="46" width="18" height="10" rx="4" fill="#F0A020" opacity="0.75"/>
+            <!-- Grilă ventilație verticală neagră în spatele ușii -->
+            <rect x="215" y="68" width="18" height="68" rx="3" fill="#1E293B"/>
+            <line x1="219" y1="76"  x2="229" y2="76"  stroke="#475569" stroke-width="2"/>
+            <line x1="219" y1="84"  x2="229" y2="84"  stroke="#475569" stroke-width="2"/>
+            <line x1="219" y1="92"  x2="229" y2="92"  stroke="#475569" stroke-width="2"/>
+            <line x1="219" y1="100" x2="229" y2="100" stroke="#475569" stroke-width="2"/>
+            <line x1="219" y1="108" x2="229" y2="108" stroke="#475569" stroke-width="2"/>
+            <line x1="219" y1="116" x2="229" y2="116" stroke="#475569" stroke-width="2"/>
+            <line x1="219" y1="124" x2="229" y2="124" stroke="#475569" stroke-width="2"/>
 
-            <!-- Separator ușă șofer / pasager -->
-            <line x1="514" y1="62" x2="514" y2="178" stroke="#B8B8B8" stroke-width="3"/>
+            <!-- Mâner ușă și insignă -->
+            <rect x="175" y="128" width="22" height="6" rx="3" fill="#0F172A"/>
+            <rect x="135" y="130" width="16" height="7" rx="2" fill="#94A3B8"/>
 
-            <!-- Geam șofer (ușa stânga) -->
-            <rect x="430" y="126" width="80" height="44" rx="5" fill="#4A6E85" opacity="0.68"/>
-            <rect x="430" y="126" width="80" height="44" rx="5" fill="none" stroke="#B0B0B0" stroke-width="1.5"/>
-            <!-- Mâner ușă -->
-            <rect x="436" y="172" width="28" height="6" rx="3" fill="#A0A0A8"/>
+            <!-- Oglindă retrovizoare pe braț -->
+            <rect x="75" y="75" width="14" height="32" rx="4" fill="#1E293B" stroke="#0F172A" stroke-width="1"/>
+            <line x1="88" y1="82" x2="105" y2="80" stroke="#0F172A" stroke-width="3"/>
+            <line x1="88" y1="96" x2="105" y2="98" stroke="#0F172A" stroke-width="3"/>
 
-            <!-- Geam pasager (ușa dreapta) -->
-            <rect x="518" y="72" width="84" height="44" rx="5" fill="#4A6E85" opacity="0.62"/>
-            <rect x="518" y="72" width="84" height="44" rx="5" fill="none" stroke="#B0B0B0" stroke-width="1.5"/>
-            <line x1="560" y1="62" x2="560" y2="178" stroke="#B8B8B8" stroke-width="2"/>
 
-            <!-- Treaptă urcare șofer -->
-            <rect x="416" y="162" width="36" height="18" rx="4" fill="#808088"/>
-            <rect x="420" y="166" width="28" height="10" rx="3" fill="#6A6A72"/>
+            <!-- ══════════════════════════════════
+                 TOBĂ BETONIERĂ (ÎNCLINATĂ, ALBĂ CURATĂ — EXACT FOTO 2)
+                 ══════════════════════════════════ -->
+            <g transform="rotate(-12, 420, 95)">
+                <!-- Suport rotație față tobă -->
+                <rect x="250" y="55" width="30" height="80" rx="6" fill="#33383F"/>
+                <rect x="254" y="59" width="22" height="72" rx="4" fill="#495057"/>
 
-            <!-- Oglindă retrovizoare -->
-            <rect x="396" y="72" width="22" height="30" rx="5" fill="#D5D5D5" stroke="#B8B8B8" stroke-width="1.5"/>
-            <line x1="408" y1="82" x2="420" y2="82" stroke="#C0C0C0" stroke-width="3.5"/>
-            <line x1="408" y1="91" x2="420" y2="91" stroke="#C0C0C0" stroke-width="3.5"/>
+                <!-- Siluetă corp principal tobă (formă de con înclinat) -->
+                <path d="
+                    M 270 70
+                    C 290 35, 340 22, 420 22
+                    C 500 22, 550 45, 570 70
+                    C 585 90, 580 105, 565 120
+                    C 545 140, 490 155, 410 155
+                    C 330 155, 285 138, 270 115
+                    C 260 98, 260 82, 270 70 Z
+                " fill="url(#drumMainGrad)" stroke="#CBD5E1" stroke-width="2"/>
 
-            <!-- Grila frontală + far + semnalizator -->
-            <rect x="608" y="76" width="16" height="75" rx="3" fill="#D5D5D5"/>
-            <!-- Bare grila -->
-            <line x1="608" y1="86"  x2="624" y2="86"  stroke="#B0B0B0" stroke-width="2.5"/>
-            <line x1="608" y1="96"  x2="624" y2="96"  stroke="#B0B0B0" stroke-width="2.5"/>
-            <line x1="608" y1="106" x2="624" y2="106" stroke="#B0B0B0" stroke-width="2.5"/>
-            <line x1="608" y1="116" x2="624" y2="116" stroke="#B0B0B0" stroke-width="2.5"/>
-            <line x1="608" y1="126" x2="624" y2="126" stroke="#B0B0B0" stroke-width="2.5"/>
-            <line x1="608" y1="136" x2="624" y2="136" stroke="#B0B0B0" stroke-width="2.5"/>
-            <!-- Far (oval galben/amber, tip Hino) -->
-            <ellipse cx="616" cy="90" rx="7" ry="12" fill="#FFD54F" stroke="#F0A000" stroke-width="1.5"/>
-            <ellipse cx="616" cy="90" rx="5" ry="8"  fill="#FFE082" opacity="0.7"/>
-            <!-- Semnalizator -->
-            <rect x="610" y="106" width="13" height="10" rx="3" fill="#FF9800"/>
-            <!-- Bara / bumper față -->
-            <rect x="604" y="152" width="22" height="26" rx="5" fill="#D0D0D0" stroke="#B8B8B8" stroke-width="1"/>
-            <rect x="607" y="156" width="16" height="18" rx="3" fill="#C0C0C0"/>
-            <!-- Proiector ceata -->
-            <circle cx="616" cy="165" r="5" fill="#FFFDE7" opacity="0.6"/>
+                <!-- Linii fine de umbră/luciu pe lungimea tobei -->
+                <path d="M 275 62 C 340 30, 470 30, 565 65"  fill="none" stroke="#FFFFFF" stroke-width="8" opacity="0.6" stroke-linecap="round"/>
+                <path d="M 270 75 C 335 48, 480 48, 572 82"  fill="none" stroke="#E2E8F0" stroke-width="7" opacity="0.5" stroke-linecap="round"/>
+                <path d="M 266 98 C 330 75, 485 75, 570 104" fill="none" stroke="#E2E8F0" stroke-width="7" opacity="0.5" stroke-linecap="round"/>
+                <path d="M 268 116 C 335 100, 480 100, 562 122" fill="none" stroke="#CBD5E1" stroke-width="6" opacity="0.4" stroke-linecap="round"/>
 
-            <!-- ══ APĂRĂTORI ROȚI (FENDERS) ══ -->
-            <!-- Spate -->
-            <path d="M 92 175 A 40 40 0 0 1 254 175"
-                  fill="none" stroke="#111118" stroke-width="20" stroke-linecap="round"/>
-            <!-- Față -->
-            <path d="M 470 175 A 36 36 0 0 1 580 175"
-                  fill="none" stroke="#111118" stroke-width="18" stroke-linecap="round"/>
+                <!-- Inel spate tobă -->
+                <ellipse cx="566" cy="92" rx="14" ry="42" fill="none" stroke="#64748B" stroke-width="7"/>
+                <ellipse cx="566" cy="92" rx="8"  ry="34" fill="none" stroke="#94A3B8" stroke-width="2"/>
 
-            <!-- ══ ROȚI CU HUB CAP ══ -->
-            <!-- Roată spate 1 (tandem 1) -->
-            <g class="ubc-wheel-rear1">
-                <circle cx="130" cy="196" r="36" fill="url(#wheelRad)"/>
-                <circle cx="130" cy="196" r="28" fill="#161820"/>
-                <circle cx="130" cy="196" r="20" fill="#242830"/>
-                <!-- Hub cap argintiu -->
-                <circle cx="130" cy="196" r="14" fill="#909098" stroke="#787880" stroke-width="1.5"/>
-                <circle cx="130" cy="196" r="8"  fill="#707078"/>
-                <circle cx="130" cy="196" r="4"  fill="#505058"/>
-                <!-- Piulițe (6x) -->
-                <circle cx="130" cy="178" r="4.5" fill="#5A6068"/>
-                <circle cx="130" cy="214" r="4.5" fill="#5A6068"/>
-                <circle cx="114" cy="184" r="4.5" fill="#5A6068"/>
-                <circle cx="146" cy="184" r="4.5" fill="#5A6068"/>
-                <circle cx="114" cy="208" r="4.5" fill="#5A6068"/>
-                <circle cx="146" cy="208" r="4.5" fill="#5A6068"/>
+                <!-- EMBLEMĂ / LOGO UBC STILIZAT PE TOBĂ (POZIȚIONAT CA ÎN POZA 2) -->
+                <g transform="translate(420, 88)">
+                    <!-- Cerc alb fundal cu umbră fină -->
+                    <circle cx="0" cy="0" r="48" fill="rgba(255,255,255,0.92)"/>
+
+                    <!-- Formă curbă duală verde/albastru (inspirată din sigla Holcim dar pentru UBC) -->
+                    <path d="M -36 -10 C -36 -32, -10 -42, 12 -34 C 32 -26, 40 -5, 36 15 C 32 30, 10 40, -12 36 Z" fill="url(#ubcLogoGrad)"/>
+                    <path d="M 36 10 C 36 32, 10 42, -12 34 C -32 26, -40 5, -36 -15 C -32 -30, -10 -40, 12 -36 Z" fill="url(#ubcAccentGrad)"/>
+
+                    <!-- Nucleu interior alb cu text UBC -->
+                    <circle cx="0" cy="0" r="32" fill="#FFFFFF"/>
+                    <text x="0" y="8" text-anchor="middle" fill="#0F172A" font-size="22" font-weight="900" font-family="'Montserrat', sans-serif" letter-spacing="1.5">UBC</text>
+                </g>
             </g>
 
-            <!-- Roată spate 2 (tandem 2) -->
-            <g class="ubc-wheel-rear2">
-                <circle cx="216" cy="196" r="36" fill="url(#wheelRad)"/>
-                <circle cx="216" cy="196" r="28" fill="#161820"/>
-                <circle cx="216" cy="196" r="20" fill="#242830"/>
-                <circle cx="216" cy="196" r="14" fill="#909098" stroke="#787880" stroke-width="1.5"/>
-                <circle cx="216" cy="196" r="8"  fill="#707078"/>
-                <circle cx="216" cy="196" r="4"  fill="#505058"/>
-                <circle cx="216" cy="178" r="4.5" fill="#5A6068"/>
-                <circle cx="216" cy="214" r="4.5" fill="#5A6068"/>
-                <circle cx="200" cy="184" r="4.5" fill="#5A6068"/>
-                <circle cx="232" cy="184" r="4.5" fill="#5A6068"/>
-                <circle cx="200" cy="208" r="4.5" fill="#5A6068"/>
-                <circle cx="232" cy="208" r="4.5" fill="#5A6068"/>
+
+            <!-- ══════════════════════════════════
+                 PÂLNIE SPATE & SCĂRIȚĂ ALBĂ TUBULARĂ (FAȚĂ DREAPTA — FOTO 2)
+                 ══════════════════════════════════ -->
+            <!-- Suport spate baza A-frame -->
+            <polygon points="560,115 590,115 605,170 545,170" fill="#212529"/>
+            <polygon points="565,118 585,118 598,167 552,167" fill="#343A40"/>
+
+            <!-- Pâlnie de încărcare albă sus -->
+            <path d="M 570 30 L 625 30 L 610 80 L 575 75 Z" fill="#F8F9FA" stroke="#CBD5E1" stroke-width="1.5"/>
+            <path d="M 575 33 L 620 33 L 606 76 L 579 72 Z" fill="#E2E8F0"/>
+
+            <!-- SCĂRIȚĂ ALBĂ TUBULARĂ (MONTATĂ PE SPATE — CA ÎN POZA 2) -->
+            <g stroke="#F8F9FA" stroke-width="3" stroke-linecap="round" fill="none">
+                <!-- Montanți verticali -->
+                <line x1="595" y1="25" x2="595" y2="155"/>
+                <line x1="618" y1="25" x2="618" y2="155"/>
+                <!-- Trepte -->
+                <line x1="595" y1="38"  x2="618" y2="38"/>
+                <line x1="595" y1="52"  x2="618" y2="52"/>
+                <line x1="595" y1="66"  x2="618" y2="66"/>
+                <line x1="595" y1="80"  x2="618" y2="80"/>
+                <line x1="595" y1="94"  x2="618" y2="94"/>
+                <line x1="595" y1="108" x2="618" y2="108"/>
+                <line x1="595" y1="122" x2="618" y2="122"/>
+                <line x1="595" y1="136" x2="618" y2="136"/>
+                <!-- Arcuri de protecție sus -->
+                <path d="M 590 25 C 590 12, 623 12, 623 25" stroke-width="3"/>
             </g>
 
-            <!-- Roată față -->
+            <!-- Jgheab evacuare beton metalic (orientat în jos spre dreapta) -->
+            <path d="M 580 125 L 655 158 L 648 172 L 575 138 Z" fill="#64748B" stroke="#334155" stroke-width="1.5"/>
+            <path d="M 582 128 L 652 159 L 646 168 L 578 139 Z" fill="#94A3B8"/>
+
+
+            <!-- ══════════════════════════════════
+                 ROȚI CU JANTE METALICE DE CAMION (POTRIVIRE FOTO 2)
+                 ══════════════════════════════════ -->
+            <!-- Roată față (Sub cabină - stânga) -->
             <g class="ubc-wheel-front">
-                <circle cx="525" cy="196" r="36" fill="url(#wheelRad)"/>
-                <circle cx="525" cy="196" r="28" fill="#161820"/>
-                <circle cx="525" cy="196" r="20" fill="#242830"/>
-                <circle cx="525" cy="196" r="14" fill="#909098" stroke="#787880" stroke-width="1.5"/>
-                <circle cx="525" cy="196" r="8"  fill="#707078"/>
-                <circle cx="525" cy="196" r="4"  fill="#505058"/>
-                <circle cx="525" cy="178" r="4.5" fill="#5A6068"/>
-                <circle cx="525" cy="214" r="4.5" fill="#5A6068"/>
-                <circle cx="509" cy="184" r="4.5" fill="#5A6068"/>
-                <circle cx="541" cy="184" r="4.5" fill="#5A6068"/>
-                <circle cx="509" cy="208" r="4.5" fill="#5A6068"/>
-                <circle cx="541" cy="208" r="4.5" fill="#5A6068"/>
+                <circle cx="170" cy="198" r="33" fill="url(#tyreGrad)"/>
+                <circle cx="170" cy="198" r="28" fill="#181C20"/>
+
+                <circle cx="170" cy="198" r="20" fill="url(#rimGrad)" stroke="#64748B" stroke-width="1.5"/>
+                <circle cx="170" cy="198" r="14" fill="#475569"/>
+
+                <!-- Inel de găuri pe jantă -->
+                <circle cx="170" cy="182" r="2.2" fill="#1E293B"/>
+                <circle cx="170" cy="214" r="2.2" fill="#1E293B"/>
+                <circle cx="154" cy="198" r="2.2" fill="#1E293B"/>
+                <circle cx="186" cy="198" r="2.2" fill="#1E293B"/>
+                <circle cx="158" cy="186" r="2.2" fill="#1E293B"/>
+                <circle cx="182" cy="186" r="2.2" fill="#1E293B"/>
+                <circle cx="158" cy="210" r="2.2" fill="#1E293B"/>
+                <circle cx="182" cy="210" r="2.2" fill="#1E293B"/>
+
+                <circle cx="170" cy="198" r="8" fill="#1E293B" stroke="#94A3B8" stroke-width="1"/>
+                <circle cx="170" cy="198" r="3" fill="#64748B"/>
             </g>
 
+            <!-- Roată spate 1 (Tandem centru-dreapta) -->
+            <g class="ubc-wheel-mid">
+                <circle cx="475" cy="198" r="33" fill="url(#tyreGrad)"/>
+                <circle cx="475" cy="198" r="28" fill="#181C20"/>
+                <circle cx="475" cy="198" r="20" fill="url(#rimGrad)" stroke="#64748B" stroke-width="1.5"/>
+                <circle cx="475" cy="198" r="14" fill="#475569"/>
+                <circle cx="475" cy="182" r="2.2" fill="#1E293B"/>
+                <circle cx="475" cy="214" r="2.2" fill="#1E293B"/>
+                <circle cx="459" cy="198" r="2.2" fill="#1E293B"/>
+                <circle cx="491" cy="198" r="2.2" fill="#1E293B"/>
+                <circle cx="463" cy="186" r="2.2" fill="#1E293B"/>
+                <circle cx="487" cy="186" r="2.2" fill="#1E293B"/>
+                <circle cx="463" cy="210" r="2.2" fill="#1E293B"/>
+                <circle cx="487" cy="210" r="2.2" fill="#1E293B"/>
+                <circle cx="475" cy="198" r="8" fill="#1E293B" stroke="#94A3B8" stroke-width="1"/>
+                <circle cx="475" cy="198" r="3" fill="#64748B"/>
+            </g>
+
+            <!-- Roată spate 2 (Tandem dreapta) -->
+            <g class="ubc-wheel-rear">
+                <circle cx="565" cy="198" r="33" fill="url(#tyreGrad)"/>
+                <circle cx="565" cy="198" r="28" fill="#181C20"/>
+                <circle cx="565" cy="198" r="20" fill="url(#rimGrad)" stroke="#64748B" stroke-width="1.5"/>
+                <circle cx="565" cy="198" r="14" fill="#475569"/>
+                <circle cx="565" cy="182" r="2.2" fill="#1E293B"/>
+                <circle cx="565" cy="214" r="2.2" fill="#1E293B"/>
+                <circle cx="549" cy="198" r="2.2" fill="#1E293B"/>
+                <circle cx="581" cy="198" r="2.2" fill="#1E293B"/>
+                <circle cx="553" cy="186" r="2.2" fill="#1E293B"/>
+                <circle cx="577" cy="186" r="2.2" fill="#1E293B"/>
+                <circle cx="553" cy="210" r="2.2" fill="#1E293B"/>
+                <circle cx="577" cy="210" r="2.2" fill="#1E293B"/>
+                <circle cx="565" cy="198" r="8" fill="#1E293B" stroke="#94A3B8" stroke-width="1"/>
+                <circle cx="565" cy="198" r="3" fill="#64748B"/>
+            </g>
         </svg>
         `;
     }
+
+    // ─── Construire overlay ───────────────────────────────
 
     // ─── Construire overlay ───────────────────────────────
     function buildIntro() {
