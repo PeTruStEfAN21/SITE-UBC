@@ -21,12 +21,12 @@ header.site-header {
 .logo-ubc {
     font-size: 30px;
     font-weight: 900;
-    color: var(--text-alb);
-    letter-spacing: 2px;
+    color: var(--verde-ubc);
+    letter-spacing: 0;
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 0;
     cursor: pointer;
 
     span {
@@ -120,4 +120,60 @@ nav ul {
 // Butonul hamburger este ascuns pe desktop
 .hamburger-btn {
     display: none;
+}
+
+// ══════════════════════════════════════
+//  MOBILE (≤ 768px) — Header overrides
+// ══════════════════════════════════════
+@media (max-width: 768px) {
+    header.site-header {
+        padding: 12px 18px;
+        display: grid;
+        grid-template-columns: 48px 1fr 48px;
+        align-items: center;
+        gap: 0;
+    }
+
+    // Hamburger — coloana 1 (stânga)
+    .hamburger-btn {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        width: 42px;
+        height: 42px;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 10px;
+        cursor: pointer;
+        z-index: 1001;
+        position: relative;
+        transition: background 0.2s;
+        grid-column: 1;
+        justify-self: start;
+
+        span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--text-alb);
+            border-radius: 2px;
+            transition: transform 0.3s ease, opacity 0.2s;
+        }
+
+        &.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        &.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        &.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    }
+
+    // Logo — coloana 2 (centru), mai mare
+    .logo-ubc {
+        grid-column: 2;
+        justify-self: center;
+        font-size: 32px;
+        letter-spacing: 0;
+        z-index: 1001;
+        position: relative;
+    }
 }

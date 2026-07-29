@@ -442,77 +442,192 @@
         document.head.appendChild(style);
     }
 
-    // ─── SVG autobetoniera (Model realist 3 axe conform pozei) ───
+    // ─── SVG Autobetonieră MAN (Model realist) ───
     function buildTruckSVG() {
         return `
-        <svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
-            <ellipse cx="230" cy="188" rx="210" ry="6" fill="rgba(0,0,0,0.5)"/>
-            <rect x="35" y="138" width="385" height="15" rx="3" fill="#1A2027"/>
-            <rect x="40" y="142" width="375" height="6" rx="2" fill="#242C35"/>
-            <rect x="205" y="146" width="115" height="12" rx="3" fill="#2C3540"/>
-            <line x1="210" y1="152" x2="315" y2="152" stroke="#526070" stroke-width="2"/>
-            <rect x="215" y="140" width="55" height="18" rx="4" fill="#222A33" stroke="#333F4C" stroke-width="1"/>
-            <g class="ubc-drum-group">
-                <polygon points="72,102 95,102 95,140 72,140" fill="#222A33"/>
-                <polygon points="295,92 318,92 318,140 295,140" fill="#222A33"/>
-                <path d="M 68 80 L 125 36 Q 225 18 292 70 Q 312 86 312 104 Q 292 120 225 132 L 125 128 Z" fill="#F2F6FA" stroke="#D1DBE5" stroke-width="2"/>
-                <path d="M 125 36 Q 210 32 292 70" fill="none" stroke="#E1E8F0" stroke-width="6"/>
-                <path d="M 115 50 Q 200 48 290 85" fill="none" stroke="#E1E8F0" stroke-width="8"/>
-                <path d="M 100 70 Q 185 70 280 102" fill="none" stroke="#E1E8F0" stroke-width="8"/>
-                <path d="M 90 92 Q 170 98 250 124" fill="none" stroke="#E1E8F0" stroke-width="6"/>
-                <ellipse cx="298" cy="96" rx="14" ry="24" fill="none" stroke="#94A3B8" stroke-width="4"/>
-                <g transform="translate(195, 78) rotate(-12)">
-                    <circle cx="0" cy="0" r="28" fill="#27D045" opacity="0.95"/>
-                    <circle cx="0" cy="0" r="28" fill="none" stroke="#FFFFFF" stroke-width="2.5"/>
-                    <text x="0" y="8" text-anchor="middle" fill="#FFFFFF" font-size="20" font-weight="900" font-family="Montserrat, sans-serif" letter-spacing="1">UBC</text>
-                </g>
+        <svg viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+            <defs>
+                <linearGradient id="cabGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#2C3E50"/>
+                    <stop offset="100%" style="stop-color:#1a252f"/>
+                </linearGradient>
+                <linearGradient id="drumGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#E8EDF2"/>
+                    <stop offset="60%" style="stop-color:#CBD5E0"/>
+                    <stop offset="100%" style="stop-color:#A0AEC0"/>
+                </linearGradient>
+                <linearGradient id="ubcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#27D045"/>
+                    <stop offset="100%" style="stop-color:#1aA333"/>
+                </linearGradient>
+            </defs>
+
+            <!-- Umbra pe sol -->
+            <ellipse cx="260" cy="200" rx="230" ry="7" fill="rgba(0,0,0,0.45)"/>
+
+            <!-- ═══ ȘASIU ═══ -->
+            <rect x="30" y="148" width="430" height="16" rx="3" fill="#151B22"/>
+            <rect x="30" y="152" width="430" height="6" rx="2" fill="#1E2830"/>
+            <!-- Bara longitudinală -->
+            <rect x="30" y="146" width="430" height="4" rx="2" fill="#2D3A47"/>
+
+            <!-- ═══ TOBĂ BETONIERĂ (pară înclinată realistă) ═══ -->
+            <!-- Suport spate tobă (A-frame) -->
+            <polygon points="60,110 78,110 85,150 53,150" fill="#1E2830"/>
+            <polygon points="64,112 74,112 80,148 58,148" fill="#253040"/>
+
+            <!-- Corp principal tobă — formă pară realismă -->
+            <ellipse cx="82" cy="88" rx="38" ry="52" fill="url(#drumGrad)" transform="rotate(-15, 82, 88)"/>
+            <path d="M 52 58 Q 58 18 112 28 Q 148 35 175 65 Q 195 88 185 115 Q 175 138 145 148 Q 115 155 85 148 Q 55 138 42 115 Q 32 92 52 58 Z"
+                  fill="url(#drumGrad)" stroke="#94A3B8" stroke-width="1.5"/>
+
+            <!-- Nervuri spiralate pe tobă -->
+            <path d="M 58 60 Q 115 35 170 68" fill="none" stroke="#B0BEC5" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+            <path d="M 50 82 Q 108 58 172 88" fill="none" stroke="#B0BEC5" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
+            <path d="M 48 104 Q 100 82 168 108" fill="none" stroke="#B0BEC5" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
+            <path d="M 52 126 Q 100 108 162 128" fill="none" stroke="#B0BEC5" stroke-width="5" stroke-linecap="round" opacity="0.5"/>
+            <path d="M 62 142 Q 108 132 155 144" fill="none" stroke="#B0BEC5" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
+
+            <!-- Inel de suport rotație (spate tobă) -->
+            <ellipse cx="175" cy="90" rx="18" ry="32" fill="none" stroke="#64748B" stroke-width="5"/>
+            <ellipse cx="175" cy="90" rx="10" ry="20" fill="none" stroke="#94A3B8" stroke-width="2"/>
+
+            <!-- Logo UBC pe tobă (cerc verde) -->
+            <g transform="translate(112, 85) rotate(-12)">
+                <circle cx="0" cy="0" r="30" fill="url(#ubcGrad)"/>
+                <circle cx="0" cy="0" r="30" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+                <text x="0" y="9" text-anchor="middle" fill="#FFFFFF"
+                      font-size="22" font-weight="900"
+                      font-family="Montserrat, Arial, sans-serif"
+                      letter-spacing="1">UBC</text>
             </g>
-            <polygon points="48,28 75,32 68,72 45,66" fill="#222A33" stroke="#333F4C" stroke-width="1"/>
-            <path d="M 52 72 L 20 118 L 30 122 L 62 78 Z" fill="#333F4C" stroke="#1E242B" stroke-width="1"/>
-            <path d="M 20 118 L 5 135 L 14 138 L 30 122 Z" fill="#475569"/>
-            <line x1="58" y1="36" x2="58" y2="102" stroke="#64748B" stroke-width="2.5"/>
-            <line x1="54" y1="48" x2="62" y2="48" stroke="#64748B" stroke-width="2"/>
-            <line x1="54" y1="62" x2="62" y2="62" stroke="#64748B" stroke-width="2"/>
-            <line x1="54" y1="76" x2="62" y2="76" stroke="#64748B" stroke-width="2"/>
-            <path d="M 320 58 L 412 58 Q 432 58 434 82 L 436 142 L 320 142 Z" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
-            <path d="M 318 126 L 438 126 L 438 146 L 318 146 Z" fill="#1E242B"/>
-            <rect x="424" y="130" width="10" height="10" rx="3" fill="#FFD580"/>
-            <rect x="424" y="120" width="8" height="6" rx="2" fill="#FF9F43"/>
-            <rect x="432" y="90" width="5" height="32" rx="2" fill="#0F172A"/>
-            <line x1="432" y1="96" x2="437" y2="96" stroke="#334155" stroke-width="1.5"/>
-            <line x1="432" y1="104" x2="437" y2="104" stroke="#334155" stroke-width="1.5"/>
-            <line x1="432" y1="112" x2="437" y2="112" stroke="#334155" stroke-width="1.5"/>
-            <polygon points="378,65 422,65 422,98 378,98" fill="#1E293B" opacity="0.9"/>
-            <line x1="378" y1="65" x2="378" y2="98" stroke="#0F172A" stroke-width="2.5"/>
-            <rect x="330" y="65" width="44" height="33" rx="4" fill="#243447" opacity="0.85"/>
-            <rect x="330" y="65" width="44" height="33" rx="4" fill="none" stroke="#0F172A" stroke-width="1.5"/>
-            <rect x="332" y="104" width="14" height="4" rx="2" fill="#334155"/>
-            <rect x="426" y="72" width="7" height="18" rx="2" fill="#0F172A"/>
-            <path d="M 80 152 A 28 28 0 0 1 215 152" fill="none" stroke="#1E293B" stroke-width="10" stroke-linecap="round"/>
-            <path d="M 350 152 A 28 28 0 0 1 410 152" fill="none" stroke="#1E293B" stroke-width="10" stroke-linecap="round"/>
+
+            <!-- Suport față tobă -->
+            <rect x="188" y="100" width="20" height="50" rx="3" fill="#1E2830"/>
+            <rect x="190" y="102" width="16" height="46" rx="2" fill="#253040"/>
+
+            <!-- ═══ JGHEAB EVACUARE (spate) ═══ -->
+            <path d="M 48 148 L 15 178 L 24 182 L 58 152 Z" fill="#374151" stroke="#1E2830" stroke-width="1"/>
+            <path d="M 15 178 L 5 192 L 13 195 L 24 182 Z" fill="#4B5563"/>
+            <!-- Pâlnie încărcare sus -->
+            <polygon points="40,20 68,26 60,62 32,56" fill="#1E2830" stroke="#374151" stroke-width="1"/>
+            <!-- Scăriță acces -->
+            <line x1="52" y1="28" x2="52" y2="100" stroke="#4B5563" stroke-width="2.5"/>
+            <line x1="47" y1="42" x2="57" y2="42" stroke="#4B5563" stroke-width="2"/>
+            <line x1="47" y1="58" x2="57" y2="58" stroke="#4B5563" stroke-width="2"/>
+            <line x1="47" y1="74" x2="57" y2="74" stroke="#4B5563" stroke-width="2"/>
+            <line x1="47" y1="90" x2="57" y2="90" stroke="#4B5563" stroke-width="2"/>
+
+            <!-- ═══ REZERVOR COMBUSTIBIL ═══ -->
+            <rect x="198" y="135" width="65" height="22" rx="5" fill="#1E2830" stroke="#2D3A47" stroke-width="1"/>
+            <rect x="202" y="139" width="57" height="10" rx="3" fill="#253040"/>
+
+            <!-- ═══ CABINĂ MAN (cab-over modern) ═══ -->
+            <!-- Corp cabină principal — alb/gri deschis -->
+            <path d="M 218 52 L 220 148 L 460 148 L 462 80 Q 460 52 432 50 Z"
+                  fill="url(#cabGrad)"/>
+            <!-- Panou frontal cabină (față) -->
+            <path d="M 432 50 Q 460 52 462 80 L 462 148 L 448 148 L 448 60 Z"
+                  fill="#1a252f"/>
+
+            <!-- Parbriz mare (tăiat în trepte) -->
+            <path d="M 228 58 L 430 58 L 430 105 L 228 112 Z"
+                  fill="#1B3A52" opacity="0.88"/>
+            <!-- Reflecție parbriz -->
+            <path d="M 235 62 Q 290 60 350 62 L 345 72 Q 288 70 238 72 Z"
+                  fill="rgba(255,255,255,0.08)"/>
+
+            <!-- Geam lateral stânga ușă -->
+            <rect x="228" y="115" width="72" height="28" rx="5" fill="#1B3A52" opacity="0.8"/>
+            <rect x="228" y="115" width="72" height="28" rx="5" fill="none" stroke="#0F1A26" stroke-width="1.5"/>
+            <!-- Mâner ușă -->
+            <rect x="234" y="148" width="18" height="4" rx="2" fill="#2D3A47"/>
+
+            <!-- Linie separatoare ușă / parbriz -->
+            <line x1="304" y1="56" x2="304" y2="148" stroke="#0F1A26" stroke-width="3"/>
+
+            <!-- Geam ușă dreapta -->
+            <rect x="310" y="62" width="116" height="42" rx="5" fill="#1B3A52" opacity="0.82"/>
+            <rect x="310" y="62" width="116" height="42" rx="5" fill="none" stroke="#0F1A26" stroke-width="1.5"/>
+            <line x1="368" y1="56" x2="368" y2="148" stroke="#0F1A26" stroke-width="2.5"/>
+
+            <!-- Acoperis cabină -->
+            <rect x="220" y="44" width="210" height="14" rx="5" fill="#111820"/>
+            <!-- Girofar portocaliu pe acoperiș -->
+            <rect x="240" y="38" width="32" height="10" rx="4" fill="#F5A623" opacity="0.9"/>
+            <rect x="240" y="38" width="32" height="10" rx="4" fill="none" stroke="#FFD080" stroke-width="1"/>
+
+            <!-- Oglindă retrovizoare -->
+            <rect x="210" y="68" width="10" height="22" rx="3" fill="#111820"/>
+            <line x1="214" y1="76" x2="220" y2="76" stroke="#111820" stroke-width="3"/>
+            <line x1="214" y1="86" x2="220" y2="86" stroke="#111820" stroke-width="3"/>
+
+            <!-- Mâner ușă dreapta -->
+            <rect x="416" y="110" width="20" height="4" rx="2" fill="#2D3A47"/>
+
+            <!-- FAȚĂ CABINĂ — Grilă & Faruri -->
+            <!-- Grilă radiator -->
+            <rect x="452" y="78" width="10" height="55" rx="2" fill="#0A1018"/>
+            <line x1="452" y1="88"  x2="462" y2="88"  stroke="#1E2830" stroke-width="2"/>
+            <line x1="452" y1="98"  x2="462" y2="98"  stroke="#1E2830" stroke-width="2"/>
+            <line x1="452" y1="108" x2="462" y2="108" stroke="#1E2830" stroke-width="2"/>
+            <line x1="452" y1="118" x2="462" y2="118" stroke="#1E2830" stroke-width="2"/>
+            <line x1="452" y1="128" x2="462" y2="128" stroke="#1E2830" stroke-width="2"/>
+            <!-- Far principal -->
+            <rect x="453" y="84" width="8" height="18" rx="4" fill="#FFE082"/>
+            <rect x="453" y="84" width="8" height="18" rx="4" fill="#FFD54F" opacity="0.5" style="filter:blur(4px)"/>
+            <!-- Semnalizator -->
+            <rect x="453" y="104" width="7" height="8" rx="2" fill="#FF8C00"/>
+
+            <!-- Bara față -->
+            <rect x="450" y="135" width="14" height="14" rx="3" fill="#0A1018"/>
+
+            <!-- Tobă eșapament -->
+            <rect x="426" y="14" width="12" height="44" rx="4" fill="#1E2830"/>
+            <ellipse cx="432" cy="14" rx="8" ry="5" fill="#111820"/>
+            <!-- Fum -->
+            <circle cx="432" cy="6"  r="5"  fill="rgba(200,210,220,0.1)"/>
+            <circle cx="429" cy="-2" r="7"  fill="rgba(200,210,220,0.07)"/>
+
+            <!-- ═══ ROȚI ═══ -->
+            <!-- Aripi / Aparători -->
+            <path d="M 82 162 A 30 30 0 0 1 205 162" fill="none" stroke="#111820" stroke-width="12" stroke-linecap="round"/>
+            <path d="M 355 162 A 26 26 0 0 1 430 162" fill="none" stroke="#111820" stroke-width="12" stroke-linecap="round"/>
+
+            <!-- Roată spate 1 -->
             <g class="ubc-wheel-rear1">
-                <circle cx="110" cy="162" r="25" fill="#0F172A"/>
-                <circle cx="110" cy="162" r="20" fill="#242C35"/>
-                <circle cx="110" cy="162" r="13" fill="#334155"/>
-                <circle cx="110" cy="162" r="5"  fill="#0F172A"/>
-                <line x1="110" y1="148" x2="110" y2="176" stroke="#475569" stroke-width="2.5" stroke-linecap="round"/>
-                <line x1="96"  y1="162" x2="124" y2="162" stroke="#475569" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="110" cy="172" r="28" fill="#0A0E12"/>
+                <circle cx="110" cy="172" r="22" fill="#1A2028"/>
+                <circle cx="110" cy="172" r="14" fill="#2D3748"/>
+                <circle cx="110" cy="172" r="5"  fill="#0A0E12"/>
+                <line x1="110" y1="155" x2="110" y2="189" stroke="#4A5568" stroke-width="3" stroke-linecap="round"/>
+                <line x1="93"  y1="172" x2="127" y2="172" stroke="#4A5568" stroke-width="3" stroke-linecap="round"/>
+                <line x1="98"  y1="159" x2="122" y2="185" stroke="#4A5568" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="122" y1="159" x2="98"  y2="185" stroke="#4A5568" stroke-width="2.5" stroke-linecap="round"/>
             </g>
+
+            <!-- Roată spate 2 (tandem) -->
             <g class="ubc-wheel-rear2">
-                <circle cx="175" cy="162" r="25" fill="#0F172A"/>
-                <circle cx="175" cy="162" r="20" fill="#242C35"/>
-                <circle cx="175" cy="162" r="13" fill="#334155"/>
-                <circle cx="175" cy="162" r="5"  fill="#0F172A"/>
-                <line x1="175" y1="148" x2="175" y2="176" stroke="#475569" stroke-width="2.5" stroke-linecap="round"/>
-                <line x1="161" y1="162" x2="189" y2="162" stroke="#475569" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="176" cy="172" r="28" fill="#0A0E12"/>
+                <circle cx="176" cy="172" r="22" fill="#1A2028"/>
+                <circle cx="176" cy="172" r="14" fill="#2D3748"/>
+                <circle cx="176" cy="172" r="5"  fill="#0A0E12"/>
+                <line x1="176" y1="155" x2="176" y2="189" stroke="#4A5568" stroke-width="3" stroke-linecap="round"/>
+                <line x1="159" y1="172" x2="193" y2="172" stroke="#4A5568" stroke-width="3" stroke-linecap="round"/>
+                <line x1="164" y1="159" x2="188" y2="185" stroke="#4A5568" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="188" y1="159" x2="164" y2="185" stroke="#4A5568" stroke-width="2.5" stroke-linecap="round"/>
             </g>
+
+            <!-- Roată față (sub cabină) -->
             <g class="ubc-wheel-front">
-                <circle cx="380" cy="162" r="25" fill="#0F172A"/>
-                <circle cx="380" cy="162" r="20" fill="#242C35"/>
-                <circle cx="380" cy="162" r="13" fill="#334155"/>
-                <circle cx="380" cy="162" r="5"  fill="#0F172A"/>
-                <line x1="380" y1="148" x2="380" y2="176" stroke="#475569" stroke-width="2.5" stroke-linecap="round"/>
-                <line x1="366" y1="162" x2="394" y2="162" stroke="#475569" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="393" cy="172" r="28" fill="#0A0E12"/>
+                <circle cx="393" cy="172" r="22" fill="#1A2028"/>
+                <circle cx="393" cy="172" r="14" fill="#2D3748"/>
+                <circle cx="393" cy="172" r="5"  fill="#0A0E12"/>
+                <line x1="393" y1="155" x2="393" y2="189" stroke="#4A5568" stroke-width="3" stroke-linecap="round"/>
+                <line x1="376" y1="172" x2="410" y2="172" stroke="#4A5568" stroke-width="3" stroke-linecap="round"/>
+                <line x1="381" y1="159" x2="405" y2="185" stroke="#4A5568" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="405" y1="159" x2="381" y2="185" stroke="#4A5568" stroke-width="2.5" stroke-linecap="round"/>
             </g>
 
         </svg>
