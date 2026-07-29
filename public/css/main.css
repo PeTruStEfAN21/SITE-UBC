@@ -68,7 +68,6 @@ header.site-header {
 .logo-ubc {
   font-size: 30px;
   font-weight: 900;
-  color: var(--verde-ubc);
   letter-spacing: 0;
   text-decoration: none;
   display: flex;
@@ -76,9 +75,12 @@ header.site-header {
   gap: 0;
   cursor: pointer;
 }
-.logo-ubc span {
+.logo-ubc .logo-u {
   color: var(--verde-ubc);
   text-shadow: 0 0 15px rgba(46, 204, 113, 0.4);
+}
+.logo-ubc .logo-bc {
+  color: var(--text-alb);
 }
 
 nav ul {
