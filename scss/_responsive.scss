@@ -34,32 +34,44 @@
 // ════════════════════════
 @media (max-width: 768px) {
 
-    // ── Nav mobile — slide-down overlay ──
+    // ── Nav mobile — slide-down overlay pe TOT ecranul (centrat) ──
+    nav#main-nav,
     nav {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
+        width: 100% !important;
+        max-width: 100% !important;
         background: var(--header-bg);
         backdrop-filter: blur(20px);
         border-bottom: 1px solid var(--border-subtle);
-        padding: 80px 20px 24px 20px;
+        padding: 85px 20px 28px 20px;
         transform: translateY(-110%);
         transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 1000;
+        display: block;
 
         &.nav-open {
             transform: translateY(0);
         }
 
         ul {
+            display: flex;
             flex-direction: column;
-            gap: 8px;
-            align-items: stretch;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 0;
+            margin: 0;
         }
 
         li {
             width: 100%;
+            max-width: 420px;
+            margin: 0 auto;
+            text-align: center;
         }
 
         a.btn-menu,
@@ -67,8 +79,10 @@
             display: flex;
             width: 100%;
             justify-content: center;
+            align-items: center;
+            text-align: center;
             padding: 14px 20px;
-            font-size: 14px;
+            font-size: 15px;
             border-radius: 12px;
         }
     }

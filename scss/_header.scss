@@ -68,21 +68,23 @@ header.site-header {
     }
 }
 
-nav#main-nav {
-    width: 50%;
-    max-width: 50%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-
-    ul {
-        list-style: none;
+@media (min-width: 769px) {
+    nav#main-nav {
+        width: 50%;
+        max-width: 50%;
         display: flex;
-        gap: 8px;
-        align-items: center;
         justify-content: flex-end;
-        width: 100%;
-        flex-wrap: nowrap;
+        align-items: center;
+
+        ul {
+            list-style: none;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: flex-end;
+            width: 100%;
+            flex-wrap: nowrap;
+        }
     }
 }
 
