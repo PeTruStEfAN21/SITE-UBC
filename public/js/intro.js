@@ -44,6 +44,7 @@
             opacity: 1;
             transition: opacity 0.7s ease;
             pointer-events: all;
+            color: #ffffff !important;
         }
         #ubc-intro.ubc-intro--fadeout {
             opacity: 0;
@@ -59,6 +60,7 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            color: #ffffff !important;
         }
 
         /* ── Logo central ──────────────────────────────── */
@@ -79,21 +81,23 @@
             font-size: clamp(4rem, 12vw, 9rem);
             font-weight: 900;
             letter-spacing: 0.1em;
-            color: #fff;
+            color: #ffffff !important;
             line-height: 1;
             animation: ubcLogoGlow 3.8s ease forwards 0.1s;
+            text-shadow: 0 0 30px rgba(46, 204, 113, 0.4), 0 4px 15px rgba(0,0,0,0.8);
         }
-        .ubc-intro-logo-main .u-letter { color: #27D045; }
+        .ubc-intro-logo-main .u-letter { color: #27D045 !important; }
         .ubc-intro-logo-sub {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(0.7rem, 2vw, 1rem);
-            font-weight: 700;
-            letter-spacing: 0.35em;
+            font-size: clamp(0.75rem, 2vw, 1.05rem);
+            font-weight: 800;
+            letter-spacing: 0.3em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.45);
+            color: #F1F5F9 !important;
             margin-top: 10px;
             animation: ubcSubReveal 3.8s ease forwards 0.3s;
             opacity: 0;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.9);
         }
 
         /* ── Linie drum ────────────────────────────────── */
@@ -234,23 +238,24 @@
         }
         .ubc-intro-progress-label {
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.68rem;
-            font-weight: 700;
+            font-size: 0.75rem;
+            font-weight: 800;
             letter-spacing: 0.18em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.28);
+            color: #F1F5F9 !important;
             text-align: center;
             margin-bottom: 10px;
             opacity: 0;
             animation: ubcFadeIn 0.5s ease forwards ${(POUR_DELAY_MS - 100) / 1000}s;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.9);
         }
         .ubc-intro-progress-track {
             width: 100%;
             height: 7px;
-            background: rgba(255,255,255,0.06);
+            background: rgba(255,255,255,0.12);
             border-radius: 4px;
             overflow: hidden;
-            border: 1px solid rgba(46,204,113,0.12);
+            border: 1px solid rgba(46,204,113,0.3);
         }
         .ubc-intro-progress-fill {
             height: 100%;
@@ -275,14 +280,15 @@
         }
         .ubc-intro-progress-pct {
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.62rem;
-            font-weight: 700;
-            color: rgba(46,204,113,0.65);
+            font-size: 0.75rem;
+            font-weight: 900;
+            color: #3FEF8B !important;
             text-align: right;
             margin-top: 6px;
             letter-spacing: 0.05em;
             opacity: 0;
             animation: ubcFadeIn 0.4s ease forwards ${POUR_DELAY_MS / 1000}s;
+            text-shadow: 0 0 8px rgba(63,239,139,0.5);
         }
 
         /* ════ KEYFRAMES ════════════════════════════════ */
