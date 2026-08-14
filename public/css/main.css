@@ -112,6 +112,12 @@ header.site-header {
   color: var(--text-alb);
 }
 
+nav ul,
+nav li {
+  list-style: none !important;
+  list-style-type: none !important;
+}
+
 @media (min-width: 769px) {
   nav#main-nav {
     width: 50%;
@@ -121,7 +127,7 @@ header.site-header {
     align-items: center;
   }
   nav#main-nav ul {
-    list-style: none;
+    list-style: none !important;
     display: flex;
     gap: 8px;
     align-items: center;
@@ -3340,6 +3346,8 @@ body.light-theme .cp-hours-list li {
     width: 100%;
     padding: 0;
     margin: 0;
+    list-style: none !important;
+    list-style-type: none !important;
   }
   nav#main-nav li,
   nav li {
@@ -3347,6 +3355,8 @@ body.light-theme .cp-hours-list li {
     max-width: 420px;
     margin: 0 auto;
     text-align: center;
+    list-style: none !important;
+    list-style-type: none !important;
   }
   nav#main-nav a.btn-menu,
   nav#main-nav a.btn-suna,
