@@ -68,32 +68,34 @@ header.site-header {
 .header-brand {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
+  flex: 0 0 auto;
 }
 
 .header-subtitle {
-  font-size: 12px;
-  font-weight: 800;
+  font-size: 15px;
+  font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
   color: var(--text-alb);
-  background: rgba(39, 208, 69, 0.1);
-  border: 1px solid rgba(39, 208, 69, 0.25);
-  padding: 5px 14px;
-  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(39, 208, 69, 0.18), rgba(39, 208, 69, 0.05));
+  border: 1.5px solid rgba(39, 208, 69, 0.4);
+  box-shadow: 0 0 16px rgba(39, 208, 69, 0.22);
+  padding: 7px 18px;
+  border-radius: 25px;
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
   line-height: 1;
 }
-.header-subtitle::before {
-  content: "🏗️ ";
-  font-size: 11px;
-  margin-right: 4px;
+.header-subtitle .highlight {
+  color: var(--verde-ubc);
+  text-shadow: 0 0 12px rgba(46, 204, 113, 0.6);
+  margin-left: 5px;
 }
 
 .logo-ubc {
-  font-size: 30px;
+  font-size: 32px;
   font-weight: 900;
   letter-spacing: 0;
   text-decoration: none;
@@ -110,12 +112,21 @@ header.site-header {
   color: var(--text-alb);
 }
 
-nav ul {
+nav#main-nav {
+  width: 50%;
+  max-width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+nav#main-nav ul {
   list-style: none;
   display: flex;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
-  flex-wrap: wrap;
+  justify-content: flex-end;
+  width: 100%;
+  flex-wrap: nowrap;
 }
 
 .btn-menu {
