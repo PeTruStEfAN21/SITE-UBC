@@ -35,10 +35,6 @@
   - Butoane operative *Click-to-Call* (`tel:0720006655`) și *Click-to-Email* (`mailto:ubcbeton@gmail.com`).
   - Harta Google Maps interactivă integrată direct pentru locația din Oltenița.
 
-- 🔐 **Panou Admin Integrat (Mobil & Desktop):**
-  - Acces rapid pe desktop prin combinația de taste `Ctrl + Shift + D`.
-  - Acces pe mobil prin 3 atingeri rapide (Triple-Tap) pe logoul `UBC` sau adăugarea `#admin` în URL.
-
 - 🔍 **SEO & Meta-taguri Avansate:**
   - Taguri OpenGraph, Twitter Cards, Schema.org JSON-LD (LocalBusiness), meta keywords extinse pentru betoane, utilaje și servicii.
 
