@@ -1,21 +1,21 @@
 /**
  * public/js/dashboard.js
  * ══════════════════════════════════════════════════════════
- * Dashboard Admin UBC — Panou de control ascuns
- *   - Activat cu Ctrl+Shift+D
- *   - Protejat cu parolă (sesiune)
- *   - Afișează analytics, erori, performanță
- *   - Export JSON, reset date
+ * Dashboard Admin UBC — Panou de control cu Analytics Reali Server-Side
+ *   - Activat cu Ctrl+Shift+D sau secret hash #admin sau 3 atingeri pe logo
+ *   - Autentificare securizată
+ *   - Numără REAL câți oameni intră (Vizitatori unici & Hits pe server)
+ *   - Înregistrează REAL ce secțiuni accesează și pe ce butoane dau click
+ *   - Detectează REAL din ce zone/județe ale României este accesat site-ul (prin Geo-IP)
+ *   - Jurnal în timp real cu ultimele 50 de acțiuni ale vizitatorilor
  * ══════════════════════════════════════════════════════════
  */
 
 (function () {
     'use strict';
 
-    // ─── Configurare ──────────────────────────────────────
     const AUTH_SESSION_KEY = 'ubc_admin_auth';
 
-    // ─── Stare internă ────────────────────────────────────
     let dashboardEl   = null;
     let isOpen        = false;
     let refreshTimer  = null;
@@ -74,7 +74,7 @@
         if (dashboardEl) {
             dashboardEl.classList.add('ubc-dash--closing');
             setTimeout(() => {
-                dashboardEl.remove();
+                dashboardEl?.remove();
                 dashboardEl = null;
             }, 300);
         }
@@ -82,7 +82,7 @@
         isOpen = false;
     }
 
-    // ─── Modal de Login ───────────────────────────────────
+    // ─── Modal Login ──────────────────────────────────────
 
     function showLoginModal() {
         const existing = document.getElementById('ubc-login-modal');
@@ -96,7 +96,7 @@
                     <div class="ubc-login-logo">
                         <span class="ubc-login-icon">🔐</span>
                         <h2 id="ubc-login-title">Admin <span>UBC</span></h2>
-                        <p>Panou de control privat</p>
+                        <p>Panou de control privat &amp; Analytics Reali</p>
                     </div>
                     <div class="ubc-login-form">
                         <label for="ubc-pass-input">Parolă de acces</label>
@@ -163,9 +163,9 @@
         setTimeout(() => input.focus(), 100);
     }
 
-    // ─── Render Dashboard ─────────────────────────────────
+    // ─── Render Dashboard Async (Date Reale Server) ───────
 
-    function renderDashboard() {
+    async function renderDashboard() {
         if (dashboardEl) dashboardEl.remove();
 
         dashboardEl = document.createElement('div');
@@ -173,20 +173,40 @@
         dashboardEl.setAttribute('role', 'dialog');
         dashboardEl.setAttribute('aria-label', 'Dashboard Admin UBC');
 
-        dashboardEl.innerHTML = buildDashboardHTML();
+        dashboardEl.innerHTML = `
+            <div class="ubc-dash-panel" style="padding:60px 20px; text-align:center;">
+                <div style="font-size:2.5rem; margin-bottom:12px;">📊</div>
+                <h3 style="color:#2ECC71; margin-bottom:8px; font-weight:900;">Se preiau datele de pe Server...</h3>
+                <p style="color:#a0a6ac; font-size:0.9rem;">Se calculează vizitatorii reali, locațiile IP din România și click-urile pe secțiuni</p>
+            </div>
+        `;
         document.body.appendChild(dashboardEl);
         injectDashboardStyles();
+
+        let serverData = null;
+        try {
+            const res = await fetch('/api/admin/stats');
+            if (res.ok) {
+                serverData = await res.json();
+            }
+        } catch(e) {
+            console.error('Nu s-au putut prelua datele reale de pe server:', e);
+        }
+
+        dashboardEl.innerHTML = buildDashboardHTML(serverData);
         bindDashboardEvents();
 
-        // Auto-refresh la fiecare 30 secunde
         clearInterval(refreshTimer);
-        refreshTimer = setInterval(refreshDashboardData, 30000);
+        refreshTimer = setInterval(refreshDashboardData, 20000);
     }
 
-    function buildDashboardHTML() {
-        const stats  = window.UBC_Analytics ? window.UBC_Analytics.getStats()  : null;
-        const errors = window.UBC_Errors    ? window.UBC_Errors.bySeverity()    : null;
-        const session = getSessionUptime();
+    function buildDashboardHTML(data) {
+        const summary   = data?.summary || { totalHits: 0, totalUniqueVisitors: 0, totalPageViews: 0, totalClicks: 0, totalCalculatorUses: 0 };
+        const geo       = data?.geoLocations || {};
+        const pages     = data?.pageViews || {};
+        const clicks    = data?.clickEvents || {};
+        const events    = data?.recentEvents || [];
+        const uptime    = getSessionUptime();
 
         return `
         <div class="ubc-dash-panel">
@@ -196,48 +216,48 @@
                 <div class="ubc-dash-title">
                     <span class="ubc-dash-logo">⚙️</span>
                     <div>
-                        <h2>Dashboard Admin <span>UBC</span></h2>
-                        <small>Ultima actualizare: ${new Date().toLocaleTimeString('ro-RO')}</small>
+                        <h2>Dashboard Admin <span>UBC</span> — Telemetrie Server</h2>
+                        <small>Actualizat în timp real: ${new Date().toLocaleTimeString('ro-RO')}</small>
                     </div>
                 </div>
                 <div class="ubc-dash-header-actions">
-                    <span class="ubc-dash-uptime">⏱ Sesiune: ${session}</span>
-                    <button class="ubc-dash-btn ubc-dash-btn--outline" id="ubc-dash-refresh">↻ Refresh</button>
+                    <span class="ubc-dash-uptime">⏱ Sesiune Admin: ${uptime}</span>
+                    <button class="ubc-dash-btn ubc-dash-btn--outline" id="ubc-dash-refresh">↻ Refresh Date</button>
                     <button class="ubc-dash-btn ubc-dash-btn--danger"  id="ubc-dash-logout">🔓 Ieși</button>
                     <button class="ubc-dash-close" id="ubc-dash-close" aria-label="Închide">✕</button>
                 </div>
             </div>
 
-            <!-- KPI Cards -->
-            ${stats ? buildKPICards(stats) : '<p class="ubc-dash-no-data">Analytics nedisponibil.</p>'}
+            <!-- KPI Cards Reale -->
+            ${buildKPICards(summary, geo)}
 
-            <!-- Tabs -->
+            <!-- Tabs Navigare -->
             <div class="ubc-dash-tabs">
-                <button class="ubc-dash-tab active" data-dash-tab="analytics">📊 Analytics</button>
-                <button class="ubc-dash-tab" data-dash-tab="errors">🚨 Erori (${errors ? (errors.critical.length + errors.warning.length + errors.info.length) : 0})</button>
-                <button class="ubc-dash-tab" data-dash-tab="performance">⚡ Performanță</button>
-                <button class="ubc-dash-tab" data-dash-tab="tools">🛠 Instrumente</button>
+                <button class="ubc-dash-tab active" data-dash-tab="geo">📍 Zone &amp; Județe România (${Object.keys(geo).length})</button>
+                <button class="ubc-dash-tab" data-dash-tab="sections">📊 Secțiuni &amp; Butoane Accesate</button>
+                <button class="ubc-dash-tab" data-dash-tab="live">⏱ Jurnal Live Vizitatori (${events.length})</button>
+                <button class="ubc-dash-tab" data-dash-tab="tools">🛠 Instrumente &amp; Resetare</button>
             </div>
 
-            <!-- Tab Content -->
+            <!-- Conținut Tabs -->
             <div class="ubc-dash-content">
 
-                <!-- Tab: Analytics -->
-                <div class="ubc-dash-tab-panel active" id="ubc-dash-tab-analytics">
-                    ${stats ? buildAnalyticsTab(stats) : '<p class="ubc-dash-no-data">Nicio sesiune înregistrată.</p>'}
+                <!-- Tab 1: Zone România (GeoIP) -->
+                <div class="ubc-dash-tab-panel active" id="ubc-dash-tab-geo">
+                    ${buildGeoTab(geo, summary.totalHits)}
                 </div>
 
-                <!-- Tab: Erori -->
-                <div class="ubc-dash-tab-panel" id="ubc-dash-tab-errors">
-                    ${errors ? buildErrorsTab(errors) : '<p class="ubc-dash-no-data">Error tracker nedisponibil.</p>'}
+                <!-- Tab 2: Secțiuni & Click-uri -->
+                <div class="ubc-dash-tab-panel" id="ubc-dash-tab-sections">
+                    ${buildSectionsTab(pages, clicks)}
                 </div>
 
-                <!-- Tab: Performanță -->
-                <div class="ubc-dash-tab-panel" id="ubc-dash-tab-performance">
-                    ${stats ? buildPerformanceTab(stats) : '<p class="ubc-dash-no-data">Nicio măsurătoare disponibilă.</p>'}
+                <!-- Tab 3: Jurnal Live -->
+                <div class="ubc-dash-tab-panel" id="ubc-dash-tab-live">
+                    ${buildLiveFeedTab(events)}
                 </div>
 
-                <!-- Tab: Instrumente -->
+                <!-- Tab 4: Instrumente -->
                 <div class="ubc-dash-tab-panel" id="ubc-dash-tab-tools">
                     ${buildToolsTab()}
                 </div>
@@ -247,193 +267,174 @@
         `;
     }
 
-    // ─── Build Sections ───────────────────────────────────
+    // ─── Componente UI ────────────────────────────────────
 
-    function buildKPICards(stats) {
+    function buildKPICards(summary, geo) {
+        const locationsCount = Object.keys(geo).length;
+
         return `
         <div class="ubc-kpi-grid">
-            <div class="ubc-kpi-card">
+            <div class="ubc-kpi-card ubc-kpi-card--highlight">
                 <span class="ubc-kpi-icon">👥</span>
-                <div class="ubc-kpi-value">${stats.totalSessions}</div>
-                <div class="ubc-kpi-label">Sesiuni totale</div>
+                <div class="ubc-kpi-value">${summary.totalUniqueVisitors || 0}</div>
+                <div class="ubc-kpi-label">Vizitatori Unici Reali</div>
+            </div>
+            <div class="ubc-kpi-card">
+                <span class="ubc-kpi-icon">📈</span>
+                <div class="ubc-kpi-value">${summary.totalHits || 0}</div>
+                <div class="ubc-kpi-label">Accesări Totale (Hits)</div>
             </div>
             <div class="ubc-kpi-card">
                 <span class="ubc-kpi-icon">📄</span>
-                <div class="ubc-kpi-value">${stats.totalPageViews}</div>
-                <div class="ubc-kpi-label">Vizualizări pagini</div>
+                <div class="ubc-kpi-value">${summary.totalPageViews || 0}</div>
+                <div class="ubc-kpi-label">Vizualizări Pagini</div>
             </div>
-            <div class="ubc-kpi-card ${stats.bounceRate > 70 ? 'ubc-kpi-card--warn' : ''}">
-                <span class="ubc-kpi-icon">↩️</span>
-                <div class="ubc-kpi-value">${stats.bounceRate}%</div>
-                <div class="ubc-kpi-label">Bounce rate</div>
+            <div class="ubc-kpi-card">
+                <span class="ubc-kpi-icon">🖱️</span>
+                <div class="ubc-kpi-value">${summary.totalClicks || 0}</div>
+                <div class="ubc-kpi-label">Click-uri Butoane / CTA</div>
             </div>
             <div class="ubc-kpi-card">
                 <span class="ubc-kpi-icon">🧮</span>
-                <div class="ubc-kpi-value">${stats.calculatorUses}</div>
-                <div class="ubc-kpi-label">Calc. utilizat</div>
+                <div class="ubc-kpi-value">${summary.totalCalculatorUses || 0}</div>
+                <div class="ubc-kpi-label">Calculat Volum Beton</div>
             </div>
             <div class="ubc-kpi-card">
-                <span class="ubc-kpi-icon">📞</span>
-                <div class="ubc-kpi-value">${stats.ctaClicks.phone}</div>
-                <div class="ubc-kpi-label">Click-uri telefon</div>
-            </div>
-            <div class="ubc-kpi-card">
-                <span class="ubc-kpi-icon">📦</span>
-                <div class="ubc-kpi-value">${stats.avgVolumeM3} m³</div>
-                <div class="ubc-kpi-label">Volum mediu calc.</div>
+                <span class="ubc-kpi-icon">📍</span>
+                <div class="ubc-kpi-value">${locationsCount}</div>
+                <div class="ubc-kpi-label">Zone / Județe România</div>
             </div>
         </div>`;
     }
 
-    function buildAnalyticsTab(stats) {
-        // Grafic bare pentru pagini vizitate
-        const pages = Object.entries(stats.pageViews || {}).sort((a, b) => b[1] - a[1]);
-        const maxPV = pages.length ? Math.max(...pages.map(p => p[1])) : 1;
-
-        const pageRows = pages.map(([page, count]) => `
-            <div class="ubc-bar-row">
-                <span class="ubc-bar-label">${page}</span>
-                <div class="ubc-bar-track">
-                    <div class="ubc-bar-fill" style="width:${Math.round((count / maxPV) * 100)}%"></div>
-                </div>
-                <span class="ubc-bar-count">${count}</span>
-            </div>
-        `).join('') || '<p class="ubc-dash-no-data">Nicio pagină vizitată.</p>';
-
-        // Timp mediu pe pagini
-        const timeRows = Object.entries(stats.avgPageTime || {}).map(([page, sec]) => `
-            <div class="ubc-stat-row">
-                <span>${page}</span>
-                <span class="ubc-stat-val">${formatSeconds(sec)}</span>
-            </div>
-        `).join('') || '<p class="ubc-dash-no-data">—</p>';
-
-        // Vizite zilnice (ultimele 7 zile)
-        const dailyEntries = Object.entries(stats.dailyVisits || {})
-            .sort((a, b) => a[0].localeCompare(b[0]))
-            .slice(-7);
-        const maxDaily = dailyEntries.length ? Math.max(...dailyEntries.map(d => d[1])) : 1;
-        const dailyRows = dailyEntries.map(([date, count]) => `
-            <div class="ubc-bar-row">
-                <span class="ubc-bar-label">${date.slice(5)}</span>
-                <div class="ubc-bar-track">
-                    <div class="ubc-bar-fill ubc-bar-fill--blue" style="width:${Math.round((count / maxDaily) * 100)}%"></div>
-                </div>
-                <span class="ubc-bar-count">${count}</span>
-            </div>
-        `).join('') || '<p class="ubc-dash-no-data">Nicio vizită înregistrată.</p>';
-
-        // Dispozitive
-        const dev = stats.deviceBreakdown || {};
-        const totalDev = (dev.desktop||0) + (dev.mobile||0) + (dev.tablet||0) || 1;
-
-        return `
-        <div class="ubc-dash-grid-2">
-            <div class="ubc-dash-card">
-                <h3>📄 Pagini vizitate</h3>
-                <div class="ubc-bar-chart">${pageRows}</div>
-            </div>
-            <div class="ubc-dash-card">
-                <h3>📅 Vizite zilnice (7 zile)</h3>
-                <div class="ubc-bar-chart">${dailyRows}</div>
-            </div>
-        </div>
-        <div class="ubc-dash-grid-2">
-            <div class="ubc-dash-card">
-                <h3>⏱ Timp mediu / pagină</h3>
-                <div class="ubc-stat-list">${timeRows}</div>
-            </div>
-            <div class="ubc-dash-card">
-                <h3>📱 Dispozitive</h3>
-                <div class="ubc-stat-list">
-                    <div class="ubc-stat-row"><span>💻 Desktop</span><span class="ubc-stat-val">${dev.desktop||0} (${Math.round(((dev.desktop||0)/totalDev)*100)}%)</span></div>
-                    <div class="ubc-stat-row"><span>📱 Mobile</span><span class="ubc-stat-val">${dev.mobile||0} (${Math.round(((dev.mobile||0)/totalDev)*100)}%)</span></div>
-                    <div class="ubc-stat-row"><span>📟 Tablet</span><span class="ubc-stat-val">${dev.tablet||0} (${Math.round(((dev.tablet||0)/totalDev)*100)}%)</span></div>
-                </div>
-                <h3 style="margin-top:16px;">🧮 Calculator Beton</h3>
-                <div class="ubc-stat-list">
-                    <div class="ubc-stat-row"><span>Utilizări totale</span><span class="ubc-stat-val">${stats.calculatorUses}</span></div>
-                    <div class="ubc-stat-row"><span>Volum mediu calculat</span><span class="ubc-stat-val">${stats.avgVolumeM3} m³</span></div>
-                    <div class="ubc-stat-row"><span>Click-uri tel.</span><span class="ubc-stat-val">${stats.ctaClicks.phone}</span></div>
-                    <div class="ubc-stat-row"><span>Click-uri email</span><span class="ubc-stat-val">${stats.ctaClicks.email}</span></div>
-                </div>
-            </div>
-        </div>`;
-    }
-
-    function buildErrorsTab(errors) {
-        function renderErrorList(list, label, color) {
-            if (!list.length) return `<p class="ubc-dash-no-data">✅ Nicio eroare de tip ${label}.</p>`;
-            return list.slice(0, 20).map(e => `
-                <div class="ubc-error-item ubc-error-item--${e.severity}">
-                    <div class="ubc-error-header">
-                        <span class="ubc-error-badge" style="background:${color}">${e.severity.toUpperCase()}</span>
-                        <span class="ubc-error-type">${e.type}</span>
-                        <span class="ubc-error-time">${new Date(e.timestamp).toLocaleString('ro-RO')}</span>
-                    </div>
-                    <div class="ubc-error-msg">${escapeHtml(e.message)}</div>
-                    ${e.source ? `<div class="ubc-error-source">📍 ${escapeHtml(e.source)}${e.line ? ':' + e.line : ''}</div>` : ''}
-                    ${e.stack ? `<details><summary>Stack trace</summary><pre class="ubc-error-stack">${escapeHtml(e.stack.slice(0, 500))}</pre></details>` : ''}
-                </div>
-            `).join('');
-        }
-
-        const all = [...errors.critical, ...errors.warning, ...errors.info]
-            .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-
-        if (!all.length) {
-            return `<div class="ubc-dash-no-data" style="padding:40px;text-align:center;">
-                <div style="font-size:3rem;">✅</div>
-                <p>Nicio eroare înregistrată. Site-ul funcționează perfect!</p>
+    function buildGeoTab(geo, totalHits) {
+        const sorted = Object.entries(geo).sort((a, b) => b[1] - a[1]);
+        if (!sorted.length) {
+            return `<div class="ubc-dash-no-data" style="padding:40px; text-align:center;">
+                <p>📍 Încă nu s-au înregistrat vizite de pe server. Accesează site-ul de pe telefon sau calculator pentru a genera primele statistici de locație IP!</p>
             </div>`;
         }
 
+        const maxHits = Math.max(...sorted.map(s => s[1]), 1);
+        const total = totalHits || sorted.reduce((a, b) => a + b[1], 0) || 1;
+
+        const rows = sorted.map(([loc, count]) => {
+            const pct = Math.round((count / total) * 100);
+            const barPct = Math.round((count / maxHits) * 100);
+
+            let flag = '🇷🇴';
+            if (loc.includes('Oltenița') || loc.includes('Călărași')) flag = '📍';
+            else if (loc.includes('București')) flag = '🏙️';
+            else if (loc.includes('Prahova')) flag = '🏔️';
+
+            return `
+            <div class="ubc-bar-row">
+                <span class="ubc-bar-label" style="width:200px; text-align:left; font-weight:700; color:#fff;">${flag} ${loc}</span>
+                <div class="ubc-bar-track">
+                    <div class="ubc-bar-fill" style="width:${barPct}%"></div>
+                </div>
+                <span class="ubc-bar-count" style="width:90px; text-align:right;">${count} vizite (${pct}%)</span>
+            </div>`;
+        }).join('');
+
         return `
-        <div class="ubc-error-summary">
-            <span class="ubc-error-badge" style="background:#e74c3c">${errors.critical.length} Critical</span>
-            <span class="ubc-error-badge" style="background:#f39c12">${errors.warning.length} Warning</span>
-            <span class="ubc-error-badge" style="background:#3498db">${errors.info.length} Info</span>
-            <button class="ubc-dash-btn ubc-dash-btn--sm" id="ubc-clear-errors">🗑 Șterge tot</button>
-            <button class="ubc-dash-btn ubc-dash-btn--sm" id="ubc-export-errors">⬇ Export JSON</button>
-        </div>
-        <div class="ubc-error-list">
-            ${renderErrorList(all, 'toate', '#666')}
+        <div class="ubc-dash-card">
+            <h3>📍 Distribuția Vizitatorilor pe Zone / Județe din România (Detectat din IP)</h3>
+            <p class="ubc-dash-hint">Analiză automată a locațiilor geografice de unde este accesat site-ul Stației de Betoane UBC.</p>
+            <div class="ubc-bar-chart" style="margin-top:16px;">${rows}</div>
         </div>`;
     }
 
-    function buildPerformanceTab(stats) {
-        const raw  = window.UBC_Analytics ? window.UBC_Analytics.getRawData() : {};
-        const times = (raw.performance && raw.performance.loadTimes) ? raw.performance.loadTimes.slice(-10).reverse() : [];
+    function buildSectionsTab(pages, clicks) {
+        const sortedPages = Object.entries(pages).sort((a, b) => b[1] - a[1]);
+        const sortedClicks = Object.entries(clicks).sort((a, b) => b[1] - a[1]);
 
-        const timeRows = times.map((t, i) => `
-            <div class="ubc-stat-row">
-                <span>${new Date(t.date).toLocaleString('ro-RO')}</span>
-                <span class="ubc-stat-val ${t.fullLoad > 3000 ? 'ubc-val--warn' : 'ubc-val--ok'}">
-                    ${t.fullLoad}ms
-                </span>
+        const maxPV = sortedPages.length ? Math.max(...sortedPages.map(p => p[1])) : 1;
+        const pageRows = sortedPages.map(([page, count]) => `
+            <div class="ubc-bar-row">
+                <span class="ubc-bar-label" style="width:180px; text-align:left; font-weight:700;">${page}</span>
+                <div class="ubc-bar-track">
+                    <div class="ubc-bar-fill ubc-bar-fill--blue" style="width:${Math.round((count / maxPV) * 100)}%"></div>
+                </div>
+                <span class="ubc-bar-count">${count} vizite</span>
             </div>
-        `).join('') || '<p class="ubc-dash-no-data">Nicio măsurătoare.</p>';
+        `).join('') || '<p class="ubc-dash-no-data">Nicio pagină înregistrată încă.</p>';
 
-        const avgLoad = stats.avgLoadTimeMs;
+        const maxClick = sortedClicks.length ? Math.max(...sortedClicks.map(c => c[1])) : 1;
+        const clickRows = sortedClicks.map(([action, count]) => `
+            <div class="ubc-bar-row">
+                <span class="ubc-bar-label" style="width:230px; text-align:left; font-weight:600; font-size:0.8rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${action}">${action}</span>
+                <div class="ubc-bar-track">
+                    <div class="ubc-bar-fill" style="width:${Math.round((count / maxClick) * 100)}%"></div>
+                </div>
+                <span class="ubc-bar-count">${count} click-uri</span>
+            </div>
+        `).join('') || '<p class="ubc-dash-no-data">Niciun click înregistrat pe butoane încă.</p>';
 
         return `
         <div class="ubc-dash-grid-2">
             <div class="ubc-dash-card">
-                <h3>⚡ Timp mediu de încărcare</h3>
-                <div class="ubc-perf-big ${avgLoad > 3000 ? 'ubc-perf-big--slow' : 'ubc-perf-big--fast'}">
-                    ${avgLoad !== null ? avgLoad + ' ms' : 'N/A'}
-                </div>
-                <p class="ubc-dash-hint">
-                    ${avgLoad === null ? 'Navighează pe site pentru a înregistra date.' :
-                      avgLoad < 1500 ? '✅ Excelent! Sub 1.5 secunde.' :
-                      avgLoad < 3000 ? '⚠️ Acceptabil. Poate fi optimizat.' :
-                      '❌ Lent. Verifică resursele încărcate.'}
-                </p>
+                <h3>📄 Top Pagini / Secțiuni Vizitate</h3>
+                <div class="ubc-bar-chart">${pageRows}</div>
             </div>
             <div class="ubc-dash-card">
-                <h3>📋 Ultimele 10 măsurători</h3>
-                <div class="ubc-stat-list">${timeRows}</div>
+                <h3>🖱️ Top Click-uri Butoane &amp; Acțiuni Utilizatori</h3>
+                <div class="ubc-bar-chart">${clickRows}</div>
             </div>
+        </div>`;
+    }
+
+    function buildLiveFeedTab(events) {
+        if (!events.length) {
+            return `<div class="ubc-dash-no-data" style="padding:40px; text-align:center;">
+                <p>⏱ Nu există evenimente recente înregistrate în jurnal.</p>
+            </div>`;
+        }
+
+        const rows = events.map(e => {
+            const timeStr = new Date(e.time).toLocaleString('ro-RO');
+            let badgeColor = '#3498db';
+            let icon = '📄';
+
+            if (e.type === 'click' || e.type === 'cta') {
+                badgeColor = '#2ECC71';
+                icon = '🖱️';
+            } else if (e.type === 'calculator') {
+                badgeColor = '#f39c12';
+                icon = '🧮';
+            }
+
+            return `
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <td style="padding:10px 12px; font-size:0.8rem; color:#a0a6ac; white-space:nowrap;">${timeStr}</td>
+                <td style="padding:10px 12px; font-weight:700; color:#fff;">📍 ${escapeHtml(e.location)}</td>
+                <td style="padding:10px 12px;">
+                    <span style="background:${badgeColor}; color:#fff; padding:3px 8px; border-radius:12px; font-size:0.75rem; font-weight:800;">
+                        ${icon} ${escapeHtml(e.action)}
+                    </span>
+                </td>
+                <td style="padding:10px 12px; font-size:0.8rem; color:#a0a6ac;">${e.device || 'Desktop'}</td>
+                <td style="padding:10px 12px; font-size:0.8rem; color:#666; font-family:monospace;">${e.ip}</td>
+            </tr>`;
+        }).join('');
+
+        return `
+        <div class="ubc-dash-card" style="overflow-x:auto;">
+            <h3>⏱ Jurnal Live în Timp Real (Ultimele ${events.length} acțiuni ale vizitatorilor)</h3>
+            <table style="width:100%; border-collapse:collapse; text-align:left; margin-top:14px; font-size:0.85rem;">
+                <thead>
+                    <tr style="border-bottom:2px solid rgba(46,204,113,0.3); color:#2ECC71;">
+                        <th style="padding:10px 12px;">Ora &amp; Data</th>
+                        <th style="padding:10px 12px;">Oraș / Județ (România)</th>
+                        <th style="padding:10px 12px;">Acțiune Executată</th>
+                        <th style="padding:10px 12px;">Dispozitiv</th>
+                        <th style="padding:10px 12px;">IP Mascat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${rows}
+                </tbody>
+            </table>
         </div>`;
     }
 
@@ -441,32 +442,21 @@
         return `
         <div class="ubc-tools-grid">
             <div class="ubc-dash-card">
-                <h3>⬇ Export Date</h3>
-                <p class="ubc-dash-hint">Descarcă toate datele în format JSON pentru analiză offline.</p>
-                <button class="ubc-dash-btn" id="ubc-export-analytics">📊 Export Analytics</button>
-                <button class="ubc-dash-btn" id="ubc-export-errors-tools">🚨 Export Erori</button>
+                <h3>⬇ Export Date Telemetrie</h3>
+                <p class="ubc-dash-hint">Descarcă toate statisticile reale direct în format JSON.</p>
+                <button class="ubc-dash-btn" id="ubc-export-server-stats">📊 Descarcă JSON Analytics Server</button>
             </div>
             <div class="ubc-dash-card">
-                <h3>🗑 Resetare Date</h3>
-                <p class="ubc-dash-hint">Atenție: acțiunile de mai jos sunt ireversibile.</p>
-                <button class="ubc-dash-btn ubc-dash-btn--danger" id="ubc-reset-analytics">Resetează Analytics</button>
-                <button class="ubc-dash-btn ubc-dash-btn--danger" id="ubc-reset-errors">Resetează Erori</button>
+                <h3>🗑 Resetare Analytics Server</h3>
+                <p class="ubc-dash-hint">Atenție: resetează toate numărătorile de pe server la 0.</p>
+                <button class="ubc-dash-btn ubc-dash-btn--danger" id="ubc-reset-server-stats">Resetează Statisticile Serverului</button>
             </div>
             <div class="ubc-dash-card">
-                <h3>🔍 Info Sesiune</h3>
+                <h3>🔍 Shortcuts Acces Rapid</h3>
                 <div class="ubc-stat-list">
-                    <div class="ubc-stat-row"><span>User Agent</span><span class="ubc-stat-val" style="font-size:0.7rem;word-break:break-all;">${navigator.userAgent.slice(0,60)}...</span></div>
-                    <div class="ubc-stat-row"><span>Limbă browser</span><span class="ubc-stat-val">${navigator.language}</span></div>
-                    <div class="ubc-stat-row"><span>Rezoluție</span><span class="ubc-stat-val">${screen.width}×${screen.height}</span></div>
-                    <div class="ubc-stat-row"><span>Online</span><span class="ubc-stat-val">${navigator.onLine ? '✅ Da' : '❌ Nu'}</span></div>
-                    <div class="ubc-stat-row"><span>Cookies activate</span><span class="ubc-stat-val">${navigator.cookieEnabled ? '✅ Da' : '❌ Nu'}</span></div>
-                </div>
-            </div>
-            <div class="ubc-dash-card">
-                <h3>⌨️ Shortcuts</h3>
-                <div class="ubc-stat-list">
-                    <div class="ubc-stat-row"><span>Deschide / Închide dashboard</span><span class="ubc-stat-val"><kbd>Ctrl+Shift+D</kbd></span></div>
-                    <div class="ubc-stat-row"><span>Logout admin</span><span class="ubc-stat-val">Buton "Ieși"</span></div>
+                    <div class="ubc-stat-row"><span>Desktop shortcut</span><span class="ubc-stat-val"><kbd>Ctrl+Shift+D</kbd></span></div>
+                    <div class="ubc-stat-row"><span>Mobil / Telefon shortcut</span><span class="ubc-stat-val">Triple-tap pe Logo UBC</span></div>
+                    <div class="ubc-stat-row"><span>URL Hash secret</span><span class="ubc-stat-val">Adaugă #admin la URL</span></div>
                 </div>
             </div>
         </div>`;
@@ -475,7 +465,6 @@
     // ─── Event Listeners Dashboard ────────────────────────
 
     function bindDashboardEvents() {
-        // Tabs
         document.querySelectorAll('[data-dash-tab]').forEach(btn => {
             btn.addEventListener('click', function () {
                 document.querySelectorAll('[data-dash-tab]').forEach(b => b.classList.remove('active'));
@@ -486,49 +475,40 @@
             });
         });
 
-        // Close / Logout / Refresh
         document.getElementById('ubc-dash-close')?.addEventListener('click', closeDashboard);
         document.getElementById('ubc-dash-logout')?.addEventListener('click', logout);
         document.getElementById('ubc-dash-refresh')?.addEventListener('click', () => {
-            closeDashboard();
-            setTimeout(() => { openDashboard(); }, 350);
+            renderDashboard();
         });
 
-        // Error actions
-        document.getElementById('ubc-clear-errors')?.addEventListener('click', () => {
-            if (confirm('Ești sigur că vrei să ștergi toate erorile?')) {
-                window.UBC_Errors && window.UBC_Errors.clear();
-                closeDashboard();
-                setTimeout(() => openDashboard(), 350);
-            }
-        });
-        document.getElementById('ubc-export-errors')?.addEventListener('click', () => {
-            window.UBC_Errors && window.UBC_Errors.export();
+        document.getElementById('ubc-export-server-stats')?.addEventListener('click', async () => {
+            try {
+                const res = await fetch('/api/admin/stats');
+                if (res.ok) {
+                    const data = await res.json();
+                    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                    const url  = URL.createObjectURL(blob);
+                    const a    = document.createElement('a');
+                    a.href     = url;
+                    a.download = 'ubc_server_analytics_' + new Date().toISOString().slice(0, 10) + '.json';
+                    a.click();
+                    URL.revokeObjectURL(url);
+                }
+            } catch(e) { alert('Eroare export date.'); }
         });
 
-        // Tools actions
-        document.getElementById('ubc-export-analytics')?.addEventListener('click', () => {
-            window.UBC_Analytics && window.UBC_Analytics.export();
-        });
-        document.getElementById('ubc-export-errors-tools')?.addEventListener('click', () => {
-            window.UBC_Errors && window.UBC_Errors.export();
-        });
-        document.getElementById('ubc-reset-analytics')?.addEventListener('click', () => {
-            if (confirm('Resetezi TOATE datele analytics. Acțiunea este ireversibilă!')) {
-                window.UBC_Analytics && window.UBC_Analytics.clear();
-                closeDashboard();
-                setTimeout(() => openDashboard(), 350);
-            }
-        });
-        document.getElementById('ubc-reset-errors')?.addEventListener('click', () => {
-            if (confirm('Resetezi TOATE erorile înregistrate. Acțiunea este ireversibilă!')) {
-                window.UBC_Errors && window.UBC_Errors.clear();
-                closeDashboard();
-                setTimeout(() => openDashboard(), 350);
+        document.getElementById('ubc-reset-server-stats')?.addEventListener('click', async () => {
+            if (confirm('Ești sigur că vrei să resetezi TOATE datele de analytics de pe server la 0?')) {
+                try {
+                    const res = await fetch('/api/admin/reset-stats', { method: 'POST' });
+                    if (res.ok) {
+                        alert('✅ Datele au fost resetate cu succes!');
+                        renderDashboard();
+                    }
+                } catch(e) { alert('Eroare resetare date.'); }
             }
         });
 
-        // Închide cu Escape
         document.addEventListener('keydown', function escClose(e) {
             if (e.key === 'Escape' && isOpen) {
                 closeDashboard();
@@ -539,14 +519,13 @@
 
     function refreshDashboardData() {
         if (!isOpen) return;
-        closeDashboard();
-        setTimeout(() => openDashboard(), 350);
+        renderDashboard();
     }
 
     // ─── Helpers ──────────────────────────────────────────
 
     function formatSeconds(sec) {
-        if (sec < 60)  return sec + 's';
+        if (sec < 60)   return sec + 's';
         if (sec < 3600) return Math.floor(sec / 60) + 'm ' + (sec % 60) + 's';
         return Math.floor(sec / 3600) + 'h ' + Math.floor((sec % 3600) / 60) + 'm';
     }
@@ -558,7 +537,7 @@
     }
 
     function escapeHtml(str) {
-        return String(str)
+        return String(str || '')
             .replace(/&/g, '&amp;')
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;')
@@ -567,7 +546,6 @@
 
     // ─── Keyboard & Mobile Triggers ───────────────────────
 
-    // 1. Shortcut tastatură (Desktop: Ctrl+Shift+D)
     document.addEventListener('keydown', function (e) {
         if (e.ctrlKey && e.shiftKey && e.key === 'D') {
             e.preventDefault();
@@ -575,7 +553,6 @@
         }
     });
 
-    // 2. Secret Hash URL: #admin (pentru orice dispozitiv)
     function checkHashTrigger() {
         if (window.location.hash === '#admin') {
             openDashboard();
@@ -585,7 +562,6 @@
     document.addEventListener('DOMContentLoaded', checkHashTrigger);
     checkHashTrigger();
 
-    // 3. Triple-Tap / 3 click-uri rapide pe Logo-ul UBC (pentru Telefon)
     let logoTapCount = 0;
     let logoTapTimer = null;
     document.addEventListener('click', function (e) {
@@ -602,7 +578,7 @@
         }
     });
 
-    // ─── Injectare Stiluri ────────────────────────────────
+    // ─── Injectare Stiluri CSS ────────────────────────────
 
     function injectLoginStyles() {
         if (document.getElementById('ubc-login-styles')) return;
@@ -699,7 +675,6 @@
                 overflow:hidden;
                 box-shadow:0 0 80px rgba(46,204,113,0.08), 0 30px 60px rgba(0,0,0,0.5);
             }
-            /* Header */
             .ubc-dash-header {
                 display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
                 padding:20px 24px;
@@ -713,7 +688,6 @@
             .ubc-dash-title small { color:#a0a6ac; font-size:.75rem; display:block; margin-top:2px; }
             .ubc-dash-header-actions { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
             .ubc-dash-uptime { color:#a0a6ac; font-size:.8rem; margin-right:8px; }
-            /* Buttons */
             .ubc-dash-btn {
                 padding:7px 14px; border-radius:8px; border:none; cursor:pointer;
                 font-weight:700; font-size:.8rem; font-family:inherit;
@@ -726,14 +700,12 @@
             .ubc-dash-btn--outline:hover { color:#fff; border-color:rgba(255,255,255,0.3); }
             .ubc-dash-btn--danger { background:rgba(231,76,60,0.15); color:#e74c3c; border-color:rgba(231,76,60,0.3); }
             .ubc-dash-btn--danger:hover { background:rgba(231,76,60,0.25); }
-            .ubc-dash-btn--sm { padding:4px 10px; font-size:.75rem; }
             .ubc-dash-close {
                 background:none; border:none; color:#a0a6ac; font-size:1.2rem;
                 cursor:pointer; padding:4px 8px; border-radius:6px;
                 transition:color .2s;
             }
             .ubc-dash-close:hover { color:#fff; }
-            /* KPI Grid */
             .ubc-kpi-grid {
                 display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:14px;
                 padding:20px 24px;
@@ -745,12 +717,10 @@
                 border-radius:12px; padding:16px;
                 text-align:center; transition:border-color .2s;
             }
-            .ubc-kpi-card:hover { border-color:rgba(46,204,113,0.3); }
-            .ubc-kpi-card--warn { border-color:rgba(243,156,18,0.4) !important; background:rgba(243,156,18,0.06); }
+            .ubc-kpi-card--highlight { border-color:rgba(46,204,113,0.4) !important; background:rgba(46,204,113,0.06); }
             .ubc-kpi-icon { font-size:1.4rem; display:block; margin-bottom:8px; }
             .ubc-kpi-value { font-size:1.6rem; font-weight:900; color:#fff; }
             .ubc-kpi-label { font-size:.72rem; color:#a0a6ac; text-transform:uppercase; letter-spacing:.5px; margin-top:4px; }
-            /* Tabs */
             .ubc-dash-tabs {
                 display:flex; gap:0;
                 border-bottom:1px solid rgba(255,255,255,0.08);
@@ -766,7 +736,6 @@
             }
             .ubc-dash-tab:hover { color:#fff; }
             .ubc-dash-tab.active { color:#2ECC71; border-bottom-color:#2ECC71; }
-            /* Content */
             .ubc-dash-content { padding:20px 24px; }
             .ubc-dash-tab-panel { display:none; }
             .ubc-dash-tab-panel.active { display:block; }
@@ -780,52 +749,20 @@
             .ubc-dash-card h3 { margin:0 0 14px; font-size:.9rem; color:#a0a6ac; text-transform:uppercase; letter-spacing:.5px; }
             .ubc-dash-hint { color:#a0a6ac; font-size:.8rem; margin:8px 0 14px; }
             .ubc-dash-no-data { color:#a0a6ac; font-size:.85rem; font-style:italic; }
-            /* Bar Charts */
             .ubc-bar-chart { display:flex; flex-direction:column; gap:8px; }
             .ubc-bar-row { display:flex; align-items:center; gap:10px; }
-            .ubc-bar-label { width:80px; font-size:.8rem; color:#a0a6ac; text-align:right; flex-shrink:0; }
-            .ubc-bar-track { flex:1; height:8px; background:rgba(255,255,255,0.08); border-radius:4px; overflow:hidden; }
-            .ubc-bar-fill { height:100%; background:linear-gradient(90deg,#2ECC71,#3FEF8B); border-radius:4px; transition:width .6s ease; }
+            .ubc-bar-label { font-size:.8rem; color:#a0a6ac; flex-shrink:0; }
+            .ubc-bar-track { flex:1; height:10px; background:rgba(255,255,255,0.08); border-radius:5px; overflow:hidden; }
+            .ubc-bar-fill { height:100%; background:linear-gradient(90deg,#2ECC71,#3FEF8B); border-radius:5px; transition:width .6s ease; }
             .ubc-bar-fill--blue { background:linear-gradient(90deg,#3498db,#5dade2); }
-            .ubc-bar-count { width:30px; text-align:right; font-size:.8rem; font-weight:700; }
-            /* Stat list */
+            .ubc-bar-count { font-size:.8rem; font-weight:700; color:#2ECC71; }
+            .ubc-tools-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
             .ubc-stat-list { display:flex; flex-direction:column; gap:8px; }
             .ubc-stat-row { display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px solid rgba(255,255,255,0.06); font-size:.85rem; }
             .ubc-stat-row:last-child { border-bottom:none; }
             .ubc-stat-val { font-weight:700; color:#fff; }
-            .ubc-val--ok { color:#2ECC71; }
-            .ubc-val--warn { color:#f39c12; }
-            /* Errors */
-            .ubc-error-summary { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
-            .ubc-error-badge { padding:3px 10px; border-radius:20px; font-size:.75rem; font-weight:700; color:#fff; }
-            .ubc-error-list { display:flex; flex-direction:column; gap:10px; max-height:400px; overflow-y:auto; }
-            .ubc-error-item {
-                background:rgba(255,255,255,0.03);
-                border:1px solid rgba(255,255,255,0.08);
-                border-radius:10px; padding:12px;
-            }
-            .ubc-error-item--critical { border-left:3px solid #e74c3c; }
-            .ubc-error-item--warning  { border-left:3px solid #f39c12; }
-            .ubc-error-item--info     { border-left:3px solid #3498db; }
-            .ubc-error-header { display:flex; align-items:center; gap:8px; margin-bottom:6px; flex-wrap:wrap; }
-            .ubc-error-type  { font-size:.8rem; color:#a0a6ac; }
-            .ubc-error-time  { font-size:.75rem; color:#a0a6ac; margin-left:auto; }
-            .ubc-error-msg   { font-size:.85rem; color:#fff; margin-bottom:4px; }
-            .ubc-error-source { font-size:.75rem; color:#a0a6ac; }
-            .ubc-error-stack { font-size:.7rem; color:#a0a6ac; white-space:pre-wrap; word-break:break-all; background:rgba(0,0,0,0.3); padding:8px; border-radius:6px; margin-top:6px; }
-            details summary { cursor:pointer; font-size:.78rem; color:#a0a6ac; margin-top:4px; }
-            /* Performance */
-            .ubc-perf-big { font-size:3rem; font-weight:900; text-align:center; padding:20px; }
-            .ubc-perf-big--fast { color:#2ECC71; }
-            .ubc-perf-big--slow { color:#e74c3c; }
-            /* Tools */
-            .ubc-tools-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; }
-            .ubc-tools-grid .ubc-dash-card { display:flex; flex-direction:column; gap:10px; }
-            kbd { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:4px; padding:2px 7px; font-size:.8rem; font-family:monospace; }
         `;
         document.head.appendChild(style);
     }
-
-    console.log('%c[UBC Dashboard] ✅ Activ — Ctrl+Shift+D', 'color:#2ECC71; font-weight:bold;');
 
 })();

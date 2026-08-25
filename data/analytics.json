@@ -1,0 +1,15 @@
+{
+  "summary": {
+    "totalHits": 0,
+    "totalUniqueVisitors": 0,
+    "totalPageViews": 0,
+    "totalClicks": 0,
+    "totalCalculatorUses": 0
+  },
+  "visitors": {},
+  "dailyStats": {},
+  "pageViews": {},
+  "clickEvents": {},
+  "geoLocations": {},
+  "recentEvents": []
+}
